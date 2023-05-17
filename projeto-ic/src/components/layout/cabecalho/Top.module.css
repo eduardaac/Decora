@@ -1,0 +1,21 @@
+.topo {
+    display: flex;
+    justify-content: left;
+    align-items: baseline;
+}
+
+.icons {
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-right: 2%;
+    color: #3E3BDD;
+}
+
+.icons:hover {
+    color: #9897E7;
+
+}
+
+.topo h2 {
+    font-size: 1.5em;
+}

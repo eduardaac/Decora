@@ -1,0 +1,14 @@
+* {
+  
+  font-family: Roboto Slab;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Roboto Slab',
+  'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+
+}
+code{
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace, 'Amatic SC', cursive;;
+}

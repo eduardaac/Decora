@@ -1,0 +1,38 @@
+body {
+    background-color: #EEF1FD;
+}
+
+.container {
+    height: 520px;
+    display: flex;
+    margin: 0 auto;
+    padding: 5% 20%;
+}
+
+.loginAside {
+    width: 40%;
+    background: linear-gradient(to bottom, #ffffff, #090539);
+    align-items: initial;
+    justify-content: center;
+}
+
+.loginAside h1 {
+    text-align: center;
+    font-size: 1.5em;
+    padding: 0px 40px;
+    color: white;
+
+}
+
+.containerForm {
+    width: 50%;
+    background-color: white;
+    padding: 0% 5%;
+    overflow: auto;
+}
+
+.containerForm h1 {
+    text-align: center;
+    font-size: 1.9em;
+    margin-bottom: 1.0em;
+}
