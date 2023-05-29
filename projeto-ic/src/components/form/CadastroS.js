@@ -15,7 +15,7 @@ const CadastroS = () => {
   const watchPassword = watch("password");
   const onSubmit = (data) => {
     setSucesso(true);
-    console.log(data);
+    onSubmit(data);
   };
   if (sucesso) {
     return <Navigate to="/Cadastro3" />;

@@ -21,9 +21,12 @@ body {
     font-size: 1.5em;
     padding: 0px 40px;
     color: white;
+    text-transform: uppercase;
 
 }
-
+.cor{
+    color:#090539;
+}
 .containerForm {
     width: 50%;
     background-color: white;

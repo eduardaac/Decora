@@ -6,7 +6,8 @@ import CadastroDP from '../pages/cadastro/CadastroDP';
 import CadastroAD from '../pages/cadastro/CadastroAD';
 import IniciarRecomendacoes from '../pages/formulario/IniciarRecomendacoes'
 import SistRecAluno from '../pages/formulario/SistRecAluno';
-import SistRecProfessor from '../pages/formulario/SistRecProfessor'
+import SistRecProfessor from '../pages/formulario/SistRecProfessor';
+import Perfil from '../pages/Perfil';
 
 function RoutasT() {
   return (
@@ -20,6 +21,7 @@ function RoutasT() {
         <Route exact path='/iniciar-sistema-recomendacoes' element={<IniciarRecomendacoes />} />
         <Route exact path='/sistema-recomendacoes-a' element={<SistRecAluno />} />
         <Route exact path='/sistema-recomendacoes-p' element={<SistRecProfessor />} />
+        <Route exact path='/perfil' element={<Perfil />} />
       </Routes>
     </Router>
   )

@@ -5,11 +5,14 @@
 
 .formGroup label {
     display: block;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-size: 0.9em;
     font-weight: bold;
     color: black;
     margin-bottom: 2px;
+}
+.formGroup label::first-letter{
+    text-transform: uppercase;
 }
 
 .formGroup input {
@@ -105,4 +108,7 @@
 .formGroup select:focus {
     box-shadow: inset 0.5px 0px 0.5px 1px #3E3BDD;
     outline: none;
+}
+.tamanho{
+    color: #3E3BDD;
 }

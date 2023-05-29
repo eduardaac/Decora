@@ -14,7 +14,7 @@ const CadastroP = () => {
     const [sucesso, setSucesso] = useState(false);
     const onSubmit = (data) => {
         setSucesso(true);
-        console.log(data);
+        onSubmit(data);
     };
     if (sucesso) {
         return <Navigate to="/Cadastro2" />;
@@ -22,9 +22,9 @@ const CadastroP = () => {
     console.log("RENDER");
 
     return (
-
+        
         <div className="form">
-            
+
             <div className="formGroup">
                 <label>Nome</label>
                 <input
