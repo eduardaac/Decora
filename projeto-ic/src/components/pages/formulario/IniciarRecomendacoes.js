@@ -15,7 +15,7 @@ function IniciarRecomendacoes() {
                         Responda as seguintes perguntas, ao final daremos nossa sugestão.</p>
                     <center><img src={engrenagem} style={{ width: "15em" }}></img></center>
                     <dev className="formGroup">
-                        <Link to="/sistema-recomendacoes-a"><button>INICIAR</button></Link>
+                        <Link to="/sistema-recomendacoes-p"><button>INICIAR</button></Link>
                     </dev>
                 </dev>
             </dev>

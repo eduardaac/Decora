@@ -3,7 +3,7 @@ body {
 }
 
 .container {
-    height: 520px;
+    height: 650px;
     display: flex;
     margin: 0 auto;
     padding: 5% 20%;
@@ -28,7 +28,7 @@ body {
     color:#090539;
 }
 .containerForm {
-    width: 50%;
+    width: 60%;
     background-color: white;
     padding: 0% 5%;
     overflow: auto;

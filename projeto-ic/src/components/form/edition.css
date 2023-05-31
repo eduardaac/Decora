@@ -3,7 +3,7 @@
     border-color: #474242;
 }
 
-.formGroup label {
+.formGroup Label {
     display: block;
     text-transform: lowercase;
     font-size: 0.9em;
@@ -11,11 +11,11 @@
     color: black;
     margin-bottom: 2px;
 }
-.formGroup label::first-letter{
+.formGroup Label::first-letter{
     text-transform: uppercase;
 }
 
-.formGroup input {
+.formGroup Input {
     background-color: transparent;
     border: none;
     color: #676464;
@@ -29,12 +29,12 @@
     height: 2.3em;
 }
 
-.formGroup input:focus {
+.formGroup Input:focus {
     box-shadow: inset 0.5px 0px 0.5px 1px #3E3BDD;
     outline: none;
 }
 
-.formGroup input::placeholder {
+.formGroup Input::placeholder {
     color: #999;
 }
 
@@ -48,7 +48,7 @@
     margin-top: 2px;
 }
 
-.formField button {
+.formGroup Button {
     background-color: #090539;
     color: white;
     border: none;
@@ -68,6 +68,12 @@
 
 .formField {
     margin-top: 0.9em;
+    display: inline;
+}
+
+.formField Button{
+    width: 40%;
+    margin-bottom: 15px;
 }
 
 .formField label {
@@ -111,4 +117,27 @@
 }
 .tamanho{
     color: #3E3BDD;
+}
+.remover Button{
+    font-size: 17px;
+    background-color: #861111;
+    width: 100%;
+}
+
+.adicionar-campo Button{
+    width: 100%;
+}
+
+.remover-campo {
+    display:flex;
+}
+.remover-campo Button{
+    width: 30%;
+    margin-left: 10px;
+}
+
+.remover-campo Input{
+    width: 70%;
+    height: 40px;
+    margin-top: 15px;
 }

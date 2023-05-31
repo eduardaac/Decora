@@ -1,22 +1,19 @@
 import React from 'react';
 import styles from './index.module.css'
 import Menu from '../../layout/cabecalho/Menu';
-import Sistema from '../../form/Sistema';
-import { FaEdit } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import Edition from '../../form/Edition';
 
-function SistRecProfessor() {
+function SistEdit() {
     return (
         <dev className={styles.page}>
             <Menu />
             <dev className={styles.container}>
                 <dev className={styles.containerForm}>
-                    <Link to='/edition' className={styles.icons}><FaEdit /></Link>
                     <h1>SISTEMA DE RECOMENDAÇÃO</h1>
-                    <Sistema />
+                    <Edition/>
                 </dev>
             </dev>
         </dev >
     )
 }
-export default SistRecProfessor; 
+export default SistEdit; 
