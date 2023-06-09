@@ -1,5 +1,5 @@
 .formGroup {
-    margin-top: 1.0em;
+    margin-top: 1.5em;
     border-color: #474242;
 }
 
@@ -46,6 +46,7 @@
     color: red;
     font-size: 0.70rem;
     margin-top: 2px;
+    position: fixed;
 }
 
 .formGroup Button {
@@ -67,18 +68,20 @@
 }
 
 .formField {
-    margin-top: 0.9em;
     display: inline;
+
 }
 
 .formField Button{
     width: 40%;
+    margin-top: 30px;
     margin-bottom: 15px;
 }
 
 .formField label {
     color: #676464;
     font-size: 0.9em;
+    margin-top: 30px;
     margin-right: 35%;
 }
 
@@ -90,11 +93,13 @@
     color: #676464;
     font-size: 0.9em;
     font-style: italic;
+    margin-top: 30px;
 }
 
 .formField a {
     color: #090539;
     font-size: 16px;
+    margin-top: 30px;
 }
 
 .formGroup select {

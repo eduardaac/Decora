@@ -1,19 +1,17 @@
-body {
-    background-color: #EEF1FD;
-}
-
 .container {
     height: 650px;
     display: flex;
     margin: 0 auto;
     padding: 5% 20%;
+    background-color: #EEF1FD;
 }
 
 .loginAside {
     width: 40%;
     background: linear-gradient(to bottom, #ffffff, #090539);
-    align-items: initial;
+    align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 .loginAside h1 {
@@ -25,12 +23,12 @@ body {
 
 }
 .cor{
-    color:#090539;
+    color:#8076FF;
 }
 .containerForm {
     width: 60%;
     background-color: white;
-    padding: 0% 5%;
+    padding: 1% 5%;
     overflow: auto;
 }
 
