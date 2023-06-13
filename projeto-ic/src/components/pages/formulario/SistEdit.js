@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.module.css'
 import Menu from '../../layout/cabecalho/Menu';
-import Edition from '../../form/Edition';
+import Edition from '../../formEdition/Edition';
 
 function SistEdit() {
     return (

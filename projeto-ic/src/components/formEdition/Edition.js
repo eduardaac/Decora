@@ -2,11 +2,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import * as uuid from "uuid"
 import {
-  Container, Form, FormGroup,
-  Input, Label, Button, Card, CardBody, CardTitle, InputGroup
+  Container,
+  Input, Label, Button, Card, CardBody, CardTitle
 } from 'reactstrap';
 import PreviewForm from './PreviewForm';
-import "./edition.css";
+import './edition.css';
+import { AiFillCloseCircle } from "react-icons/ai";
 
 function Edition() {
   const [inputs, setInputs] = useState([
@@ -69,28 +70,31 @@ function Edition() {
 
   const renderOptions = (item, index) => {
     return (
+
       <div className="adicionar-campo">
+
         <center>
           <Button onClick={() => addOptionToSpecificField(index)}>
-            Adicionar
+            Adicionar Campo
           </Button>
 
           {item.options.map((option, indexOption) => {
             return (
               <>
-                <div className="remover-campo">
+
+                <div className="campo-options">
                   <Input
                     value={option.value}
                     onChange={(event) => handlerDataEachOption(index, indexOption, event.target.value)}
                   />
                   <Button onClick={() => deleteFieldOption(index, indexOption)}>Remover</Button>
-
                 </div>
 
               </>
             );
           })}
         </center>
+
       </div>
     );
   };
@@ -108,22 +112,30 @@ function Edition() {
 
   return (
     <Container>
+
       <div className="formField">
-        <center>
-          <Button onClick={addField}>Adicionar</Button>&nbsp;
-          <Button onClick={showData}>Salvar</Button>
-        </center>
+
+        <div className="cabecalho">
+
+          <center>
+            <Button onClick={addField}>Adicionar</Button>&nbsp;
+            <Button onClick={showData}>Salvar</Button>
+          </center>
+
+        </div>
         {isExistInputs() &&
           inputs.map((item, index) => {
             return (
 
               <Card className="mb-2" key={item.id}>
                 <CardTitle tag="h5" >
-                  <div className="remover">
+                  
+                  <div className="topo">
                     <Button onClick={() => deleteField(index)}>
-                      Remover
+                      <AiFillCloseCircle />
                     </Button>
                   </div>
+                
                 </CardTitle>
                 <CardBody>
 
@@ -146,6 +158,7 @@ function Edition() {
             );
           })}
       </div>
+   
       <div className="formGroup">
         <h1>Previsão do Formulário</h1>
         <PreviewForm

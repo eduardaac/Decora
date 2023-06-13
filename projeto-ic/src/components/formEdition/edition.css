@@ -1,21 +1,24 @@
+/* Estilos para os campos do formulário */
 .formGroup {
-    margin-top: 1.5em;
     border-color: #474242;
+    margin: 1px 1px;
 }
 
-.formGroup Label {
+.formGroup label {
     display: block;
     text-transform: lowercase;
     font-size: 0.9em;
     font-weight: bold;
     color: black;
     margin-bottom: 2px;
+
 }
-.formGroup Label::first-letter{
+
+.formGroup label::first-letter {
     text-transform: uppercase;
 }
 
-.formGroup Input {
+.formGroup input {
     background-color: transparent;
     border: none;
     color: #676464;
@@ -24,32 +27,21 @@
     border-radius: 5px;
     font-size: 0.9em;
     font-weight: 300;
-    padding-bottom: 10px 10;
     width: 99%;
     height: 2.3em;
+    padding: 0 10px;
 }
 
-.formGroup Input:focus {
+.formGroup input:focus {
     box-shadow: inset 0.5px 0px 0.5px 1px #3E3BDD;
     outline: none;
 }
 
-.formGroup Input::placeholder {
+.formGroup input::placeholder {
     color: #999;
 }
 
-.formGroup .input-error {
-    outline: 1px solid rgb(255, 72, 72);
-}
-
-.formGroup .error-message {
-    color: red;
-    font-size: 0.70rem;
-    margin-top: 2px;
-    position: fixed;
-}
-
-.formGroup Button {
+.formGroup button {
     background-color: #090539;
     color: white;
     border: none;
@@ -57,7 +49,6 @@
     border-radius: 5px;
     font-size: 1em;
     font-weight: bold;
-    margin-top: 1em;
     width: 100%;
     height: 40px;
 }
@@ -67,39 +58,22 @@
     background-color: #9897E7;
 }
 
-.formField {
-    display: inline;
-
-}
-
-.formField Button{
-    width: 40%;
+.cabecalho Button {
+    width: 49.5%;
     margin-top: 30px;
     margin-bottom: 15px;
 }
 
+/* Estilos para o formulário principal */
 .formField label {
     color: #676464;
     font-size: 0.9em;
-    margin-top: 30px;
     margin-right: 35%;
+
 }
 
 .formField input {
     position: relative;
-}
-
-.formField p {
-    color: #676464;
-    font-size: 0.9em;
-    font-style: italic;
-    margin-top: 30px;
-}
-
-.formField a {
-    color: #090539;
-    font-size: 16px;
-    margin-top: 30px;
 }
 
 .formGroup select {
@@ -111,7 +85,7 @@
     border-radius: 5px;
     font-size: 0.9em;
     font-weight: 300;
-    padding-bottom: 10px 10;
+    padding: 0 10px;
     width: 99%;
     height: 2.5em;
 }
@@ -120,29 +94,48 @@
     box-shadow: inset 0.5px 0px 0.5px 1px #3E3BDD;
     outline: none;
 }
-.tamanho{
+
+.tamanho {
     color: #3E3BDD;
 }
-.remover Button{
-    font-size: 17px;
-    background-color: #861111;
-    width: 100%;
-}
 
-.adicionar-campo Button{
+.adicionar-campo Button {
     width: 100%;
 }
 
 .remover-campo {
-    display:flex;
+    display: flex;
 }
-.remover-campo Button{
+
+.remover-campo Button {
     width: 30%;
     margin-left: 10px;
 }
 
-.remover-campo Input{
+.remover-campo Input {
     width: 70%;
     height: 40px;
-    margin-top: 15px;
 }
+
+.campo-options {
+    display: flex;
+    align-items: center;
+}
+
+.campo-options Input {
+    margin-top: 16px;
+    margin-right: 2em;
+}
+.topo{
+    align-items: center;
+    display: flex;
+    justify-content: end;
+}
+.topo Button {
+    background-color: #861111;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    margin: 10px 10px;
+}
+
