@@ -13,7 +13,7 @@ function IniciarRecomendacoes() {
                     <h1>SISTEMA DE RECOMENDAÇÃO</h1>
                     <p>Olá, neste painel vamos sugerir um conjunto de alternativas arquitetônicas para o seu projeto.
                         Responda as seguintes perguntas, ao final daremos nossa sugestão.</p>
-                    <center><img src={engrenagem} style={{ width: "15em" }}></img></center>
+                    <center><img src={engrenagem} alt='' style={{ width: "15em" }}></img></center>
                     <dev className="formGroup">
                         <Link to="/sistema-recomendacoes-p"><button>INICIAR</button></Link>
                     </dev>

@@ -1,5 +1,5 @@
 import React from "react"
-import { FormGroup, Input, Label, Button } from 'reactstrap';
+import { FormGroup, Input, Label} from 'reactstrap';
 
 const PreviewForm = ({ formData, inputs, handlerFormData, getKeyField }) => {
     const renderManyOptions = (item) => {
@@ -14,7 +14,7 @@ const PreviewForm = ({ formData, inputs, handlerFormData, getKeyField }) => {
                             return (
                                 <>
                                     &nbsp;
-                                    {(option.value == formData[item.id])
+                                    {(option.value === formData[item.id])
                                         ? <Input
                                             style={{ padding: "10px" }}
                                             type="checkbox"

@@ -8,7 +8,7 @@ function Login() {
   return (
     <dev className={styles.container}>
       <dev className={styles.loginAside}>
-        <img src={logo} style={{ height: "55%", width: '90%' }}></img>
+        <img src={logo} alt=' ' style={{ height: "55%", width: '90%' }}></img>
         <h1>Um sistema de recomendações de <span className={styles.cor}>dec
         </span>isões de pr<span className={styles.cor}>o</span>jeto arquitetu<span className={styles.cor}>ra</span>l</h1>
       </dev>

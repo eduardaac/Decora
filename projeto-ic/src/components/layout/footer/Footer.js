@@ -10,7 +10,7 @@ function Footer({ frase, rota }) {
                 <p>ou</p>
                 <LoginGoogle />
                 <br />
-                <Link to={rota}><a>{frase}</a></Link>
+                <Link to={rota}><a href={rota}>{frase}</a></Link>
             </center>
         </div>
 
