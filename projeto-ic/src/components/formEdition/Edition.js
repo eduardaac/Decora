@@ -6,9 +6,8 @@ import {
   Input, Label, Button, Card, CardBody, CardTitle
 } from 'reactstrap';
 import PreviewForm from './PreviewForm';
-import './edition.css';
 import { AiFillCloseCircle } from "react-icons/ai";
-
+import styles from  './Edition.module.css'
 function Edition() {
   const [inputs, setInputs] = useState([
     {
@@ -71,7 +70,7 @@ function Edition() {
   const renderOptions = (item, index) => {
     return (
 
-      <div className="adicionar-campo">
+      <div className= {styles.adicionarCampo}>
 
         <center>
           <Button onClick={() => addOptionToSpecificField(index)}>
@@ -82,7 +81,7 @@ function Edition() {
             return (
               <>
 
-                <div className="campo-options">
+                <div className= {styles.options}>
                   <Input
                     value={option.value}
                     onChange={(event) => handlerDataEachOption(index, indexOption, event.target.value)}
@@ -113,9 +112,9 @@ function Edition() {
   return (
     <Container>
 
-      <div className="formField">
+      <div className={styles.form}>
 
-        <div className="cabecalho">
+        <div className= {styles.cabecalho}>
 
           <center>
             <Button onClick={addField}>Adicionar</Button>&nbsp;
@@ -130,7 +129,7 @@ function Edition() {
               <Card className="mb-2" key={item.id}>
                 <CardTitle tag="h5" >
                   
-                  <div className="topo">
+                  <div className= {styles.topo}>
                     <Button onClick={() => deleteField(index)}>
                       <AiFillCloseCircle />
                     </Button>
@@ -139,7 +138,7 @@ function Edition() {
                 </CardTitle>
                 <CardBody>
 
-                  <div className="formGroup">
+                  <div className = {styles.group}>
                     <Label for="exampleEmail">
                       Qual a pergunta?
                     </Label>
@@ -159,7 +158,7 @@ function Edition() {
           })}
       </div>
    
-      <div className="formGroup">
+      <div className={styles.group}>
         <h1>Previsão do Formulário</h1>
         <PreviewForm
           inputs={inputs}

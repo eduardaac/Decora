@@ -223,11 +223,11 @@ const SistemaAluno = () => {
                 <select
                     className={errors?.elasticity && "input-error"}
                     defaultValue="0"
-                    {...register("expertiseBanco", { validate: (value) => value !== "0" })}>
+                    {...register("elasticity", { validate: (value) => value !== "0" })}>
                     <option value="0">Selecione opção...</option>
-                    <option value="sql">SQL</option>
-                    <option value="nosql">NoSQL</option>
-                    <option value="bother">Ambos</option>
+                    <option value="yes">Sim</option>
+                    <option value="no">Não</option>
+                    <option value="dont-know">Não sei</option>
                 </select>
                 {errors?.elasticity?.type === "validate" && (
                     <p className="error-message">Campo obrigatório.</p>

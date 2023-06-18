@@ -36,7 +36,8 @@ function LoginGoogle() {
     <div className="LoginGoogle">
       <div id="signInDiv"></div>
       {isLoggedIn ? (
-        <Navigate to="/LoginComplementar"></Navigate>
+       <Navigate to="/LoginComplementar"></Navigate>
+       
       ) : (
         ""
       )}
