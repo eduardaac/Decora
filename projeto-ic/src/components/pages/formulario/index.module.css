@@ -12,6 +12,7 @@ body {
     display: flex;
     margin: 0 auto;
     padding: 2% 20%;
+    background-color: #EEF1FD;
 }
 .containerForm {
     background-color: white;

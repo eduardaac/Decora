@@ -45,7 +45,7 @@
 .formGroup .error-message {
     color: red;
     font-size: 0.70rem;
-    position: fixed;
+    position: absolute;
 }
 
 .formGroup button{

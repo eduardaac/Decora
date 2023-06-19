@@ -185,7 +185,7 @@ const SistemaAluno = () => {
                 <select
                     className={errors?.security && "input-error"}
                     defaultValue="0"
-                    {...register("expertiseBanco", { validate: (value) => value !== "0" })}>
+                    {...register("security", { validate: (value) => value !== "0" })}>
                     <option value="0">Selecione opção...</option>
                     <option value="yes">Sim</option>
                     <option value="no">Não</option>
@@ -204,7 +204,7 @@ const SistemaAluno = () => {
                 <select
                     className={errors?.usability && "input-error"}
                     defaultValue="0"
-                    {...register("expertiseBanco", { validate: (value) => value !== "0" })}>
+                    {...register("usability", { validate: (value) => value !== "0" })}>
                     <option value="0">Selecione opção...</option>
                     <option value="yes">Sim</option>
                     <option value="no">Não</option>
