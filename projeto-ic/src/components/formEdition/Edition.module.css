@@ -1,4 +1,4 @@
-.adicionarCampo button{
+.adicionarCampo button {
     background-color: #090539;
     color: white;
     border: none;
@@ -10,31 +10,45 @@
     margin-bottom: 0.5em;
     width: 100%;
     height: 40px;
+    text-transform: uppercase;
 }
+
 .adicionarCampo button:hover {
     color: antiquewhite;
     background-color: #9897E7;
 }
-.options{
+
+.options {
     display: flex;
     margin-top: 1em;
     align-items: center;
 }
-.options Input{
+
+.options Input {
     display: flex;
     width: 49%;
     height: 40px;
     margin-right: 1em;
 }
-.options Button{
+
+.options Button {
+    text-transform: uppercase;
     background-color: #861111;
     width: 49%;
     height: 40px;
 }
-.cabecalho{
+
+.options button:hover {
+    color: antiquewhite;
+    background-color: rgb(250, 183, 183);
+}
+
+.cabecalho {
     display: flex;
 }
-.cabecalho button{
+
+.cabecalho button {
+    text-transform: uppercase;
     background-color: #090539;
     color: white;
     border: none;
@@ -47,7 +61,12 @@
     margin-bottom: 1.0em;
 }
 
-.topo{
+.cabecalho button:hover {
+    color: antiquewhite;
+    background-color: #9897E7;
+}
+
+.topo {
     justify-content: flex-end;
     align-items: flex-end;
     width: 100%;
@@ -55,9 +74,15 @@
     padding: 0.2em 1em;
 }
 
-.topo Button{
+.topo Button {
     background-color: #861111;
     border: none;
     outline: none;
     border-radius: 5px;
+    text-transform: uppercase;
+}
+
+.topo button:hover {
+    color: antiquewhite;
+    background-color: rgb(250, 183, 183);
 }
