@@ -74,7 +74,7 @@ function Edition() {
 
         <center>
           <Button onClick={() => addOptionToSpecificField(index)}>
-            Adicionar Campo
+            Adicionar opção
           </Button>
 
           {item.options.map((option, indexOption) => {
@@ -117,7 +117,7 @@ function Edition() {
         <div className= {styles.cabecalho}>
 
           <center>
-            <Button onClick={addField}>Adicionar</Button>&nbsp;
+            <Button onClick={addField}>Adicionar pergunta</Button>&nbsp;
             <Button onClick={showData}>Salvar</Button>
           </center>
 
