@@ -7,16 +7,22 @@ const LoginS = () => {
     const {
         register,
         handleSubmit,
+        watch,
         formState: { errors },
     } = useForm();
     const [sucesso, setSucesso] = useState(false);
     const onSubmit = (data) => {
-      setSucesso(true);
-      console.log(data);
+        setSucesso(true);
+        console.log(data);
     };
     if (sucesso) {
-      return <Navigate to="/iniciar-sistema-recomendacoes" />;
+        if (watch("typeUser") === "aluno") {
+            return <Navigate to="/sistema-recomendacoes-a" />;
+        } else if (watch("typeUser") === "professor") {
+            return <Navigate to="/sistema-recomendacoes-p" />;
+        }
     }
+    const typeUser = watch("typeUser");
     console.log("RENDER");
     return (
 
@@ -59,25 +65,6 @@ const LoginS = () => {
             </div>
 
             <div className="formGroup">
-                <label>Nível de Experiência na Área</label>
-                <select
-                    className={errors?.experiencia && "input-error"}
-                    defaultValue="0"
-                    {...register("experiencia", { validate: (value) => value !== "0" })}
-                >
-                    <option value="0">Selecione o seu nível de experiencia na área...</option>
-                    <option value="0a2">0 a 2 anos</option>
-                    <option value="3a5">3 a 5 anos</option>
-                    <option value="6a9">6 a 9 anos</option>
-                    <option value="mais10">Mais de 10 anos</option>
-                </select>
-
-                {errors?.experiencia?.type === "validate" && (
-                    <p className="error-message">Nível de experiencia na área é necessária.</p>
-                )}
-            </div>
-
-            <div className="formGroup">
                 <label>Tipo de usuário</label>
                 <select
                     className={errors?.typeUser && "input-error"}
@@ -93,6 +80,22 @@ const LoginS = () => {
                     <p className="error-message">Tipo de usuário é necessário.</p>
                 )}
             </div>
+
+            {typeUser === "aluno" && (
+                <div className="formGroup">
+                    <label>Código da turma</label>
+                    <input
+                        type="text"
+                        {...register("codigoTurma", {
+                            required: "Código da turma é necessário."
+                        })}
+                        className={errors?.codigoAluno && "input-error"}
+                    />
+                    {errors?.codigoTurma && (
+                        <p className="error-message">{errors.codigoTurma.message}</p>
+                    )}
+                </div>
+            )}
 
             <div className="formGroup">
                 <button onClick={() => handleSubmit(onSubmit)()}>ENTRAR</button>
