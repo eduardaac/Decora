@@ -1,12 +1,25 @@
-.formField p {
+.formField {
+    margin-top: 15px;
+}
+
+.line {
+    width: 45%;
+    height: 1px;
+    background-color: #676464;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.text {
     color: #676464;
     font-size: 16px;
     font-style: italic;
-    margin-top: 15px;
-
+    display: inline-block;
+    margin: 0 10px;
+    vertical-align: middle;
 }
 
-.formField a {
+.link {
     color: #090539;
-    font-size: 16px;
+    font-size: 15px;
 }

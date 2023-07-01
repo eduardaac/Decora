@@ -15,9 +15,7 @@ const LoginP = () => {
     console.log("RENDER");
 
     return (
-
         <div className="form">
-
             <div className="formGroup">
                 <label>E-mail</label>
                 <input
@@ -68,11 +66,9 @@ const LoginP = () => {
             </div>
 
             <div className="formGroup">
-                <button onClick={() => handleSubmit(onSubmit)()}>ENTRAR</button>
+                <button onClick={handleSubmit(onSubmit)}>ENTRAR</button>
             </div>
-
         </div>
-
     );
 };
 
