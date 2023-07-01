@@ -7,7 +7,7 @@ import {
 } from 'reactstrap';
 import PreviewForm from './PreviewForm';
 import { AiFillCloseCircle } from "react-icons/ai";
-import styles from  './Edition.module.css'
+import styles from './Edition.module.css'
 function Edition() {
   const [inputs, setInputs] = useState([
     {
@@ -70,7 +70,7 @@ function Edition() {
   const renderOptions = (item, index) => {
     return (
 
-      <div className= {styles.adicionarCampo}>
+      <div className={styles.adicionarCampo}>
 
         <center>
           <Button onClick={() => addOptionToSpecificField(index)}>
@@ -81,7 +81,7 @@ function Edition() {
             return (
               <>
 
-                <div className= {styles.options}>
+                <div className={styles.options}>
                   <Input
                     value={option.value}
                     onChange={(event) => handlerDataEachOption(index, indexOption, event.target.value)}
@@ -114,7 +114,7 @@ function Edition() {
 
       <div className={styles.form}>
 
-        <div className= {styles.cabecalho}>
+        <div className={styles.cabecalho}>
 
           <center>
             <Button onClick={addField}>Adicionar pergunta</Button>&nbsp;
@@ -128,17 +128,17 @@ function Edition() {
 
               <Card className="mb-2" key={item.id}>
                 <CardTitle tag="h5" >
-                  
-                  <div className= {styles.topo}>
+
+                  <div className={styles.topo}>
                     <Button onClick={() => deleteField(index)}>
                       <AiFillCloseCircle />
                     </Button>
                   </div>
-                
+
                 </CardTitle>
                 <CardBody>
 
-                  <div className = {styles.group}>
+                  <div className={styles.group}>
                     <Label for="exampleEmail">
                       Qual a pergunta?
                     </Label>
@@ -157,7 +157,7 @@ function Edition() {
             );
           })}
       </div>
-   
+
       <div className={styles.group}>
         <h1>Previsão do Formulário</h1>
         <PreviewForm
