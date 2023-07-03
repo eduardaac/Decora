@@ -87,7 +87,8 @@
 
 .formField a {
     color: #090539;
-    font-size: 16px;
+    font-size: 15px;
+    margin-left: 8px;
 }
 
 .formGroup select {

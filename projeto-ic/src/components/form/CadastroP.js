@@ -12,19 +12,25 @@ const CadastroP = () => {
         formState: { errors },
     } = useForm();
     const [sucesso, setSucesso] = useState(false);
+    
     const onSubmit = (data) => {
         setSucesso(true);
-        onSubmit(data);
+        // Renomeie a função abaixo para evitar a recursão infinita
+        submitForm(data);
     };
+    
+    const submitForm = (data) => {
+        // Lógica adicional do envio do formulário
+    };
+    
     if (sucesso) {
         return <Navigate to="/Cadastro2" />;
     }
+    
     console.log("RENDER");
 
     return (
-        
         <div className="form">
-
             <div className="formGroup">
                 <label>Nome</label>
                 <input
@@ -39,7 +45,6 @@ const CadastroP = () => {
                 {errors?.nome?.type === "required" && (
                     <p className="error-message">O nome é necessário.</p>
                 )}
-
             </div>
 
             <div className="formGroup">
@@ -63,11 +68,9 @@ const CadastroP = () => {
             </div>
 
             <div className="formGroup">
-                <button onClick={() => handleSubmit(onSubmit)()}>PRÓXIMO</button>
+                <button onClick={handleSubmit(onSubmit)}>PRÓXIMO</button>
             </div>
-
         </div>
-
     );
 };
 

@@ -3,6 +3,7 @@ import './style.css';
 import { useForm } from "react-hook-form";
 import { Navigate } from 'react-router-dom';
 import { useState } from 'react';
+
 const LoginS = () => {
     const {
         register,
@@ -13,7 +14,6 @@ const LoginS = () => {
     const [sucesso, setSucesso] = useState(false);
     const onSubmit = (data) => {
         setSucesso(true);
-        console.log(data);
     };
     if (sucesso) {
         if (watch("typeUser") === "aluno") {
