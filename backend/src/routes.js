@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const userController = require('../controllers/userController');
-const questionController = require('../controllers/questionController');
+const userController = require('./controllers/UserController');
+const questionController = require('./controllers/QuestionController');
 
 // Rotas para o usuário
 router.get('/users', userController.read);
