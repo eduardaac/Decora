@@ -1,102 +1,93 @@
 const { response } = require('express');
+const user = require('../models/userData');
 const question = require('../models/questionData');
 
 module.exports = {
-
-    async read(request, response) {
-        const questionList = await question.find();
-        return response.json(questionList);
-    },
-
     async create(request, response) {
-        const { domain, application, numberUser, technologicalExp, dataBaseExp, interactionsUsers, transmission, availability, maintainability, security, usability } = request.body;
-        const questionCreated = await question.create({
-            domain,
-            application,
-            numberUser,
-            technologicalExp,
-            dataBaseExp,
-            interactionsUsers,
-            transmission,
-            availability,
-            maintainability,
-            security,
-            usability,
-        })
-    },
-    async delete(request, response) {
-        const { id } = request.params;
-        const questionDeleted = await question.findOneAndDelete({ _id: id });
-        if (questionDeleted) {
-            return response.json(questionDeleted);
-        }
-        return response.status(401).json({ error: 'Não foi encontrado esse registro' })
-    },
-    async update(request, response) {
-        const { id } = request.params;
-        const {
-            domain,
-            application,
-            numberUser,
-            technologicalExp,
-            dataBaseExp,
-            interactionsUsers,
-            transmission,
-            availability,
-            maintainability,
-            security,
-            usability
-        } = request.body;
-
-        if (!id) {
-            return response.status(400).json({ error: 'ID de usuário inválido.' });
-        }
         try {
-            const existingQuestion = await question.findById(id);
+            const { professorId, question, options, answers } = request.body;
 
-            if (!existingQuestion) {
-                return response.status(404).json({ error: 'Usuário não encontrado.' });
-            }
-
-            if (domain) {
-                existingQuestion.domain = domain;
-            }
-            if (application) {
-                existingQuestion.application = application;
-            }
-            if (numberUser) {
-                existingQuestion.numberUser = numberUser;
-            }
-            if (technologicalExp) {
-                existingQuestion.technologicalExp = technologicalExp;
-            }
-            if (dataBaseExp) {
-                existingQuestion.dataBaseExp = dataBaseExp;
-            }
-            if (interactionsUsers) {
-                existingQuestion.interactionsUsers = interactionsUsers;
-            }
-            if (transmission) {
-                existingQuestion.transmission = transmission;
-            }
-            if (availability) {
-                existingQuestion.availability = availability;
-            }
-            if (maintainability) {
-                existingQuestion.maintainability = maintainability;
-            }
-            if (security) {
-                existingQuestion.security = security;
-            }
-            if (usability) {
-                existingQuestion.usability = usability;
+            const professor = await user.findById(professorId);
+            if (!professor || professor.typeUser !== "professor") {
+                return response.status(401).json({ error: 'Apenas professores podem adicionar perguntas.' });
             }
 
-            const updatedQuestion = await existingQuestion.save();
+            const questionCreated = new question({
+                professorId,
+                question,
+                options,
+                answers,
+            });
 
-            return response.json(updatedQuestion);
+            const savedQuestion = await questionCreated.save();
+            response.status(201).json(savedQuestion);
         } catch (error) {
-            return response.status(500).json({ error: 'Erro ao atualizar o perguntas.' });
+            return response.status(500).json({ error: 'Erro ao adicionar pergunta.' });
+        }
+    },
+
+    async getQuestionsByProfessor(request, response) {
+        try {
+            const professorId = request.params.professorId;
+
+            const professor = await user.findById(professorId);
+            if (!professor || professor.typeUser !== 'professor') {
+                return response.status(401).json({ error: 'Apenas professores podem visualizar suas perguntas.' });
+            }
+
+            const questions = await question.find({ professorId });
+            response.json(questions);
+        } catch (error) {
+            return response.status(500).json({ error: 'Erro ao obter perguntas.' });
+        }
+    },
+
+    async answerQuestions(request, response) {
+        try {
+            const { alunoId, answers } = request.body;
+
+            const aluno = await user.findById(alunoId);
+            if (!aluno || aluno.typeUser !== 'aluno') {
+                return response.status(401).json({ error: 'Apenas alunos podem responder perguntas.' });
+            }
+
+            const recommendations = getRecommendations(alunoId, answers);
+
+            response.json(recommendations);
+        } catch (error) {
+            return response.status(500).json({ error: 'Erro ao obter recomendações.' });
+        }
+    },
+
+    async getRecommendations(request, response) {
+        try {
+            // Lógica para calcular as recomendações com base nas respostas do aluno e respostas dos professores
+            // Supondo que você tenha a lógica implementada em uma função chamada "calculateRecommendations"
+            const recommendations = calculateRecommendations(request.body);
+            response.json(recommendations);
+        } catch (error) {
+            return response.status(500).json({ error: 'Erro ao obter recomendações.' });
+        }
+    },
+
+    async delete(request, response) {
+        try {
+            const { id } = request.params;
+            const professorId = request.headers.professorid; // Pegando o professorId do header
+
+            const professor = await user.findById(professorId);
+            if (!professor || professor.typeUser !== "professor") {
+                return response.status(401).json({ error: 'Apenas professores podem remover perguntas.' });
+            }
+
+            const questionDeleted = await question.findOneAndDelete({ _id: id, professorId });
+            if (questionDeleted) {
+                return response.json(questionDeleted);
+            }
+
+            return response.status(404).json({ error: 'Não foi encontrado esse registro' });
+        } catch (error) {
+            return response.status(500).json({ error: 'Erro ao remover a pergunta.' });
         }
     },
 };
