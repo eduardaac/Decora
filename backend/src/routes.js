@@ -1,17 +1,20 @@
 const express = require('express');
-const routes = express.Router();
-const UserController = require('./controllers/UserController');
-const QuestionController = require ('./controllers/QuestionController');
+const router = express.Router();
 
-routes.post('/user', UserController.create);
-routes.get('/user', UserController.read);
-routes.delete('/user/:id', UserController.delete);
-routes.put('/user/:id', UserController.update); 
+const userController = require('../controllers/userController');
+const questionController = require('../controllers/questionController');
 
-routes.post('/question', QuestionController.create);
-routes.get('/question', QuestionController.read);
-routes.delete('/question/:id', QuestionController.delete);
-//routes.put('/question/:id', UserController.update); 
+// Rotas para o usuário
+router.get('/users', userController.read);
+router.post('/users', userController.create);
+router.put('/users/:id', userController.update);
+router.delete('/users/:id', userController.delete);
 
+// Rotas para as perguntas
+router.get('/questions/:professorId', questionController.getQuestionsByProfessor);
+router.post('/questions', questionController.create);
+router.post('/questions/answers', questionController.answerQuestions);
+router.get('/questions/recommendations', questionController.getRecommendations);
+router.delete('/questions/:id', questionController.delete);
 
-module.exports = routes;
+module.exports = router;
