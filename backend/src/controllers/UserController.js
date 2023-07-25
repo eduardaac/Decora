@@ -1,5 +1,11 @@
 const { response } = require('express');
 const user = require('../models/userData');
+const { v4: uuidv4 } = require('uuid');
+
+function generateUniqueCodigoTurma() {
+    const codigoTurma = uuidv4();
+    return codigoTurma;
+}
 
 module.exports = {
     async read(request, response) {
@@ -14,6 +20,17 @@ module.exports = {
     async create(request, response) {
         try {
             const { nome, email, dataNascimento, senha, atuacao, escolaridade, typeUser, codigoTurma } = request.body;
+            // Verificar se o typeUser é "professor" e gerar um código de turma aleatório e distinto
+            let generatedCodigoTurma;
+            if (typeUser === "professor") {
+                generatedCodigoTurma = generateUniqueCodigoTurma();
+            } else if (typeUser === "aluno") {
+                // Verificar se o código de turma existe no banco de dados
+                const turmaExists = await user.exists({ typeUser: "professor", codigoTurma });
+                if (!turmaExists) {
+                    return response.status(400).json({ error: 'Código de turma não encontrado.' });
+                }
+            }
             const userCreated = await user.create({
                 nome,
                 email,
@@ -22,7 +39,7 @@ module.exports = {
                 atuacao,
                 escolaridade,
                 typeUser,
-                codigoTurma,
+                codigoTurma: generatedCodigoTurma,
             });
             return response.status(201).json(userCreated);
         } catch (error) {

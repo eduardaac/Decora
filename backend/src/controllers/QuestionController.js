@@ -5,22 +5,22 @@ const question = require('../models/questionData');
 module.exports = {
     async create(request, response) {
         try {
-            const { professorId, question, options, answers } = request.body;
+            const { professorId, label, options, answers, priority } = request.body;
 
             const professor = await user.findById(professorId);
             if (!professor || professor.typeUser !== "professor") {
                 return response.status(401).json({ error: 'Apenas professores podem adicionar perguntas.' });
             }
 
-            const questionCreated = new question({
+            const questionCreated = await question.create({
                 professorId,
-                question,
+                label,
                 options,
                 answers,
+                priority,
             });
 
-            const savedQuestion = await questionCreated.save();
-            response.status(201).json(savedQuestion);
+            return response.status(201).json(questionCreated);
         } catch (error) {
             return response.status(500).json({ error: 'Erro ao adicionar pergunta.' });
         }
@@ -44,50 +44,28 @@ module.exports = {
 
     async answerQuestions(request, response) {
         try {
-            const { alunoId, answers } = request.body;
-
-            const aluno = await user.findById(alunoId);
-            if (!aluno || aluno.typeUser !== 'aluno') {
-                return response.status(401).json({ error: 'Apenas alunos podem responder perguntas.' });
+            const { codigoTurma, alunoId, answers } = request.body;
+    
+            // Verificar se o aluno existe e pertence à turma do professor
+            const aluno = await user.findOne({ _id: alunoId, typeUser: 'aluno', codigoTurma });
+            if (!aluno) {
+                return response.status(401).json({ error: 'Aluno não encontrado ou não pertence à turma do professor.' });
             }
-
+    
+            // Processar as respostas e retornar recomendações
             const recommendations = getRecommendations(alunoId, answers);
-
+    
             response.json(recommendations);
         } catch (error) {
             return response.status(500).json({ error: 'Erro ao obter recomendações.' });
         }
     },
-
+    
     async getRecommendations(request, response) {
-        try {
-            // Lógica para calcular as recomendações com base nas respostas do aluno e respostas dos professores
-            // Supondo que você tenha a lógica implementada em uma função chamada "calculateRecommendations"
-            const recommendations = calculateRecommendations(request.body);
-            response.json(recommendations);
-        } catch (error) {
-            return response.status(500).json({ error: 'Erro ao obter recomendações.' });
-        }
+
     },
 
     async delete(request, response) {
-        try {
-            const { id } = request.params;
-            const professorId = request.headers.professorid; // Pegando o professorId do header
-
-            const professor = await user.findById(professorId);
-            if (!professor || professor.typeUser !== "professor") {
-                return response.status(401).json({ error: 'Apenas professores podem remover perguntas.' });
-            }
-
-            const questionDeleted = await question.findOneAndDelete({ _id: id, professorId });
-            if (questionDeleted) {
-                return response.json(questionDeleted);
-            }
-
-            return response.status(404).json({ error: 'Não foi encontrado esse registro' });
-        } catch (error) {
-            return response.status(500).json({ error: 'Erro ao remover a pergunta.' });
-        }
+        
     },
 };
