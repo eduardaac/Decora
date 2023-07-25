@@ -42,30 +42,33 @@ module.exports = {
         }
     },
 
-    async answerQuestions(request, response) {
-        try {
-            const { codigoTurma, alunoId, answers } = request.body;
-    
-            // Verificar se o aluno existe e pertence à turma do professor
-            const aluno = await user.findOne({ _id: alunoId, typeUser: 'aluno', codigoTurma });
-            if (!aluno) {
-                return response.status(401).json({ error: 'Aluno não encontrado ou não pertence à turma do professor.' });
-            }
-    
-            // Processar as respostas e retornar recomendações
-            const recommendations = getRecommendations(alunoId, answers);
-    
-            response.json(recommendations);
-        } catch (error) {
-            return response.status(500).json({ error: 'Erro ao obter recomendações.' });
-        }
-    },
-    
-    async getRecommendations(request, response) {
-
-    },
-
     async delete(request, response) {
-        
+        try {
+            const professorId = request.params.professorId;
+            const questionId = request.params.questionId;
+
+            // Verificar se o professor existe e é um professor
+            const professor = await user.findById(professorId);
+            if (!professor || professor.typeUser !== "professor") {
+                return response.status(401).json({ error: 'Apenas professores podem deletar perguntas.' });
+            }
+
+            // Encontrar a pergunta a ser deletada
+            const questionToDelete = await question.findById(questionId);
+            if (!questionToDelete) {
+                return response.status(404).json({ error: 'Pergunta não encontrada.' });
+            }
+
+            // Verificar se a pergunta pertence ao professor atual
+            if (questionToDelete.professorId.toString() !== professorId) {
+                return response.status(403).json({ error: 'Você não tem permissão para deletar esta pergunta.' });
+            }
+
+            // Deletar a pergunta usando o método deleteOne()
+            await question.deleteOne({ _id: questionId });
+            return response.status(200).json({ message: 'Pergunta deletada com sucesso.' });
+        } catch (error) {
+            return response.status(500).json({ error: 'Erro ao deletar pergunta.' });
+        }
     },
 };
