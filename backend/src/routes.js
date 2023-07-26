@@ -3,6 +3,7 @@ const router = express.Router();
 
 const userController = require('./controllers/UserController');
 const questionController = require('./controllers/QuestionController');
+const responseController = require('./controllers/ResponseController');
 
 // Rotas para o usuário
 router.get('/users', userController.read);
@@ -14,5 +15,9 @@ router.delete('/users/:id', userController.delete);
 router.get('/questions/:professorId', questionController.getQuestionsByProfessor);
 router.post('/questions', questionController.create);
 router.delete('/users/:professorId/questions/:questionId', questionController.delete);
+
+// Rotas para responder as perguntas 
+router.get('/responses/:classCode/questions', responseController.viewQuestionsForStudent);
+router.post('/responses', responseController.saveResponse);
 
 module.exports = router;

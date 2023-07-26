@@ -30,6 +30,7 @@ module.exports = {
                 if (!turmaExists) {
                     return response.status(400).json({ error: 'Código de turma não encontrado.' });
                 }
+                generatedCodigoTurma = codigoTurma; // Salvar o código de turma fornecido pelo aluno
             }
             const userCreated = await user.create({
                 nome,
