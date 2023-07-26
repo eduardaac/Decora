@@ -17,7 +17,7 @@ router.post('/questions', questionController.create);
 router.delete('/users/:professorId/questions/:questionId', questionController.delete);
 
 // Rotas para responder as perguntas 
-router.get('/responses/:classCode/questions', responseController.viewQuestionsForStudent);
+router.get('/responses/:codigoTurma/questions', responseController.viewQuestionsForStudent);
 router.post('/responses', responseController.saveResponse);
 
 module.exports = router;
