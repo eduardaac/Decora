@@ -20,7 +20,7 @@ module.exports = {
     },
     async saveResponse(request, response) {
         try {
-            const { classCode, questionId, selectedOption } = request.body; 
+            const { classCode, questionId, selectedOption } = request.body;
             const student = await user.findOne({ codigoTurma: classCode, typeUser: 'aluno' });
 
             if (!student) {
