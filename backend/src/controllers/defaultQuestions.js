@@ -1,10 +1,18 @@
 const defaultQuestions = [
-    {
-      label: 'Qual é a capital do Brasil?',
-      options: ['São Paulo', 'Rio de Janeiro', 'Brasília', 'Belo Horizonte'],
-      answers: [2], // O índice da resposta correta na matriz 'options'
-      priority: 1, // Prioridade da pergunta (opcional)
-    },
-    // Adicione outras perguntas padrão aqui
-  ];
-  
+  {
+    label: 'Teste questão',
+    options: [
+      { type: 'Business', answers: [{ answer: ['Layered Pattern', 'Model-View-Controller Pattern'] }] },
+      { type: 'Academic', answers: [{ answer: ['Layered Pattern'] }] },
+      { type: 'Hospital', answers: [{ answer: ['Layered Pattern', 'Service-Oriented Pattern'] }] },
+      { type: 'Real-time game', answers: [{ answer: ['Real-Time Agent'] }] },
+      { type: 'Web Conference / Stream (audio/video)', answers: [{ answer: ['Peer-to-Peer Pattern'] }] },
+      { type: 'Other' },
+    ],
+    priority: 3,
+  },
+
+  // Adicione mais perguntas padrão aqui...
+];
+
+module.exports = defaultQuestions;

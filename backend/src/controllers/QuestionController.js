@@ -74,35 +74,33 @@ module.exports = {
         }
     },
 
-    // Registra um professor com perguntas padrão (caso ele não tenha perguntas cadastradas)
-    async registerProfessorWithDefaultQuestions(request, response) {
+    async registerProfessorWithDefaultQuestions(professorId) {
         try {
-            const { professorId } = request.body;
-
             const professor = await user.findById(professorId);
             if (!professor || professor.typeUser !== 'professor') {
-                return response
-                    .status(401)
-                    .json({ error: 'Somente professores podem ser registrados com perguntas padrão.' });
+                return { error: 'Somente professores podem ser registrados com perguntas padrão.' };
             }
 
             // Verifica se o professor já possui perguntas, se sim, não adiciona as padrões novamente
             const existingQuestions = await question.find({ professorId });
             if (existingQuestions.length > 0) {
-                return response.status(200).json({ message: 'Professor já possui perguntas cadastradas.' });
+                return { message: 'Professor já possui perguntas cadastradas.' };
             }
 
             // Adicionar perguntas padrão ao banco de dados
-            const defaultQuestionsCreated = await question.create(
-                defaultQuestions.map((defaultQuestion) => ({ ...defaultQuestion, professorId }))
-            );
+            const defaultQuestionsToCreate = defaultQuestions.map((defaultQuestion) => ({
+                ...defaultQuestion,
+                professorId,
+            }));
 
-            return response.status(201).json({
+            const defaultQuestionsCreated = await question.create(defaultQuestionsToCreate);
+
+            return {
                 message: 'Professor registrado com perguntas padrão.',
                 defaultQuestionsCreated,
-            });
+            };
         } catch (error) {
-            return response.status(500).json({ error: 'Erro ao registrar professor com perguntas padrão.' });
+            return { error: 'Erro ao registrar professor com perguntas padrão.' };
         }
     },
 };

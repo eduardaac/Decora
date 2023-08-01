@@ -1,6 +1,8 @@
 const { response } = require('express');
 const user = require('../models/userData');
 const question = require('../models/questionData');
+const { registerProfessorWithDefaultQuestions } = require('./QuestionController');
+
 const { v4: uuidv4 } = require('uuid');
 
 function generateUniqueCodigoTurma() {
@@ -21,6 +23,7 @@ module.exports = {
     async create(request, response) {
         try {
             const { nome, email, dataNascimento, senha, atuacao, escolaridade, typeUser, codigoTurma } = request.body;
+
             // Verificar se o typeUser é "professor" e gerar um código de turma aleatório e distinto
             let generatedCodigoTurma;
             if (typeUser === "professor") {
@@ -43,11 +46,23 @@ module.exports = {
                 typeUser,
                 codigoTurma: generatedCodigoTurma,
             });
+
+            // Verificar se o usuário criado é um professor e registrar as perguntas padrão, se necessário
+            if (typeUser === 'professor') {
+                const registerResult = await registerProfessorWithDefaultQuestions(userCreated._id);
+                if (registerResult.error) {
+                    return response.status(500).json({ error: 'Erro ao registrar professor com perguntas padrão.' });
+                }
+            }
+
             return response.status(201).json(userCreated);
         } catch (error) {
+            console.log(error);
             return response.status(500).json({ error: 'Erro ao criar usuário.' });
         }
     },
+
+
 
     async delete(request, response) {
         try {
@@ -81,7 +96,6 @@ module.exports = {
             }
             return response.status(404).json({ error: 'Usuário não encontrado.' });
         } catch (error) {
-            console.log(error);
             return response.status(500).json({ error: 'Erro ao remover usuário.' });
         }
     },
