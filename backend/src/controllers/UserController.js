@@ -1,5 +1,6 @@
 const { response } = require('express');
 const user = require('../models/userData');
+const question = require('../models/questionData');
 const { v4: uuidv4 } = require('uuid');
 
 function generateUniqueCodigoTurma() {
@@ -51,12 +52,36 @@ module.exports = {
     async delete(request, response) {
         try {
             const { id } = request.params;
+
+            // Encontre o professor para verificar seu tipo de usuário e codigoTurma
+            const professor = await user.findById(id);
+
+            if (!professor) {
+                return response.status(404).json({ error: 'Usuário não encontrado.' });
+            }
+
+            // Verifique se o professor é do tipo de usuário 'professor' e tem um codigoTurma
+            if (professor.typeUser === 'professor' && professor.codigoTurma) {
+                // Encontre todos os alunos vinculados a esse professor pelo mesmo codigoTurma
+                const alunos = await user.find({ typeUser: 'aluno', codigoTurma: professor.codigoTurma });
+
+                // Atualize o código de turma dos alunos para null, para que eles precisem inserir novamente
+                for (const aluno of alunos) {
+                    aluno.codigoTurma = null;
+                    await aluno.save();
+                }
+            }
+
+            // Delete as perguntas do professor associadas ao codigoTurma
+            await question.deleteMany({ professorId: id });
+
             const userDeleted = await user.findOneAndDelete({ _id: id });
             if (userDeleted) {
                 return response.json(userDeleted);
             }
             return response.status(404).json({ error: 'Usuário não encontrado.' });
         } catch (error) {
+            console.log(error);
             return response.status(500).json({ error: 'Erro ao remover usuário.' });
         }
     },
