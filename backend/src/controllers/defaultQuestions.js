@@ -10,7 +10,7 @@ const defaultQuestions = [
       { type: 'Conferência Web / Stream (áudio/vídeo)', answers: [{ answer: ['Peer-to-Peer Pattern'] }] },
       { type: 'Outro' },
     ],
-    priority: 3,
+    priority: 1,
   },
 
   {
@@ -21,7 +21,7 @@ const defaultQuestions = [
       { type: 'Não' },
       { type: 'Não sei' },
     ],
-    priority: 3,
+    priority: 1,
   },
 
   {
@@ -32,7 +32,7 @@ const defaultQuestions = [
       { type: 'Não' },
       { type: 'Não sei' },
     ],
-    priority: 3,
+    priority: 1,
   },
 
   {
@@ -46,7 +46,7 @@ const defaultQuestions = [
       { type: 'React Native', answers: [{ answer: ['React-Native'] }] },
       { type: 'Nenhuma das opções' },
     ],
-    priority: 3,
+    priority: 1,
   },
 
   {
@@ -57,7 +57,7 @@ const defaultQuestions = [
       { type: 'NoSQL', answers: [{ answer: ['NoSQL'] }] },
       { type: 'Ambos', answers: [{ answer: ['SQL', 'NoSQL'] }] },
     ],
-    priority: 3,
+    priority: 1,
   },
 
   {
@@ -68,7 +68,7 @@ const defaultQuestions = [
       { type: 'Não' },
       { type: 'Não sei' },
     ],
-    priority: 3,
+    priority: 1,
   },
 
   {
@@ -79,7 +79,7 @@ const defaultQuestions = [
       { type: 'Não', answers: [{ answer: ['REST'] }] },
       { type: 'Não sei' },
     ],
-    priority: 3,
+    priority: 1,
   },
 
   {
@@ -90,7 +90,7 @@ const defaultQuestions = [
       { type: 'Não' },
       { type: 'Não sei' },
     ],
-    priority: 3,
+    priority: 1,
   },
 
   {
@@ -101,7 +101,7 @@ const defaultQuestions = [
       { type: 'Não' },
       { type: 'Não sei' },
     ],
-    priority: 3,
+    priority: 1,
   },
   {
     //Questão 10
@@ -111,7 +111,7 @@ const defaultQuestions = [
       { type: 'Não' },
       { type: 'Não sei' },
     ],
-    priority: 3,
+    priority: 1,
   },
 
   {
@@ -122,7 +122,7 @@ const defaultQuestions = [
       { type: 'Não' },
       { type: 'Não sei' },
     ],
-    priority: 3,
+    priority: 1,
   },
 
   {
@@ -133,7 +133,7 @@ const defaultQuestions = [
       { type: 'Não', answers: [{ answer: ['SQL'] }] },
       { type: 'Não sei' },
     ],
-    priority: 3,
+    priority: 2,
   },
 
 ];
