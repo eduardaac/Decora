@@ -11,6 +11,7 @@ const defaultQuestions = [
       { type: 'Outro' },
     ],
     priority: 1,
+    category: 'styles',
   },
 
   {
@@ -22,6 +23,7 @@ const defaultQuestions = [
       { type: 'Não sei' },
     ],
     priority: 1,
+    category: 'styles',
   },
 
   {
@@ -33,6 +35,7 @@ const defaultQuestions = [
       { type: 'Não sei' },
     ],
     priority: 1,
+    category: 'styles',
   },
 
   {
@@ -47,6 +50,7 @@ const defaultQuestions = [
       { type: 'Nenhuma das opções' },
     ],
     priority: 1,
+    category: 'technologies',
   },
 
   {
@@ -58,6 +62,7 @@ const defaultQuestions = [
       { type: 'Ambos', answers: [{ answer: ['SQL', 'NoSQL'] }] },
     ],
     priority: 1,
+    category: 'technologies',
   },
 
   {
@@ -69,6 +74,7 @@ const defaultQuestions = [
       { type: 'Não sei' },
     ],
     priority: 1,
+    category: 'styles',
   },
 
   {
@@ -80,6 +86,7 @@ const defaultQuestions = [
       { type: 'Não sei' },
     ],
     priority: 1,
+    category: 'styles',
   },
 
   {
@@ -91,6 +98,7 @@ const defaultQuestions = [
       { type: 'Não sei' },
     ],
     priority: 1,
+    category: 'styles',
   },
 
   {
@@ -102,7 +110,9 @@ const defaultQuestions = [
       { type: 'Não sei' },
     ],
     priority: 1,
+    category: 'styles',
   },
+
   {
     //Questão 10
     label: 'Com relação à segurança, o software armazenará dados importantes de interesse de terceiros?',
@@ -112,6 +122,7 @@ const defaultQuestions = [
       { type: 'Não sei' },
     ],
     priority: 1,
+    category: 'decisions',
   },
 
   {
@@ -123,6 +134,7 @@ const defaultQuestions = [
       { type: 'Não sei' },
     ],
     priority: 1,
+    category: 'decisions',
   },
 
   {
@@ -134,6 +146,7 @@ const defaultQuestions = [
       { type: 'Não sei' },
     ],
     priority: 2,
+    category: 'technologies',
   },
 
 ];

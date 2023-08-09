@@ -3,28 +3,41 @@ const user = require('../models/userData');
 const question = require('../models/questionData');
 const Response = require('../models/responseData');
 
-module.exports = {
-    async viewQuestionsForStudent(request, response) {
-        try {
-            const classCode = request.params.codigoTurma;
-            const professor = await user.findOne({ codigoTurma: classCode, typeUser: 'professor' });
-            if (!professor) {
-                return response.status(404).json({ error: 'Código de turma inválido ou professor não encontrado.' });
-            }
-            const questions = await question.find({ professorId: professor._id }).populate('options.answers');
+// Função para processar as respostas e gerar recomendações
+function generateRecommendations(answers) {
+    const recommendations = {
+        styles: [],
+        decisions: [],
+        technologies: [],
+    };
 
-            response.json({ questions });
-        } catch (error) {
-            response.status(500).json({ error: 'Erro ao recuperar as perguntas.' });
+    // Percorre as respostas e identifica as recomendações correspondentes
+    answers.forEach((answer) => {
+        const question = defaultQuestions.find((q) => q.label === answer.question);
+        if (question) {
+            question.options.forEach((option) => {
+                if (option.type === answer.answer) {
+                    const category = question.category;
+                    if (option.answers) {
+                        recommendations[category].push(...option.answers[0].answer);
+                    }
+                }
+            });
         }
-    },
+    });
+
+    return recommendations;
+}
+
+module.exports = {
     async saveResponse(request, response) {
         try {
             const { classCode, questionId, selectedOption } = request.body;
-            const student = await user.findOne({ codigoTurma: classCode, typeUser: 'aluno' });
 
-            if (!student) {
-                return response.status(404).json({ error: 'Código de turma inválido ou aluno não encontrado.' });
+            // Verifique se o usuário (aluno ou professor) existe e faz parte da turma
+            const user = await user.findOne({ codigoTurma: classCode });
+            if (!user) {
+                return response.status(404).json({ error: 'Código de turma inválido ou usuário não encontrado na turma.' });
             }
 
             // Verifique se a pergunta existe
@@ -33,8 +46,8 @@ module.exports = {
                 return response.status(404).json({ error: 'Pergunta não encontrada.' });
             }
 
-            // Verificar se já existe uma resposta para essa pergunta pelo mesmo aluno
-            const existingResponse = await Response.findOne({ studentId: student._id, questionId });
+            // Verificar se já existe uma resposta para essa pergunta pelo mesmo usuário
+            const existingResponse = await Response.findOne({ userId: user._id, questionId });
 
             if (existingResponse) {
                 // Se a resposta já existir, atualize-a
@@ -43,14 +56,20 @@ module.exports = {
                 response.json({ message: 'Resposta atualizada com sucesso.' });
             } else {
                 // Se a resposta ainda não existir, crie uma nova
-                const responses = new Response({ studentId: student._id, questionId, selectedOption });
-                await responses.save();
-                response.json({ message: 'Resposta salva com sucesso.' });
+                const newResponse = new Response({ userId: user._id, questionId, selectedOption });
+                await newResponse.save();
+
+                // Processar recomendações
+                const userRecommendations = generateRecommendations(userAnswers);
+
+                response.json({ 
+                    message: 'Resposta salva com sucesso.', 
+                    recommendations: userRecommendations 
+                });
             }
         } catch (error) {
             console.log(error);
             response.status(500).json({ error: 'Erro ao salvar a resposta.' });
         }
     },
-
 };

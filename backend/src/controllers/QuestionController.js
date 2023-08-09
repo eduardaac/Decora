@@ -19,6 +19,7 @@ module.exports = {
                 options,
                 answers,
                 priority,
+                category,
             });
 
             return response.status(201).json(questionCreated);
@@ -103,4 +104,5 @@ module.exports = {
             return { error: 'Erro ao registrar professor com perguntas padrão.' };
         }
     },
+
 };

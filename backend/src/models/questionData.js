@@ -10,6 +10,7 @@ const QuestionSchema = new Schema({
     label: { type: String, required: true },
     options: [{ text: String, answers: [answerSchema] }], // Um array de objetos com "text" e "answers" para cada opção
     priority: { type: Number, required: true },
+    category: { type: String, required: true},
 });
 
 module.exports = mongoose.model('question', QuestionSchema);

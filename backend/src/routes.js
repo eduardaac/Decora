@@ -18,7 +18,6 @@ router.delete('/users/:professorId/questions/:questionId', questionController.de
 router.post('/professors/register-with-default-questions', questionController.registerProfessorWithDefaultQuestions);
 
 // Rotas para responder as perguntas 
-router.get('/responses/:codigoTurma/questions', responseController.viewQuestionsForStudent);
 router.post('/responses', responseController.saveResponse);
 
 module.exports = router;
