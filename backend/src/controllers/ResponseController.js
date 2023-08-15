@@ -4,29 +4,53 @@ const question = require('../models/questionData');
 const Response = require('../models/responseData');
 
 // Função para processar as respostas e gerar recomendações
-function generateRecommendations(answers) {
+async function generateRecommendations(userId) {
     const recommendations = {
         styles: [],
         decisions: [],
         technologies: [],
     };
 
-    // Percorre as respostas e identifica as recomendações correspondentes
-    answers.forEach((answer) => {
-        const question = defaultQuestions.find((q) => q.label === answer.question);
-        if (question) {
-            question.options.forEach((option) => {
-                if (option.type === answer.answer) {
-                    const category = question.category;
-                    if (option.answers) {
-                        recommendations[category].push(...option.answers[0].answer);
-                    }
-                }
-            });
-        }
-    });
+    try {
+        // Encontre todas as respostas do usuário
+        const userResponses = await Response.find({ userId });
 
-    return recommendations;
+        // Crie um objeto para contabilizar as respostas por categoria
+        const categoryCounts = {
+            styles: {},
+            decisions: {},
+            technologies: {},
+        };
+
+        // Preencha o objeto 'categoryCounts' com as contagens de respostas para cada categoria
+        userResponses.forEach((response) => {
+            const questionData = question.findById(response.questionId);
+            if (questionData) {
+                const selectedOption = questionData.options[response.selectedOption];
+                selectedOption.answers[0].answer.forEach((answer) => {
+                    const category = questionData.category;
+                    if (!categoryCounts[category][answer]) {
+                        categoryCounts[category][answer] = 0;
+                    }
+                    categoryCounts[category][answer] += questionData.priority;
+                });
+            }
+        });
+
+        // Calcule as recomendações com base nas contagens ponderadas
+        Object.keys(categoryCounts).forEach((category) => {
+            const answers = categoryCounts[category];
+            const recommendedAnswer = Object.keys(answers).reduce((prevAnswer, currAnswer) => {
+                return answers[currAnswer] > answers[prevAnswer] ? currAnswer : prevAnswer;
+            });
+            recommendations[category].push(recommendedAnswer);
+        });
+
+        return recommendations;
+    } catch (error) {
+
+        throw new Error('Erro ao gerar recomendações.');
+    }
 }
 
 module.exports = {
@@ -35,8 +59,8 @@ module.exports = {
             const { classCode, questionId, selectedOption } = request.body;
 
             // Verifique se o usuário (aluno ou professor) existe e faz parte da turma
-            const user = await user.findOne({ codigoTurma: classCode });
-            if (!user) {
+            const foundUser = await user.findOne({ codigoTurma: classCode }); // Renomeado para foundUser
+            if (!foundUser) {
                 return response.status(404).json({ error: 'Código de turma inválido ou usuário não encontrado na turma.' });
             }
 
@@ -47,7 +71,7 @@ module.exports = {
             }
 
             // Verificar se já existe uma resposta para essa pergunta pelo mesmo usuário
-            const existingResponse = await Response.findOne({ userId: user._id, questionId });
+            const existingResponse = await Response.findOne({ userId: foundUser._id, questionId }); // Usar foundUser._id
 
             if (existingResponse) {
                 // Se a resposta já existir, atualize-a
@@ -56,15 +80,15 @@ module.exports = {
                 response.json({ message: 'Resposta atualizada com sucesso.' });
             } else {
                 // Se a resposta ainda não existir, crie uma nova
-                const newResponse = new Response({ userId: user._id, questionId, selectedOption });
+                const newResponse = new Response({ userId: foundUser._id, questionId, selectedOption }); // Usar foundUser._id
                 await newResponse.save();
 
                 // Processar recomendações
-                const userRecommendations = generateRecommendations(userAnswers);
+                const userRecommendations = await generateRecommendations(foundUser._id); // Usar foundUser._id
 
-                response.json({ 
-                    message: 'Resposta salva com sucesso.', 
-                    recommendations: userRecommendations 
+                response.json({
+                    message: 'Resposta salva com sucesso.',
+                    recommendations: userRecommendations
                 });
             }
         } catch (error) {

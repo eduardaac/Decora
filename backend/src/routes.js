@@ -15,7 +15,6 @@ router.delete('/users/:id', userController.delete);
 router.get('/questions/:professorId', questionController.getQuestionsByProfessor);
 router.post('/questions', questionController.create);
 router.delete('/users/:professorId/questions/:questionId', questionController.delete);
-router.post('/professors/register-with-default-questions', questionController.registerProfessorWithDefaultQuestions);
 
 // Rotas para responder as perguntas 
 router.post('/responses', responseController.saveResponse);
