@@ -22,9 +22,9 @@ async function generateRecommendations(userId) {
             technologies: {},
         };
 
-        // Preencha o objeto 'categoryCounts' com as contagens de respostas para cada categoria
-        userResponses.forEach((response) => {
-            const questionData = question.findById(response.questionId);
+        // Usar Promise.all para aguardar todas as operações assíncronas no loop
+        await Promise.all(userResponses.map(async (response) => {
+            const questionData = await question.findById(response.questionId);
             if (questionData) {
                 const selectedOption = questionData.options[response.selectedOption];
                 selectedOption.answers[0].answer.forEach((answer) => {
@@ -35,20 +35,23 @@ async function generateRecommendations(userId) {
                     categoryCounts[category][answer] += questionData.priority;
                 });
             }
-        });
+        }));
 
         // Calcule as recomendações com base nas contagens ponderadas
         Object.keys(categoryCounts).forEach((category) => {
             const answers = categoryCounts[category];
-            const recommendedAnswer = Object.keys(answers).reduce((prevAnswer, currAnswer) => {
-                return answers[currAnswer] > answers[prevAnswer] ? currAnswer : prevAnswer;
-            });
-            recommendations[category].push(recommendedAnswer);
-        });
+            
+            if (Object.keys(answers).length > 0) {  // Verifica se o array não está vazio
+                const recommendedAnswer = Object.keys(answers).reduce((prevAnswer, currAnswer) => {
+                    return answers[currAnswer] > answers[prevAnswer] ? currAnswer : prevAnswer;
+                });
+                recommendations[category].push(recommendedAnswer);
+            }
+        });        
 
         return recommendations;
     } catch (error) {
-
+        console.log(error);
         throw new Error('Erro ao gerar recomendações.');
     }
 }
@@ -59,7 +62,7 @@ module.exports = {
             const { classCode, questionId, selectedOption } = request.body;
 
             // Verifique se o usuário (aluno ou professor) existe e faz parte da turma
-            const foundUser = await user.findOne({ codigoTurma: classCode }); // Renomeado para foundUser
+            const foundUser = await user.findOne({ codigoTurma: classCode });
             if (!foundUser) {
                 return response.status(404).json({ error: 'Código de turma inválido ou usuário não encontrado na turma.' });
             }
@@ -71,7 +74,7 @@ module.exports = {
             }
 
             // Verificar se já existe uma resposta para essa pergunta pelo mesmo usuário
-            const existingResponse = await Response.findOne({ userId: foundUser._id, questionId }); // Usar foundUser._id
+            const existingResponse = await Response.findOne({ userId: foundUser._id, questionId });
 
             if (existingResponse) {
                 // Se a resposta já existir, atualize-a
@@ -80,11 +83,11 @@ module.exports = {
                 response.json({ message: 'Resposta atualizada com sucesso.' });
             } else {
                 // Se a resposta ainda não existir, crie uma nova
-                const newResponse = new Response({ userId: foundUser._id, questionId, selectedOption }); // Usar foundUser._id
+                const newResponse = new Response({ userId: foundUser._id, questionId, selectedOption });
                 await newResponse.save();
 
                 // Processar recomendações
-                const userRecommendations = await generateRecommendations(foundUser._id); // Usar foundUser._id
+                const userRecommendations = await generateRecommendations(foundUser._id);
 
                 response.json({
                     message: 'Resposta salva com sucesso.',
