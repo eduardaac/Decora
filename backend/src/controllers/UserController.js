@@ -127,7 +127,17 @@ module.exports = {
             existingUser.atuacao = atuacao || existingUser.atuacao;
             existingUser.escolaridade = escolaridade || existingUser.escolaridade;
             existingUser.typeUser = typeUser || existingUser.typeUser;
-            existingUser.codigoTurma = codigoTurma || existingUser.codigoTurma;
+
+            if (typeUser === 'professor') {
+                existingUser.codigoTurma = uuidv4();
+            } else if (typeUser === 'aluno') {
+                // Verificar se o código de turma existe no banco de dados
+                const turmaExists = await user.exists({ typeUser: "professor", codigoTurma });
+                if (!turmaExists) {
+                    return response.status(400).json({ error: 'Código de turma não encontrado.' });
+                }
+                existingUser.codigoTurma = codigoTurma || existingUser.codigoTurma;
+            }
 
             const updatedUser = await existingUser.save();
 

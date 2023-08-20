@@ -1,8 +1,11 @@
 import React from 'react';
 import './style.css';
 import { useForm } from "react-hook-form";
-import { Navigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
+
+const API_BASE_URL = "http://localhost:3333"; // Atualize para a URL correta
 
 const CadastroS = () => {
   const {
@@ -12,22 +15,29 @@ const CadastroS = () => {
     formState: { errors },
   } = useForm();
   const [sucesso, setSucesso] = useState(false);
+  const navigate = useNavigate();
   const watchPassword = watch("password");
-  
-  const onSubmit = (data) => {
+
+  const location = useLocation();
+  const userId = location.state.userId; // Recebe o userId do estado
+
+  const onSubmit = async (data) => {
     setSucesso(true);
-    // Renomeie a função abaixo para evitar a recursão infinita
-    submitForm(data);
-  };
-  
-  const submitForm = (data) => {
-    // Lógica adicional do envio do formulário
-  };
-  
-  if (sucesso) {
-    return <Navigate to="/Cadastro3" />;
-  }
-  
+
+    try {
+        // Use o userId recebido para atualizar o usuário com informações da segunda etapa
+        await axios.put(`${API_BASE_URL}/users/${userId}`, {
+            dataNascimento: data.data,
+            senha: data.password,
+        });
+
+        // Navegar para a próxima etapa
+        navigate('/Cadastro3', { state: { userId } });
+    } catch (error) {
+        console.log("Erro ao atualizar usuário:", error);
+    }
+};
+
   console.log("RENDER");
 
   return (
@@ -86,7 +96,7 @@ const CadastroS = () => {
           <p className="error-message">As senhas não correspondem.</p>
         )}
       </div>
-      
+
       <div className="formGroup">
         <button onClick={handleSubmit(onSubmit)}>PRÓXIMO</button>
       </div>

@@ -19,16 +19,18 @@ const CadastroP = () => {
 
     const onSubmit = async (data) => {
         setSucesso(true);
-
+        
         try {
             const response = await axios.post(`${API_BASE_URL}/users`, data);
-            const userId = response.data.id; // Supondo que a resposta contém o ID do usuário
-            navigate('/Cadastro2', { state: { userId } }); // Passando o ID do usuário para a próxima etapa
+            const userId = response.data._id; // Supondo que a resposta contém o ID do usuário
+            
+            // Navegar para a próxima etapa, passando o userId
+            navigate('/Cadastro2', { state: { userId } });
         } catch (error) {
             console.log(error);
         }
     };
-
+    
 
     console.log("RENDER");
 

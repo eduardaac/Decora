@@ -1,8 +1,11 @@
 import React from 'react';
 import './style.css';
 import { useForm } from "react-hook-form";
-import { Navigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
+
+const API_BASE_URL = "http://localhost:3333"; // Atualize para a URL correta
 
 const LoginS = () => {
     const {
@@ -12,18 +15,29 @@ const LoginS = () => {
         formState: { errors },
     } = useForm();
     const [sucesso, setSucesso] = useState(false);
-    const onSubmit = (data) => {
-        setSucesso(true);
-    };
-    if (sucesso) {
-        if (watch("typeUser") === "aluno") {
-            return <Navigate to="/sistema-recomendacoes-a" />;
-        } else if (watch("typeUser") === "professor") {
-            return <Navigate to="/sistema-recomendacoes-p" />;
-        }
-    }
+    const location = useLocation();
+    const navigate = useNavigate();
+    const userId = location.state.userId; // Recebendo o userId do estado
     const typeUser = watch("typeUser");
-    console.log("RENDER");
+
+    
+    const onSubmit = async (data) => {
+        setSucesso(true);
+
+        try {
+            // Use o userId recebido para atualizar o usuário com as informações do formulário
+            await axios.put(`${API_BASE_URL}/users/${userId}`, data);
+
+            // Navegar para a próxima página, dependendo do tipo de usuário
+            if (typeUser === "aluno") {
+                navigate(`/sistema-recomendacoes-a/${userId}`);
+            } else if (typeUser === "professor") {
+                navigate(`/sistema-recomendacoes-p/${userId}`);
+            }
+        } catch (error) {
+            console.log("Erro ao atualizar usuário:", error);
+        }
+    };
     return (
 
         <div className="form">
