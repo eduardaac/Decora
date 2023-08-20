@@ -2,8 +2,11 @@ import React from 'react';
 import './style.css';
 import { useForm } from "react-hook-form";
 import { isEmail } from "validator";
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { useState } from 'react';
+
+const API_BASE_URL = "http://localhost:3333";
 
 const CadastroP = () => {
     const {
@@ -12,21 +15,21 @@ const CadastroP = () => {
         formState: { errors },
     } = useForm();
     const [sucesso, setSucesso] = useState(false);
-    
-    const onSubmit = (data) => {
+    const navigate = useNavigate();
+
+    const onSubmit = async (data) => {
         setSucesso(true);
-        // Renomeie a função abaixo para evitar a recursão infinita
-        submitForm(data);
+
+        try {
+            const response = await axios.post(`${API_BASE_URL}/users`, data);
+            const userId = response.data.id; // Supondo que a resposta contém o ID do usuário
+            navigate('/Cadastro2', { state: { userId } }); // Passando o ID do usuário para a próxima etapa
+        } catch (error) {
+            console.log(error);
+        }
     };
-    
-    const submitForm = (data) => {
-        // Lógica adicional do envio do formulário
-    };
-    
-    if (sucesso) {
-        return <Navigate to="/Cadastro2" />;
-    }
-    
+
+
     console.log("RENDER");
 
     return (
@@ -35,7 +38,7 @@ const CadastroP = () => {
                 <label>Nome</label>
                 <input
                     className={errors?.nome && "input-error"}
-                    type="nome"
+                    type="text" // Corrigido de "nome" para "text"
                     placeholder="Insira seu nome"
                     {...register("nome", {
                         required: true,

@@ -11,7 +11,6 @@ function Footer({ frase, rota }) {
                 <span className={styles.text}>ou</span>
                 <div className={styles.line}></div>
                 <br/><br/>
-                <LoginGoogle />
                 <br/>
                 <Link to={rota}><a className={styles.link} href={rota}>{frase}</a></Link>
             </center>
