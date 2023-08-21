@@ -45,6 +45,24 @@ module.exports = {
         }
     },
 
+    // Obtém todas as perguntas de um professor específico vinculado por código de turma
+    async getQuestionsByClassCode(request, response) {
+        try {
+            const { codigoTurma } = request.params;
+
+            const professor = await user.findOne({ codigoTurma });
+
+            if (!professor || professor.typeUser !== 'professor') {
+                return response.status(404).json({ error: 'Professor não encontrado para este código de turma.' });
+            }
+
+            const questions = await question.find({ professorId: professor._id });
+            return response.json(questions);
+        } catch (error) {
+            return response.status(500).json({ error: 'Erro ao obter perguntas.' });
+        }
+    },
+
     async delete(request, response) {
         try {
             const professorId = request.params.professorId;
