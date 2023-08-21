@@ -129,10 +129,23 @@ module.exports = {
             existingUser.typeUser = typeUser || existingUser.typeUser;
 
             if (typeUser === 'professor') {
-                existingUser.codigoTurma = uuidv4();
+                // Verificar se já existe um professor com o mesmo código de turma
+                const professorWithSameCodigoTurma = await user.findOne({ typeUser: 'professor', codigoTurma });
+                if (professorWithSameCodigoTurma && professorWithSameCodigoTurma._id.toString() !== id) {
+                    return response.status(400).json({ error: 'Já existe um professor com esse código de turma.' });
+                }
+
+                const generatedCodigoTurma = generateUniqueCodigoTurma();
+                existingUser.codigoTurma = generatedCodigoTurma;
+
+                // Registrar perguntas padrão para o professor com o novo código de turma
+                const registerResult = await registerProfessorWithDefaultQuestions(id);
+                if (registerResult.error) {
+                    return response.status(500).json({ error: 'Erro ao registrar perguntas padrão para o professor.' });
+                }
             } else if (typeUser === 'aluno') {
                 // Verificar se o código de turma existe no banco de dados
-                const turmaExists = await user.exists({ typeUser: "professor", codigoTurma });
+                const turmaExists = await user.exists({ typeUser: 'professor', codigoTurma });
                 if (!turmaExists) {
                     return response.status(400).json({ error: 'Código de turma não encontrado.' });
                 }
@@ -146,4 +159,6 @@ module.exports = {
             return response.status(500).json({ error: 'Erro ao atualizar o usuário.' });
         }
     },
+
+
 };
