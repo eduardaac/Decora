@@ -100,6 +100,10 @@ module.exports = {
         }
     },
 
+    // ...
+
+    // ...
+
     async update(request, response) {
         try {
             const { id } = request.params;
@@ -129,36 +133,35 @@ module.exports = {
             existingUser.typeUser = typeUser || existingUser.typeUser;
 
             if (typeUser === 'professor') {
-                // Verificar se já existe um professor com o mesmo código de turma
-                const professorWithSameCodigoTurma = await user.findOne({ typeUser: 'professor', codigoTurma });
-                if (professorWithSameCodigoTurma && professorWithSameCodigoTurma._id.toString() !== id) {
-                    return response.status(400).json({ error: 'Já existe um professor com esse código de turma.' });
-                }
+                existingUser.codigoTurma = generateUniqueCodigoTurma(); // Gera um novo código de turma para o professor
+                const updatedUser = await existingUser.save();
 
-                const generatedCodigoTurma = generateUniqueCodigoTurma();
-                existingUser.codigoTurma = generatedCodigoTurma;
-
-                // Registrar perguntas padrão para o professor com o novo código de turma
-                const registerResult = await registerProfessorWithDefaultQuestions(id);
+                const registerResult = await registerProfessorWithDefaultQuestions(updatedUser._id); // Registra as perguntas padrão com o novo código de turma
                 if (registerResult.error) {
-                    return response.status(500).json({ error: 'Erro ao registrar perguntas padrão para o professor.' });
+                    return response.status(500).json({ error: 'Erro ao registrar professor com perguntas padrão.' });
                 }
             } else if (typeUser === 'aluno') {
                 // Verificar se o código de turma existe no banco de dados
-                const turmaExists = await user.exists({ typeUser: 'professor', codigoTurma });
+                const turmaExists = await user.exists({ typeUser: "professor", codigoTurma });
                 if (!turmaExists) {
                     return response.status(400).json({ error: 'Código de turma não encontrado.' });
                 }
                 existingUser.codigoTurma = codigoTurma || existingUser.codigoTurma;
             }
 
+            // Salvar as alterações
             const updatedUser = await existingUser.save();
 
             return response.json(updatedUser);
         } catch (error) {
             return response.status(500).json({ error: 'Erro ao atualizar o usuário.' });
         }
-    },
+    }
+
+
+
+
+
 
 
 };
