@@ -23,21 +23,26 @@ const LoginS = () => {
     
     const onSubmit = async (data) => {
         setSucesso(true);
-
+    
         try {
-            // Use o userId recebido para atualizar o usuário com as informações do formulário
-            await axios.put(`${API_BASE_URL}/users/${userId}`, data);
-
-            // Navegar para a próxima página, dependendo do tipo de usuário
-            if (typeUser === "aluno") {
-                navigate(`/sistema-recomendacoes-a/${userId}`);
-            } else if (typeUser === "professor") {
-                navigate(`/sistema-recomendacoes-p/${userId}`);
+            const response = await axios.put(`${API_BASE_URL}/users/${userId}`, data);
+    
+            // Se a atualização do usuário foi bem-sucedida, você pode acessar o código de turma gerado
+            if (response.status === 200) {
+                const novoCodigoTurma = response.data.codigoTurma; // Supondo que o código de turma esteja no corpo da resposta
+    
+                // Navegar para a próxima página, dependendo do tipo de usuário
+                if (typeUser === "aluno") {
+                    navigate(`/sistema-recomendacoes-a/${novoCodigoTurma}`);
+                } else if (typeUser === "professor") {
+                    navigate(`/sistema-recomendacoes-p/${novoCodigoTurma}`);
+                }
             }
         } catch (error) {
             console.log("Erro ao atualizar usuário:", error);
         }
     };
+    
     return (
 
         <div className="form">
