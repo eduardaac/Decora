@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './style.css';
 import { useForm } from 'react-hook-form';
 
 const API_BASE_URL = "http://localhost:3333";
 
-const Sistema = ({ codigoTurma }) => { // Recebendo o código da turma como prop
+const Sistema = () => {
     const [questions, setQuestions] = useState([]);
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
+    const location = useLocation();
+    const codigoTurma = location.state.codigoTurma;
+    console.log(codigoTurma);
 
     useEffect(() => {
+        console.log("Código da Turma:", codigoTurma);
+
         if (codigoTurma) {
             axios.get(`${API_BASE_URL}/questions/byclass/${codigoTurma}`)
                 .then(response => {
@@ -24,10 +30,12 @@ const Sistema = ({ codigoTurma }) => { // Recebendo o código da turma como prop
                 });
         }
     }, [codigoTurma]);
-    
+
+    // Dentro de onSubmit em Sistema.js
     const onSubmit = (data) => {
-        console.log(data);
+        console.log("Dados do Formulário Submetidos:", data); // Verifique os dados do formulário submetidos
     };
+
 
     return (
         <div className="form">

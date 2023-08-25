@@ -20,29 +20,31 @@ const LoginS = () => {
     const userId = location.state.userId; // Recebendo o userId do estado
     const typeUser = watch("typeUser");
 
-    
+
     const onSubmit = async (data) => {
         setSucesso(true);
-    
+
         try {
             const response = await axios.put(`${API_BASE_URL}/users/${userId}`, data);
-    
+
             // Se a atualização do usuário foi bem-sucedida, você pode acessar o código de turma gerado
             if (response.status === 200) {
                 const novoCodigoTurma = response.data.codigoTurma; // Supondo que o código de turma esteja no corpo da resposta
-    
+                console.log(novoCodigoTurma);
                 // Navegar para a próxima página, dependendo do tipo de usuário
                 if (typeUser === "aluno") {
-                    navigate(`/sistema-recomendacoes-a/${novoCodigoTurma}`);
+                    navigate(`/sistema-recomendacoes-a`, { state: { novoCodigoTurma} });
                 } else if (typeUser === "professor") {
-                    navigate(`/sistema-recomendacoes-p/${novoCodigoTurma}`);
+                    navigate(`/sistema-recomendacoes-p`, { state: { novoCodigoTurma} });
                 }
+                
+
             }
         } catch (error) {
             console.log("Erro ao atualizar usuário:", error);
         }
     };
-    
+
     return (
 
         <div className="form">

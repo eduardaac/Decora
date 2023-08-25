@@ -20,8 +20,8 @@ function RoutasT() {
         <Route exact path='/Cadastro2' element={<CadastroDP />} />
         <Route exact path='/Cadastro3' element={<CadastroAD />} />
         <Route exact path='/iniciar-sistema-recomendacoes' element={<IniciarRecomendacoes />} />
-        <Route exact path='/sistema-recomendacoes-a/:codigoTurma' element={<SistRecAluno />} />
-        <Route exact path='/sistema-recomendacoes-p/:codigoTurma' element={<SistRecProfessor />} />
+        <Route exact path='/sistema-recomendacoes-a' element={<SistRecAluno />} />
+        <Route exact path='/sistema-recomendacoes-p' element={<SistRecProfessor />} />
         <Route exact path='/perfil' element={<Perfil />} />
         <Route exact path='/edition' element={<SistEdit />} />
       </Routes>
