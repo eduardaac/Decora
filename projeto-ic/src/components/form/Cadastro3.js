@@ -2,43 +2,35 @@ import React from 'react';
 import './style.css';
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import axios from 'axios';
 
-const API_BASE_URL = "http://localhost:3333"; // Atualize para a URL correta
+const API_BASE_URL = "http://localhost:3333";
 
-const LoginS = () => {
+const Cadastro3 = () => {
     const {
         register,
         handleSubmit,
         watch,
         formState: { errors },
     } = useForm();
-    const [sucesso, setSucesso] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
     const userId = location.state.userId; // Recebendo o userId do estado
     const typeUser = watch("typeUser");
 
-
     const onSubmit = async (data) => {
-        setSucesso(true);
-
         try {
             const response = await axios.put(`${API_BASE_URL}/users/${userId}`, data);
 
-            // Se a atualização do usuário foi bem-sucedida, você pode acessar o código de turma gerado
             if (response.status === 200) {
-                const novoCodigoTurma = response.data.codigoTurma; // Supondo que o código de turma esteja no corpo da resposta
-                console.log(novoCodigoTurma);
-                // Navegar para a próxima página, dependendo do tipo de usuário
-                if (typeUser === "aluno") {
-                    navigate(`/sistema-recomendacoes-a`, { state: { novoCodigoTurma} });
-                } else if (typeUser === "professor") {
-                    navigate(`/sistema-recomendacoes-p`, { state: { novoCodigoTurma} });
-                }
-                
+                const novoCodigoTurma = response.data.codigoTurma;
+                console.log("Código da Turma:", novoCodigoTurma);
 
+                if (typeUser === "aluno") {
+                    navigate(`/sistema-recomendacoes-a`, { state: { novoCodigoTurma } });
+                } else if (typeUser === "professor") {
+                    navigate(`/sistema-recomendacoes-p`, { state: { novoCodigoTurma } });
+                }
             }
         } catch (error) {
             console.log("Erro ao atualizar usuário:", error);
@@ -127,4 +119,4 @@ const LoginS = () => {
     );
 };
 
-export default LoginS;
+export default Cadastro3;

@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const API_BASE_URL = "http://localhost:3333"; // Atualize para a URL correta
 
-const CadastroS = () => {
+const Cadastro2 = () => {
   const {
     register,
     handleSubmit,
@@ -104,4 +104,4 @@ const CadastroS = () => {
   );
 };
 
-export default CadastroS;
+export default Cadastro2;

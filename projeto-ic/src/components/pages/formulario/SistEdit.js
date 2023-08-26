@@ -5,15 +5,15 @@ import Edition from '../../formEdition/Edition';
 
 function SistEdit() {
     return (
-        <dev className={styles.page}>
+        <div className={styles.page}>
             <Menu />
-            <dev className={styles.container}>
-                <dev className={styles.containerForm}>
+            <div className={styles.container}>
+                <div className={styles.containerForm}>
                     <h1>SISTEMA DE RECOMENDAÇÃO</h1>
                     <Edition/>
-                </dev>
-            </dev>
-        </dev >
+                </div>
+            </div>
+        </div >
     )
 }
 export default SistEdit; 

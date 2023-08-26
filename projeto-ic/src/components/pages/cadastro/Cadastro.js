@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from '../index.module.css';
-import CadastroP from '../../form/CadastroP';
 import Footer from '../../layout/footer/Footer';
 import logo from '../../img/logo.png'
+import Cadastro1 from '../../form/Cadastro1';
 
 function Cadastro() {
   return (
@@ -14,7 +14,7 @@ function Cadastro() {
       </div>
       <div className={styles.containerForm}>
         <h1>CADASTRO</h1>
-        <CadastroP />
+        <Cadastro1 />
 
         <Footer
           frase="Já possui cadastro? Entre"

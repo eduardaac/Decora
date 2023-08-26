@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from '../index.module.css';
-import LoginS from '../../form/LoginS';
 import Top from '../../layout/cabecalho/Top';
 import logo from '../../img/logo.png'
+import Cadastro3 from '../../form/Cadastro3';
 
 function CadastroaAD() {
   return (
@@ -17,7 +17,7 @@ function CadastroaAD() {
           rota="/Cadastro2"
           title="DADOS PESSOAIS"
         />
-        <LoginS />
+        <Cadastro3 />
       </div>
     </div>
   )

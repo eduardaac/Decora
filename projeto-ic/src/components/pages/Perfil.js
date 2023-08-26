@@ -5,16 +5,16 @@ import Menu from '../layout/cabecalho/Menu';
 
 function Perfil() {
   return (
-    <dev className={styles.page}>
+    <div className={styles.page}>
       <Menu />
-      <dev className={styles.container}>
-        <dev className={styles.containerForm}>
+      <div className={styles.container}>
+        <div className={styles.containerForm}>
       
 
 
-        </dev>
-      </dev>
-    </dev >
+        </div>
+      </div>
+    </div >
   )
 }
 export default Perfil; 

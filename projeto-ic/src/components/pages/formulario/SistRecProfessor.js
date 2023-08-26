@@ -6,6 +6,7 @@ import { FaEdit } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
 function SistRecProfessor() {
+    console.log("SistRecProfessor renderizado");
     return (
         <div className={styles.page}>
             <Menu />

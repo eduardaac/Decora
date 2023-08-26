@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './style.css';
 import { useForm } from 'react-hook-form';
@@ -14,15 +14,14 @@ const Sistema = () => {
         formState: { errors },
     } = useForm();
     const location = useLocation();
-    const codigoTurma = location.state.codigoTurma;
-    console.log(codigoTurma);
+    const codigoTurma = location.state.novoCodigoTurma; 
+    console.log("Codigo da turma: ", codigoTurma)
 
     useEffect(() => {
-        console.log("Código da Turma:", codigoTurma);
-
         if (codigoTurma) {
             axios.get(`${API_BASE_URL}/questions/byclass/${codigoTurma}`)
                 .then(response => {
+                    console.log("Dados das perguntas obtidos da API:", response.data);
                     setQuestions(response.data);
                 })
                 .catch(error => {
@@ -31,26 +30,25 @@ const Sistema = () => {
         }
     }, [codigoTurma]);
 
-    // Dentro de onSubmit em Sistema.js
     const onSubmit = (data) => {
-        console.log("Dados do Formulário Submetidos:", data); // Verifique os dados do formulário submetidos
+        console.log("Dados do Formulário Submetidos:", data);
     };
-
 
     return (
         <div className="form">
-            {questions.map((question, index) => (
-                <div className="formGroup" key={index}>
+            {questions.map((question) => (
+                <div className="formGroup" key={question._id}>
                     <label>{question.label}</label>
                     <select
-                        className={errors?.[question.fieldName] && "input-error"}
+                        key={question._id}
+                        className={errors?.[question.fieldName] ? "input-error" : ""}
                         defaultValue="0"
                         {...register(question.fieldName, { validate: (value) => value !== "0" })}
                     >
                         <option value="0">Selecione opção...</option>
                         {question.options.map(option => (
-                            <option key={option.text} value={option.text}>
-                                {option.text}
+                            <option key={option._id} value={option.type}>
+                                {option.type}
                             </option>
                         ))}
                     </select>
@@ -67,3 +65,4 @@ const Sistema = () => {
 };
 
 export default Sistema;
+

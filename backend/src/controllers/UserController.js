@@ -62,8 +62,6 @@ module.exports = {
         }
     },
 
-
-
     async delete(request, response) {
         try {
             const { id } = request.params;
@@ -99,10 +97,6 @@ module.exports = {
             return response.status(500).json({ error: 'Erro ao remover usuário.' });
         }
     },
-
-    // ...
-
-    // ...
 
     async update(request, response) {
         try {
@@ -157,11 +151,4 @@ module.exports = {
             return response.status(500).json({ error: 'Erro ao atualizar o usuário.' });
         }
     }
-
-
-
-
-
-
-
 };

@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 const API_BASE_URL = "http://localhost:3333";
 
-const CadastroP = () => {
+const Cadastro1 = () => {
     const {
         register,
         handleSubmit,
@@ -79,4 +79,4 @@ const CadastroP = () => {
     );
 };
 
-export default CadastroP;
+export default Cadastro1;
