@@ -3,6 +3,8 @@ const user = require('../models/userData');
 const question = require('../models/questionData');
 const { registerProfessorWithDefaultQuestions } = require('./QuestionController');
 
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 
 function generateUniqueCodigoTurma() {
@@ -11,6 +13,47 @@ function generateUniqueCodigoTurma() {
 }
 
 module.exports = {
+
+    async login(request, response) {
+        const { email, password } = request.body;
+
+        try {
+            const foundUser = await user.findOne({ email });
+
+            if (!foundUser) {
+                console.log("Usuário não encontrado:", email);
+                return response.status(401).json({ error: 'Credenciais inválidas.' });
+            }
+
+            console.log("Comparando senhas...");
+            console.log("Password:", password);
+            console.log("Hash do banco de dados:", foundUser.senha);
+            const passwordMatch = await bcrypt.compare(password, foundUser.senha);
+            console.log("Resultado da comparação:", passwordMatch);
+
+
+            if (!passwordMatch) {
+                console.log("Senha incorreta");
+                return response.status(401).json({ error: 'Credenciais inválidas.' });
+            }
+
+            console.log("Senha coincidiu");
+
+            const secretKey = 'secrety';
+
+            const token = jwt.sign(
+                { userId: foundUser._id, email: foundUser.email },
+                secretKey,
+                { expiresIn: '1h' } // Tempo de expiração do token
+            );
+
+            return response.status(200).json({ token });
+        } catch (error) {
+            console.log("Erro:", error);
+            return response.status(500).json({ error: 'Ocorreu um erro.' });
+        }
+    },
+
     async read(request, response) {
         try {
             const userList = await user.find();
