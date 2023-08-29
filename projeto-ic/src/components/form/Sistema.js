@@ -50,7 +50,7 @@ const Sistema = () => {
                             <option value="0">Selecione opção...</option>
                             {question.options && question.options.map((option, optionIndex) => (
                                 <option key={optionIndex} value={optionIndex}>
-                                    {option.type}
+                                    {option.text}
                                 </option>
                             ))}
                         </select>

@@ -154,7 +154,7 @@ module.exports = {
                 typeUser,
                 codigoTurma
             } = request.body;
-
+            console.log("Updating user with ID:", id);
             const existingUser = await user.findById(id);
             if (!existingUser) {
                 return response.status(404).json({ error: 'Usuário não encontrado.' });
