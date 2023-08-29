@@ -11,10 +11,11 @@ const Sistema = () => {
     const {
         register,
         handleSubmit,
+        watch,
         formState: { errors },
     } = useForm();
     const location = useLocation();
-    const codigoTurma = location.state.novoCodigoTurma; 
+    const codigoTurma = location.state.novoCodigoTurma;
     console.log("Codigo da turma: ", codigoTurma)
 
     useEffect(() => {
@@ -35,34 +36,36 @@ const Sistema = () => {
     };
 
     return (
-        <div className="form">
-            {questions.map((question) => (
-                <div className="formGroup" key={question._id}>
-                    <label>{question.label}</label>
-                    <select
-                        key={question._id}
-                        className={errors?.[question.fieldName] ? "input-error" : ""}
-                        defaultValue="0"
-                        {...register(question.fieldName, { validate: (value) => value !== "0" })}
-                    >
-                        <option value="0">Selecione opção...</option>
-                        {question.options.map(option => (
-                            <option key={option._id} value={option.type}>
-                                {option.type}
-                            </option>
-                        ))}
-                    </select>
-                    {errors?.[question.fieldName]?.type === "validate" && (
-                        <p className="error-message">Campo obrigatório.</p>
-                    )}
+        <>
+            <div className="form">
+                {questions.map((question, index) => (
+                    <div className="formGroup" key={question.label}>
+                        <label>{question.label}</label>
+                        <select
+                            key={question.label}
+                            className={errors?.[`question_${index}`] ? "input-error" : ""}
+                            defaultValue="0"
+                            {...register(`question_${index}`, { validate: (value) => value !== "0" })}
+                        >
+                            <option value="0">Selecione opção...</option>
+                            {question.options && question.options.map((option, optionIndex) => (
+                                <option key={optionIndex} value={optionIndex}>
+                                    {option.type}
+                                </option>
+                            ))}
+                        </select>
+
+                        {errors?.[`question_${index}`]?.type === "validate" && (
+                            <p className="error-message">Campo obrigatório.</p>
+                        )}
+                    </div>
+                ))}
+                <div className="formGroup">
+                    <button onClick={handleSubmit(onSubmit)}>SUBMETER</button>
                 </div>
-            ))}
-            <div className="formGroup">
-                <button onClick={handleSubmit(onSubmit)}>SUBMETER</button>
             </div>
-        </div>
+        </>
     );
 };
 
 export default Sistema;
-
