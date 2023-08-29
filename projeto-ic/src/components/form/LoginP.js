@@ -1,18 +1,30 @@
 import React from 'react';
 import './style.css';
-import { useForm } from "react-hook-form";
-import { isEmail } from "validator";
+import { useForm } from 'react-hook-form';
+import { isEmail } from 'validator';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+const API_BASE_URL = 'http://localhost:3333';
 
 const LoginP = () => {
+    const navigate = useNavigate();
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const onSubmit = (data) => {
-        console.log(data);
+
+    const onSubmit = async (data) => {
+        try {
+            const response = await axios.post(`${API_BASE_URL}/login`, data); // Corrija a URL da API
+            console.log('Resposta do servidor:', response.data);
+
+        } catch (error) {
+            console.error('Erro ao fazer login:', error);
+        }
     };
-    console.log("RENDER");
 
     return (
         <div className="form">

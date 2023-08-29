@@ -3,7 +3,7 @@ const defaultQuestions = [
     //Questão 1
     label: 'Qual o domínio do software?',
     options: [
-      { type: 'Négocio', answers: [{ answer: ['Layered Pattern', 'Model-View-Controller Pattern'] }] },
+      { label: 'Négocio', answers: [{ answer: ['Layered Pattern', 'Model-View-Controller Pattern'] }] },
       { type: 'Acadêmico', answers: [{ answer: ['Layered Pattern'] }] },
       { type: 'Hospital', answers: [{ answer: ['Layered Pattern', 'Service-Oriented Pattern'] }] },
       { type: 'Jogo em tempo real', answers: [{ answer: ['Real-Time Agent'] }] },

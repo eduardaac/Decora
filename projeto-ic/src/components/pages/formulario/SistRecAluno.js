@@ -10,7 +10,7 @@ function SistRecAluno() {
       <div className={styles.container}>
         <div className={styles.containerForm}>
           <h1>SISTEMA DE RECOMENDAÇÃO</h1>
-          <Sistema/> 
+          <Sistema />
         </div>
       </div>
     </div>
