@@ -6,51 +6,41 @@ const { registerProfessorWithDefaultQuestions } = require('./QuestionController'
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
+const { callbackify } = require('util');
 
 function generateUniqueCodigoTurma() {
     const codigoTurma = uuidv4();
     return codigoTurma;
 }
 
+const secretKey = 'sua_chave_secreta_aqui';
+
 module.exports = {
 
     async login(request, response) {
-        const { email, password } = request.body;
-
         try {
-            const foundUser = await user.findOne({ email });
+            const { email, senha } = request.body;
 
-            if (!foundUser) {
-                console.log("Usuário não encontrado:", email);
-                return response.status(401).json({ error: 'Credenciais inválidas.' });
+            const existingUser = await user.findOne({ email });
+
+            if (!existingUser) {
+                return response.status(401).json({ error: 'E-mail inválido.' });
             }
 
-            console.log("Comparando senhas...");
-            console.log("Password:", password);
-            console.log("Hash do banco de dados:", foundUser.senha);
-            const passwordMatch = await bcrypt.compare(password, foundUser.senha);
-            console.log("Resultado da comparação:", passwordMatch);
+            const isPasswordValid = await bcrypt.compare(senha, existingUser.senha);
 
-
-            if (!passwordMatch) {
-                console.log("Senha incorreta");
-                return response.status(401).json({ error: 'Credenciais inválidas.' });
+            if (!isPasswordValid) {
+                return response.status(401).json({ error: 'Senha inválida.' });
             }
 
-            console.log("Senha coincidiu");
+            const token = jwt.sign({ userId: existingUser._id }, secretKey, { expiresIn: '1h' });
 
-            const secretKey = 'secrety';
+            return response.json({ token });
 
-            const token = jwt.sign(
-                { userId: foundUser._id, email: foundUser.email },
-                secretKey,
-                { expiresIn: '1h' } // Tempo de expiração do token
-            );
-
-            return response.status(200).json({ token });
         } catch (error) {
-            console.log("Erro:", error);
-            return response.status(500).json({ error: 'Ocorreu um erro.' });
+            console.log(error);
+            return response.status(500).json({ error: 'Erro ao fazer login.' });
         }
     },
 
@@ -154,8 +144,10 @@ module.exports = {
                 typeUser,
                 codigoTurma
             } = request.body;
+
             console.log("Updating user with ID:", id);
             const existingUser = await user.findById(id);
+
             if (!existingUser) {
                 return response.status(404).json({ error: 'Usuário não encontrado.' });
             }
@@ -164,21 +156,24 @@ module.exports = {
             existingUser.nome = nome || existingUser.nome;
             existingUser.email = email || existingUser.email;
             existingUser.dataNascimento = dataNascimento || existingUser.dataNascimento;
-            existingUser.senha = senha || existingUser.senha;
             existingUser.atuacao = atuacao || existingUser.atuacao;
             existingUser.escolaridade = escolaridade || existingUser.escolaridade;
             existingUser.typeUser = typeUser || existingUser.typeUser;
 
+            // Se uma nova senha foi fornecida, criptografá-la e atualizar
+            if (senha) {
+                existingUser.senha = await bcrypt.hash(senha, 10);
+            }
+
             if (typeUser === 'professor') {
-                existingUser.codigoTurma = generateUniqueCodigoTurma(); // Gera um novo código de turma para o professor
+                existingUser.codigoTurma = generateUniqueCodigoTurma();
                 const updatedUser = await existingUser.save();
 
-                const registerResult = await registerProfessorWithDefaultQuestions(updatedUser._id); // Registra as perguntas padrão com o novo código de turma
+                const registerResult = await registerProfessorWithDefaultQuestions(updatedUser._id);
                 if (registerResult.error) {
                     return response.status(500).json({ error: 'Erro ao registrar professor com perguntas padrão.' });
                 }
             } else if (typeUser === 'aluno') {
-                // Verificar se o código de turma existe no banco de dados
                 const turmaExists = await user.exists({ typeUser: "professor", codigoTurma });
                 if (!turmaExists) {
                     return response.status(400).json({ error: 'Código de turma não encontrado.' });
