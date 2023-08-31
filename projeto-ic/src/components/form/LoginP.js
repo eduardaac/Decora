@@ -51,17 +51,17 @@ const LoginP = () => {
             <div className="formGroup">
                 <label>Senha</label>
                 <input
-                    className={errors?.password && "input-error"}
+                    className={errors?.senha && "input-error"}
                     type="password"
                     placeholder="Insira sua senha"
-                    {...register("password", { required: true, minLength: 7 })}
+                    {...register("senha", { required: true, minLength: 7 })}
                 />
 
-                {errors?.password?.type === "required" && (
+                {errors?.senha?.type === "required" && (
                     <p className="error-message">A senha é necessária.</p>
                 )}
 
-                {errors?.password?.type === "minLength" && (
+                {errors?.senha?.type === "minLength" && (
                     <p className="error-message">
                         A senha precisa ter pelo menos 7 caracteres.
                     </p>

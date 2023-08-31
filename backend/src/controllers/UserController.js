@@ -6,8 +6,6 @@ const { registerProfessorWithDefaultQuestions } = require('./QuestionController'
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
-const crypto = require('crypto');
-const { callbackify } = require('util');
 
 function generateUniqueCodigoTurma() {
     const codigoTurma = uuidv4();
@@ -91,7 +89,7 @@ module.exports = {
             return response.status(201).json(userCreated);
         } catch (error) {
             console.log(error);
-            return response.status(500).json({ error: 'Erro ao criar usuário.' });
+            return response.status(500).ajson({ error: 'Erro ao criar usuário.' });
         }
     },
 
@@ -188,5 +186,34 @@ module.exports = {
         } catch (error) {
             return response.status(500).json({ error: 'Erro ao atualizar o usuário.' });
         }
+    },
+    async getUserById(request, response) {
+        try {
+            const { id } = request.params;
+            const existingUser = await user.findById(id); // Certifique-se de usar o modelo correto
+
+            if (!existingUser) {
+                return response.status(404).json({ error: 'Usuário não encontrado.' });
+            }
+            return response.json(existingUser);
+        } catch (error) {
+            console.log(error);
+            return response.status(500).json({ error: 'Erro ao obter informações do usuário.' });
+        }
+    },
+    
+    async deleteAllUsers(request, response) {
+        try {
+            // Delete todos os usuários
+            await user.deleteMany({}); // Isso vai deletar todos os documentos na coleção 'users'
+            
+            // Opcional: Também pode deletar outras informações relacionadas (por exemplo, perguntas associadas aos professores)
+            await question.deleteMany({}); // Isso vai deletar todas as perguntas
+
+            return response.json({ message: 'Todos os usuários foram deletados com sucesso.' });
+        } catch (error) {
+            return response.status(500).json({ error: 'Erro ao deletar todos os usuários.' });
+        }
     }
+
 };

@@ -10,7 +10,9 @@ router.get('/users', userController.read);
 router.post('/users', userController.create);
 router.put('/users/:id', userController.update);
 router.delete('/users/:id', userController.delete);
+router.delete('/users', userController.deleteAllUsers);
 router.post('/login', userController.login);
+router.get('/users/:id', userController.getUserById);
 
 // Rotas para as perguntas
 router.get('/questions/:professorId', questionController.getQuestionsByProfessor);
