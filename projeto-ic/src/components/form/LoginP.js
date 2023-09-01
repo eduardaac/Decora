@@ -18,9 +18,18 @@ const LoginP = () => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post(`${API_BASE_URL}/login`, data); // Corrija a URL da API
-            console.log('Resposta do servidor:', response.data);
+            const response = await axios.post(`${API_BASE_URL}/login`, data);
 
+            if (response.status === 200) {
+                const { typeUser } = response.data;
+                const novoCodigoTurma = response.data.codigoTurma;
+
+                if (typeUser === "aluno") {
+                    navigate(`/sistema-recomendacoes-a`, { state: { novoCodigoTurma } });
+                } else if (typeUser === "professor") {
+                    navigate(`/sistema-recomendacoes-p`, { state: { novoCodigoTurma } });
+                }
+            }
         } catch (error) {
             console.error('Erro ao fazer login:', error);
         }
