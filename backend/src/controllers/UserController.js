@@ -34,8 +34,7 @@ module.exports = {
 
             const token = jwt.sign({ userId: existingUser._id }, secretKey, { expiresIn: '1h' });
 
-            return response.json({ token });
-
+            return response.json({ token, typeUser: existingUser.typeUser, codigoTurma: existingUser.codigoTurma });
         } catch (error) {
             console.log(error);
             return response.status(500).json({ error: 'Erro ao fazer login.' });
