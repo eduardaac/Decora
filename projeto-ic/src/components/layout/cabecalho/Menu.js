@@ -14,7 +14,7 @@ function Menu() {
                     <Link to="/iniciar-sistema-recomendacoes">SISTEMA DE RECOMENDAÇÃO</Link>
                 </li>
                 <li className={styles.item}>
-                    <Link to="/">PERFIL</Link>
+                    <Link to="/perfil">PERFIL</Link>
                 </li>
                 <li className={styles.item}>
                     <Link to="/">SAIR</Link>

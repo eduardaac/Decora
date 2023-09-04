@@ -11,12 +11,11 @@ const Sistema = () => {
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
     } = useForm();
     const location = useLocation();
     const codigoTurma = location.state.novoCodigoTurma;
-    console.log("Codigo da turma: ", codigoTurma)
+    console.log("Codigo da turma: ", codigoTurma);
 
     useEffect(() => {
         if (codigoTurma) {
@@ -31,38 +30,63 @@ const Sistema = () => {
         }
     }, [codigoTurma]);
 
-    const onSubmit = (data) => {
-        console.log("Dados do Formulário Submetidos:", data);
+    const onSubmit = async (data) => {
+        try {
+            const userResponses = {};
+            questions.forEach((question, index) => {
+                const fieldName = `question_${index}`;
+                if (data[fieldName] !== "0") {
+                    userResponses[question._id] = parseInt(data[fieldName]);
+                }
+            });
+
+            const response = await axios.post(`${API_BASE_URL}/responses`, {
+                classCode: codigoTurma,
+                userResponses: userResponses,
+            });
+
+            if (response.data.recommendations) {
+                console.log("Recomendações:", response.data.recommendations);
+                // Aqui você pode atualizar o estado do componente com as recomendações
+            }
+        } catch (error) {
+            console.error('Erro ao salvar a resposta:', error);
+        }
     };
 
     return (
         <>
             <div className="form">
-                {questions.map((question, index) => (
-                    <div className="formGroup" key={question.label}>
-                        <label>{question.label}</label>
-                        <select
-                            key={question.label}
-                            className={errors?.[`question_${index}`] ? "input-error" : ""}
-                            defaultValue="0"
-                            {...register(`question_${index}`, { validate: (value) => value !== "0" })}
-                        >
-                            <option value="0">Selecione opção...</option>
-                            {question.options && question.options.map((option, optionIndex) => (
-                                <option key={optionIndex} value={optionIndex}>
-                                    {option.text}
-                                </option>
-                            ))}
-                        </select>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    {questions.map((question, index) => (
+                        <div className="formGroup" key={question.label}>
+                            <label>{question.label}</label>
+                            <select
+                                key={question.label}
+                                className={errors?.[`question_${index}`] ? "input-error" : ""}
+                                defaultValue=""
+                                {...register(`question_${index}`, {
+                                    validate: (value) => value !== "",
+                                })}
+                            >
+                                <option value="">Selecione opção...</option>
+                                {question.options && question.options.map((option, optionIndex) => (
+                                    <option key={optionIndex} value={optionIndex}>
+                                        {option.text}
+                                    </option>
+                                ))}
+                            </select>
 
-                        {errors?.[`question_${index}`]?.type === "validate" && (
-                            <p className="error-message">Campo obrigatório.</p>
-                        )}
+                            {errors?.[`question_${index}`]?.type === "validate" && (
+                                <p className="error-message">Campo obrigatório.</p>
+                            )}
+
+                        </div>
+                    ))}
+                    <div className="formGroup">
+                        <button type="submit">SUBMETER</button>
                     </div>
-                ))}
-                <div className="formGroup">
-                    <button onClick={handleSubmit(onSubmit)}>SUBMETER</button>
-                </div>
+                </form>
             </div>
         </>
     );
