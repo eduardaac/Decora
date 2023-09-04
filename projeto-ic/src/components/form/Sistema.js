@@ -8,6 +8,7 @@ const API_BASE_URL = "http://localhost:3333";
 
 const Sistema = () => {
     const [questions, setQuestions] = useState([]);
+    const [userSelections, setUserSelections] = useState({}); // Novo estado para rastrear as seleções do usuário
     const {
         register,
         handleSubmit,
@@ -35,8 +36,8 @@ const Sistema = () => {
             const userResponses = {};
             questions.forEach((question, index) => {
                 const fieldName = `question_${index}`;
-                if (data[fieldName] !== "0") {
-                    userResponses[question._id] = parseInt(data[fieldName]);
+                if (userSelections[fieldName] !== undefined && userSelections[fieldName] !== "") {
+                    userResponses[question._id] = parseInt(userSelections[fieldName]);
                 }
             });
 
@@ -66,23 +67,32 @@ const Sistema = () => {
                             <select
                                 key={question.label}
                                 className={errors?.[`question_${index}`] ? "input-error" : ""}
-                                defaultValue=""
-                                {...register(`question_${index}`, {
-                                    validate: (value) => value !== "",
-                                })}
+                                value={userSelections[`question_${index}`] || ""}
+                                onChange={(e) => {
+                                    const fieldName = `question_${index}`;
+                                    const selectedValue = e.target.value;
+                                    setUserSelections((prevState) => ({
+                                        ...prevState,
+                                        [fieldName]: selectedValue,
+                                    }));
+                                }}
                             >
                                 <option value="">Selecione opção...</option>
-                                {question.options && question.options.map((option, optionIndex) => (
-                                    <option key={optionIndex} value={optionIndex}>
-                                        {option.text}
-                                    </option>
-                                ))}
+                                {question.options &&
+                                    question.options.map((option, optionIndex) => (
+                                        <option key={optionIndex} value={optionIndex}>
+                                            {option.text}
+                                        </option>
+                                    ))}
                             </select>
+                            {userSelections[`question_${index}`] === "" && (
+                                <p className="error-message">Campo obrigatório.</p>
+                            )}
+
 
                             {errors?.[`question_${index}`]?.type === "validate" && (
                                 <p className="error-message">Campo obrigatório.</p>
                             )}
-
                         </div>
                     ))}
                     <div className="formGroup">
