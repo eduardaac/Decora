@@ -4,6 +4,7 @@ const question = require('../models/questionData');
 const Response = require('../models/responseData');
 
 async function generateRecommendations(userResponses) {
+    // Inicialize o objeto de recomendações
     const recommendations = {
         styles: [],
         decisions: [],
@@ -11,43 +12,54 @@ async function generateRecommendations(userResponses) {
     };
 
     try {
-        const categoryCounts = {
+        // Crie um objeto para rastrear as respostas e suas prioridades por categoria
+        const answerPrioritiesByCategory = {
             styles: {},
             decisions: {},
             technologies: {},
         };
 
-        // Iterar pelas respostas do usuário
-        Object.keys(userResponses).forEach(async (questionId) => {
+        // Itere pelas respostas do usuário
+        for (const questionId of Object.keys(userResponses)) {
             const questionData = await question.findById(questionId);
             if (questionData) {
                 const selectedOption = questionData.options[userResponses[questionId]];
-                if (selectedOption && selectedOption.answers) { // Verifica se há respostas vinculadas
+                if (selectedOption && selectedOption.answers) {
                     selectedOption.answers.forEach((answerObj) => {
                         answerObj.answer.forEach((answer) => {
+                            // Rastreie a prioridade da resposta por categoria
                             const category = questionData.category;
-                            if (!categoryCounts[category][answer]) {
-                                categoryCounts[category][answer] = questionData.priority;
+                            if (!answerPrioritiesByCategory[category][answer]) {
+                                answerPrioritiesByCategory[category][answer] = questionData.priority;
                             } else {
-                                categoryCounts[category][answer] += questionData.priority;
+                                answerPrioritiesByCategory[category][answer] += questionData.priority;
                             }
                         });
                     });
                 }
             }
-        });
+        }
 
-        // Calcular as recomendações com base nas contagens ponderadas
-        Object.keys(categoryCounts).forEach((category) => {
-            const answers = categoryCounts[category];
+        // Construa as recomendações com base nas prioridades máximas por categoria
+        for (const category of Object.keys(answerPrioritiesByCategory)) {
+            const categoryPriorities = answerPrioritiesByCategory[category];
+            let maxPriority = 0;
+            let maxPriorityAnswers = [];
 
-            if (Object.keys(answers).length > 0) {
-                const recommendedAnswer = Object.keys(answers).reduce((prevAnswer, currAnswer) => {
-                    return answers[currAnswer] > answers[prevAnswer] ? currAnswer : prevAnswer;
-                });
-                recommendations[category].push(recommendedAnswer);
+            // Encontre a prioridade máxima dentro da categoria
+            for (const answer of Object.keys(categoryPriorities)) {
+                const priority = categoryPriorities[answer];
+                if (priority > maxPriority) {
+                    maxPriority = priority;
+                    maxPriorityAnswers = [answer];
+                } else if (priority === maxPriority) {
+                    maxPriorityAnswers.push(answer);
+                }
             }
-        });
+
+            // Adicione as respostas com prioridade máxima à categoria
+            recommendations[category] = maxPriorityAnswers;
+        }
 
         return recommendations;
     } catch (error) {
@@ -68,12 +80,13 @@ module.exports = {
 
             // Processar recomendações
             const userRecommendations = await generateRecommendations(userResponses);
-
+            console.log(userRecommendations);
             response.json({
                 message: 'Resposta salva com sucesso.',
-                recommendations: userRecommendations
+                recommendations: userRecommendations,
             });
         } catch (error) {
+            console.error(error);
             response.status(500).json({ error: 'Erro ao salvar a resposta.' });
         }
     },

@@ -40,6 +40,8 @@ const Sistema = () => {
                 }
             });
 
+            console.log("Respostas do usuário:", userResponses);
+
             const response = await axios.post(`${API_BASE_URL}/responses`, {
                 classCode: codigoTurma,
                 userResponses: userResponses,
