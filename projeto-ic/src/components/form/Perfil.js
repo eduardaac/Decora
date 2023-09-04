@@ -1,41 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-const API_BASE_URL = "http://localhost:3333";
+const Perfil = ({ userId }) => {
+  const [userData, setUserData] = useState({});
 
-function UserProfile() {
-    const location = useLocation();
-    const { userId } = location.state;
-    const [user, setUser] = useState(null);
+  useEffect(() => {
+    // Faça uma chamada à API para obter os dados do usuário com base no ID
+    axios.get(`http://localhost:3333/users/${userId}`)
+      .then(response => {
+        setUserData(response.data);
+      })
+      .catch(error => {
+        console.error('Erro ao obter dados do usuário:', error);
+      });
+  }, [userId]);
 
-    useEffect(() => {
-        // Obtenha informações do usuário com base no userId
-        const fetchUserDetails = async () => {
-            try {
-                const response = await axios.get(`${API_BASE_URL}/users/${userId}`);
-                setUser(response.data);
-            } catch (error) {
-                console.error('Erro ao obter informações do usuário:', error);
-            }
-        };
+  return (
+    <div>
+      <h2>Perfil do Usuário</h2>
+      <p><strong>Nome:</strong> {userData.nome}</p>
+      <p><strong>Email:</strong> {userData.email}</p>
+      <p><strong>Data de Nascimento:</strong> {userData.dataNascimento}</p>
+      <p><strong>Atuação:</strong> {userData.atuacao}</p>
+      <p><strong>Escolaridade:</strong> {userData.escolaridade}</p>
+      <p><strong>Tipo de Usuário:</strong> {userData.typeUser}</p>
+      <p><strong>Código de Turma:</strong> {userData.codigoTurma}</p>
+    </div>
+  );
+};
 
-        if (userId) {
-            fetchUserDetails();
-        }
-    }, [userId]);
-
-    return (
-        <div>
-            <h1>Perfil do Usuário</h1>
-            {user && (
-                <div>
-                    <p>Nome: {user.nome}</p>
-                    <p>Email: {user.email}</p>
-                </div>
-            )}
-        </div>
-    );
-}
-
-export default UserProfile;
+export default Perfil;
