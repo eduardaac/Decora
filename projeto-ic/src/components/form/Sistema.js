@@ -1,37 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import './style.css';
-import { useForm } from 'react-hook-form';
 import Sugestoes from './Sugestoes'; // Importe o componente Sugestoes
 
 const API_BASE_URL = "http://localhost:3333";
 
-const Sistema = () => {
-  const [questions, setQuestions] = useState([]);
-  const [showRecommendations, setShowRecommendations] = useState(false); // Novo estado
-  const [recommendations, setRecommendations] = useState({}); // Novo estado
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const location = useLocation();
-  const codigoTurma = location.state.novoCodigoTurma;
-  console.log("Codigo da turma: ", codigoTurma);
+const Sistema = ({ codigoTurma }) => { // Receba codigoTurma como uma propriedade
+    const [questions, setQuestions] = useState([]);
+    const [showRecommendations, setShowRecommendations] = useState(false);
+    const [recommendations, setRecommendations] = useState({});
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
-  useEffect(() => {
-    if (codigoTurma) {
-      axios.get(`${API_BASE_URL}/questions/byclass/${codigoTurma}`)
-        .then(response => {
-          console.log("Dados das perguntas obtidos da API:", response.data);
-          setQuestions(response.data);
-        })
-        .catch(error => {
-          console.error('Erro ao buscar as perguntas:', error);
-        });
-    }
-  }, [codigoTurma]);
+    useEffect(() => {
+        if (codigoTurma) { // Verifique se o codigoTurma está disponível
+            console.log("Codigo de turma do sistema: ", codigoTurma);
+            axios.get(`${API_BASE_URL}/questions/byclass/${codigoTurma}`)
+                .then(response => {
+                    console.log("Dados das perguntas obtidos da API:", response.data);
+                    setQuestions(response.data);
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar as perguntas:', error);
+                });
+        }
+    }, [codigoTurma]);
 
   const onSubmit = async (data) => {
     try {

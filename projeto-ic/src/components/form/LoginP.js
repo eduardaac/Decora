@@ -23,11 +23,12 @@ const LoginP = () => {
             if (response.status === 200) {
                 const { typeUser } = response.data;
                 const novoCodigoTurma = response.data.codigoTurma;
+                const userId = response.data.userId;
 
                 if (typeUser === "aluno") {
-                    navigate(`/sistema-recomendacoes-a`, { state: { novoCodigoTurma } });
+                    navigate(`/sistema-recomendacoes-a`, { state: { novoCodigoTurma, userId } });
                 } else if (typeUser === "professor") {
-                    navigate(`/sistema-recomendacoes-p`, { state: { novoCodigoTurma } });
+                    navigate(`/sistema-recomendacoes-p`, { state: { novoCodigoTurma, userId } });
                 }
             }
         } catch (error) {

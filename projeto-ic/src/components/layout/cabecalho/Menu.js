@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import styles from './Menu.module.css';
 import logo from '../../img/logo.png'
 
-function Menu() {
+function Menu({userId}) {
+    console.log("userId passado para perfil", userId);
     return (
         <nav className={styles.menu}>
             <dev className={styles.logo}>
@@ -14,7 +15,7 @@ function Menu() {
                     <Link to="/iniciar-sistema-recomendacoes">SISTEMA DE RECOMENDAÇÃO</Link>
                 </li>
                 <li className={styles.item}>
-                    <Link to="/perfil">PERFIL</Link>
+                <Link to={`/perfil/${userId}`}>PERFIL</Link>
                 </li>
                 <li className={styles.item}>
                     <Link to="/">SAIR</Link>

@@ -8,7 +8,8 @@ import {
 import PreviewForm from './PreviewForm';
 import { AiFillCloseCircle } from "react-icons/ai";
 import styles from './Edition.module.css'
-function Edition() {
+function Edition({ codigoTurma }) {
+  console.log("Coi", codigoTurma);
   const [inputs, setInputs] = useState([
     {
       id: uuid.v4(),

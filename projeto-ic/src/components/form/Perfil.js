@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-const Perfil = ({ userId }) => {
+const Perfil = () => {
+  const { userId } = useParams(); // Obtém o userId da URL
+
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    // Faça uma chamada à API para obter os dados do usuário com base no ID
-    axios.get(`http://localhost:3333/users/${userId}`)
-      .then(response => {
-        setUserData(response.data);
-      })
-      .catch(error => {
-        console.error('Erro ao obter dados do usuário:', error);
-      });
+    if (userId) {
+      axios.get(`http://localhost:3333/users/${userId}`)
+        .then(response => {
+          setUserData(response.data);
+        })
+        .catch(error => {
+          console.error('Erro ao obter dados do usuário:', error);
+        });
+    }
   }, [userId]);
 
   return (
@@ -30,3 +34,5 @@ const Perfil = ({ userId }) => {
 };
 
 export default Perfil;
+
+// Resto do código não modificado
