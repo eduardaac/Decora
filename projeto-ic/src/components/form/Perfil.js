@@ -21,7 +21,6 @@ const Perfil = () => {
 
   return (
     <div>
-      <h2>Perfil do Usuário</h2>
       <p><strong>Nome:</strong> {userData.nome}</p>
       <p><strong>Email:</strong> {userData.email}</p>
       <p><strong>Data de Nascimento:</strong> {userData.dataNascimento}</p>

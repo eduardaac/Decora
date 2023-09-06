@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './index.module.css';
+import styles from '../index.module.css';
 import Menu from '../../layout/cabecalho/Menu';
 import Sistema from '../../form/Sistema';
 import { useLocation } from 'react-router-dom'; // Importe o useLocation
@@ -13,7 +13,7 @@ function SistRecAluno() {
         <div className={styles.page}>
             <Menu userId={userId} />
             <div className={styles.container}>
-                <div className={styles.containerForm}>
+                <div className={styles.form}>
                     <h1>SISTEMA DE RECOMENDAÇÃO</h1>
                     <Sistema codigoTurma={codigoTurma} />
                 </div>
