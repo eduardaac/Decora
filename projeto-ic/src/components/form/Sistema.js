@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import './style.css';
 import Sugestoes from './Sugestoes'; // Importe o componente Sugestoes
 
 const API_BASE_URL = "http://localhost:3333";
@@ -62,7 +61,7 @@ const Sistema = ({ codigoTurma }) => { // Receba codigoTurma como uma propriedad
       <div className="form">
         <form onSubmit={handleSubmit(onSubmit)}>
           {questions.map((question, index) => (
-            <div className="formGroup" key={question.label}>
+            <div className="group" key={question.label}>
               <label>{question.label}</label>
               <select
                 key={question.label}
