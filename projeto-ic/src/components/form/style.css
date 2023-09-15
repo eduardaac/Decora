@@ -1,5 +1,5 @@
 .formGroup {
-    margin-top: 1.2em;
+    margin-top: 2.0em;
     border-color: #474242;
 }
 
@@ -24,7 +24,6 @@
     border-radius: 5px;
     font-size: 0.9em;
     font-weight: 300;
-    padding-bottom: 10px 10;
     width: 99%;
     height: 2.3em;    
 }
@@ -44,7 +43,8 @@
 
 .formGroup .error-message {
     color: red;
-    font-size: 0.70rem;
+    font-size: 0.7rem;
+    margin-top: 1px;
     position: absolute;
 }
 
@@ -56,7 +56,6 @@
     border-radius: 5px;
     font-size: 1em;
     font-weight: bold;
-    margin-top: 1em;
     width: 100%;
     height: 40px;
 }
@@ -72,7 +71,7 @@
 .formField label {
     color: #676464;
     font-size: 0.9em;
-    margin-right: 35%;
+    margin-right: 26%;
 }
 
 .formField input {
@@ -88,7 +87,6 @@
 .formField a {
     color: #090539;
     font-size: 15px;
-    margin-left: 8px;
 }
 
 .formGroup select {
@@ -100,7 +98,6 @@
     border-radius: 5px;
     font-size: 0.9em;
     font-weight: 300;
-    padding-bottom: 10px 10;
     width: 99%;
     height: 2.5em;
 }
@@ -112,3 +109,19 @@
 .tamanho{
     color: #3E3BDD;
 }
+
+@media (max-width: 768px) {
+    .formField {
+      text-align: center; 
+    }
+  
+    .formField input[type="checkbox"],
+    .formField label,
+    .formField a {
+      display: inline-block;
+      margin-right: 5px;
+      font-size: 0.8em; 
+    }
+  }
+  
+  

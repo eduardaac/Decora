@@ -1,44 +1,66 @@
-.container{
+body {
+    margin: 0;
+    padding: 0;
     display: flex;
-    margin: 0 auto;
-    padding: 5% 20%;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 100vh;
     background-color: #EEF1FD;
-}
-
-.loginAside {
-    width: 40%;
+  }
+  
+  .container {
+    width: 100%; /* Ajuste conforme necessário */
+    max-width: 800px; /* Largura máxima */
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas de largura igual */
+    grid-gap: 20px; /* Espaço entre as colunas */
+  }
+  
+  .loginAside {
     background: linear-gradient(to bottom, #ffffff, #090539);
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-}
-.loginAside h1 {
-    text-align: center;
+    padding: 20px;
+    /* Altura mínima para evitar o colapso em conteúdo pequeno */
+    min-height: 200px;
+  }
+  
+  .loginAside h1 {
     font-size: 1.5em;
-    padding: 0px 40px;
     color: white;
     text-transform: uppercase;
-
-}
-.cor{
-    color:#8076FF;
-}
-
-.form{
-    width: 100%;
+  }
+  
+  .cor {
+    color: #8076FF;
+  }
+  
+  .containerForm {
     background-color: white;
-    padding: 3% 5%;
-}
-
-.containerForm {
-    width: 60%;
-    background-color: white;
-    padding: 3% 5%;
-    overflow: auto;
-}
-
-.containerForm h1 {
-    text-align: center;
+    padding: 20px;
+    /* Altura mínima para evitar o colapso em conteúdo pequeno */
+    min-height: 200px;
+  }
+  
+  .containerForm h1 {
     font-size: 1.9em;
     margin-bottom: 1.0em;
-}
+  }
+  
+  /* Estilos responsivos */
+  @media (max-width: 768px) {
+    .container {
+      width: 100%;
+      grid-template-columns: 1fr; /* Uma coluna em telas menores */
+      padding: 5% 10%;
+    }
+  
+    .loginAside {
+      display: none; /* Oculta loginAside em telas pequenas */
+    }
+  }
+  

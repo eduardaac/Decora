@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from '../index.module.css';
 import Menu from '../../layout/cabecalho/Menu';
 import Sistema from '../../form/Sistema';
 import { FaEdit } from "react-icons/fa";
@@ -13,11 +12,11 @@ function SistRecProfessor() {
     const codigoTurma = location.state ? location.state.novoCodigoTurma : null;
     console.log("Codigo de turma na pagina renderizada: ", codigoTurma);
     return (
-        <div className={styles.page}>
+        <div className="">
             <Menu userId={userId} />
-            <div className={styles.container}>
-                <div className={styles.form}>
-                    <Link to={`/edition/${userId}/${codigoTurma}`} className={styles.icons}><FaEdit /></Link>
+            <div className="">
+                <div className="">
+                    <Link to={`/edition/${userId}/${codigoTurma}`} className=" "><FaEdit /></Link>
                     <h1>SISTEMA DE RECOMENDAÇÃO</h1>
                     <Sistema codigoTurma={codigoTurma} />
                 </div>
