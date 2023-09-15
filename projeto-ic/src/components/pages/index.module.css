@@ -46,7 +46,7 @@ body {
 }
 .containerSist button{
   border: none;
-  background-color: white;
+  display: inline;
 }
 
 .formSist {
@@ -56,12 +56,15 @@ body {
 }
 
 .icons{
-  font-size: 30px;
+  font-size: 35px;
   color: #090539;
+  background-color: white;
 }
 
 .formSist h1{
   text-align: center;
+  margin-left: 15%;
+  display: inline;
 }
 
 .containerForm {
