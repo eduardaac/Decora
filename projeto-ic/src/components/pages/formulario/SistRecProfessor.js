@@ -15,7 +15,7 @@ function SistRecProfessor() {
     return (
         <div className={styles.page}>
             <Menu userId={userId} />
-            <div className={styles.containeSist}>
+            <div className={styles.containerSist}>
                 <div className={styles.formSist}>
                     <Link to={`/edition/${userId}/${codigoTurma}`} className={styles.icons}><FaEdit /></Link>
                     <h1>SISTEMA DE RECOMENDAÇÃO</h1>

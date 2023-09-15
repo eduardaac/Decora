@@ -60,11 +60,11 @@ function SistemaEdition() {
                 </option>
               ))}
             </select>
-
+            
             <button onClick={() => handleDeleteQuestion(question._id, index)}>
               <FaTrash />
             </button>
-
+    
           </div>
         ))}
       </ul>

@@ -11,10 +11,9 @@ function SistEdit() {
     const userId = location.state ? location.state.userId : null;
     const codigoTurma = location.state ? location.state.novoCodigoTurma : null;
 
-    const navigate = useNavigate(); // Use useNavigate em vez de useHistory
+    const navigate = useNavigate(); 
 
     const handleGoBack = () => {
-        // Use navigate(-1) para voltar para a página anterior
         navigate(-1);
     };
 
@@ -22,8 +21,8 @@ function SistEdit() {
     return (
         <div className={styles.page}>
             <Menu userId={userId} />
-            <div className={styles.container}>
-                <div className={styles.form}>
+            <div className={styles.containerSist}>
+                <div className={styles.formSist}>
                     <button onClick={handleGoBack} className={styles.icons}><BsArrowLeftSquareFill /></button>
                     <h1>SISTEMA DE RECOMENDAÇÃO</h1>
                     <SistemaEdition />

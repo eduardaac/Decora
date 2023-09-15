@@ -1,66 +1,89 @@
 body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    height: 100vh;
-    background-color: #EEF1FD;
-  }
-  
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #EEF1FD;
+  height: 100%;
+}
+
+.container {
+  margin-top: 9%;
+  width: 100%;
+  max-width: 800px;
+  background-color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.containerSist {
+  width: 100%;
+  max-width: 800px;
+  background-color: #8076FF;
+}
+
+.loginAside {
+  background: linear-gradient(to bottom, #ffffff, #090539);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  min-height: 200px;
+}
+
+.loginAside h1 {
+  font-size: 1.5em;
+  color: white;
+  text-transform: uppercase;
+}
+
+.cor {
+  color: #8076FF;
+}
+.containerSist button{
+  border: none;
+  background-color: white;
+}
+
+.formSist {
+  background-color: white;
+  padding: 20px;
+  min-height: 200px; 
+}
+
+.icons{
+  font-size: 30px;
+  color: #090539;
+}
+
+.formSist h1{
+  text-align: center;
+}
+
+.containerForm {
+  background-color: white;
+  padding: 20px;
+  min-height: 200px;
+}
+
+.containerForm h1 {
+  font-size: 1.9em;
+  margin-bottom: 1.0em;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
   .container {
-    width: 100%; /* Ajuste conforme necessário */
-    max-width: 800px; /* Largura máxima */
-    background-color: white;
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Duas colunas de largura igual */
-    grid-gap: 20px; /* Espaço entre as colunas */
+    width: 100%;
+    grid-template-columns: 1fr;
+    padding: 5% 10%;
   }
-  
+
   .loginAside {
-    background: linear-gradient(to bottom, #ffffff, #090539);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 20px;
-    /* Altura mínima para evitar o colapso em conteúdo pequeno */
-    min-height: 200px;
+    display: none;
   }
-  
-  .loginAside h1 {
-    font-size: 1.5em;
-    color: white;
-    text-transform: uppercase;
-  }
-  
-  .cor {
-    color: #8076FF;
-  }
-  
-  .containerForm {
-    background-color: white;
-    padding: 20px;
-    /* Altura mínima para evitar o colapso em conteúdo pequeno */
-    min-height: 200px;
-  }
-  
-  .containerForm h1 {
-    font-size: 1.9em;
-    margin-bottom: 1.0em;
-  }
-  
-  /* Estilos responsivos */
-  @media (max-width: 768px) {
-    .container {
-      width: 100%;
-      grid-template-columns: 1fr; /* Uma coluna em telas menores */
-      padding: 5% 10%;
-    }
-  
-    .loginAside {
-      display: none; /* Oculta loginAside em telas pequenas */
-    }
-  }
-  
+}
