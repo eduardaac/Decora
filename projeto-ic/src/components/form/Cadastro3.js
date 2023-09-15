@@ -27,9 +27,9 @@ const Cadastro3 = () => {
                 console.log("Código da Turma:", novoCodigoTurma);
 
                 if (typeUser === "aluno") {
-                    navigate(`/sistema-recomendacoes-a`, { state: { novoCodigoTurma } });
+                    navigate(`/sistema-recomendacoes-a`, { state: { novoCodigoTurma, userId } });
                 } else if (typeUser === "professor") {
-                    navigate(`/sistema-recomendacoes-p`, { state: { novoCodigoTurma } });
+                    navigate(`/sistema-recomendacoes-p`, { state: { novoCodigoTurma, userId } });
                 }
             }
         } catch (error) {
