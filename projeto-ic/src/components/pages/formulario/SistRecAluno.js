@@ -8,7 +8,9 @@ function SistRecAluno() {
     const location = useLocation();
     const userId = location.state ? location.state.userId : null;
     const codigoTurma = location.state ? location.state.novoCodigoTurma : null;
+
     console.log("Codigo de turma na pagina renderizada: ", codigoTurma);
+    console.log("UserId na pagina renderizada: ", userId);
     return (
         <div className={styles.page}>
             <Menu userId={userId} />

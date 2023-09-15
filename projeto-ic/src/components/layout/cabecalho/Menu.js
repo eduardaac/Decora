@@ -11,9 +11,7 @@ function Menu({userId}) {
                 <img src={logo} alt='' style={{ width: "8em" }}></img>
             </dev>
             <ul className={styles.list}>
-                <li className={styles.item}>
-                    <Link to="/iniciar-sistema-recomendacoes">SISTEMA DE RECOMENDAÇÃO</Link>
-                </li>
+
                 <li className={styles.item}>
                 <Link to={`/perfil/${userId}`}>PERFIL</Link>
                 </li>
