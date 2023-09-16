@@ -6,6 +6,7 @@ body {
   align-items: center;
   background-color: #EEF1FD;
   height: 100%;
+  width: 100%;
 }
 
 .container {
@@ -21,7 +22,15 @@ body {
 .containerSist {
   width: 100%;
   max-width: 800px;
-  background-color: #8076FF;
+  min-height: 200px;
+
+}
+
+.containerE {
+  width: 100%;
+  max-width: 800px;
+  min-height: 200px;
+  margin-top: 70px;
 }
 
 .loginAside {
@@ -44,7 +53,8 @@ body {
 .cor {
   color: #8076FF;
 }
-.containerSist button{
+
+.containerSist button {
   border: none;
   display: inline;
 }
@@ -52,31 +62,54 @@ body {
 .formSist {
   background-color: white;
   padding: 20px;
-  min-height: 200px; 
+  min-height: 200px;
 }
 
-.icons{
+.formE {
+  background-color: white;
+  padding: 20px;
+  min-height: 200px;
+}
+
+.icons {
   font-size: 35px;
   color: #090539;
   background-color: white;
+  border: none;
+  display: inline;
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
-.formSist h1{
+
+.formSist h1 {
   text-align: center;
   margin-left: 15%;
   display: inline;
+  font-size: 2.0em;
+
+}
+
+.formE h1 {
+  text-align: center;
+  margin-left: 30%;
+  display: inline;
+  font-size: 2.0em;
+
 }
 
 .containerForm {
   background-color: white;
   padding: 20px;
   min-height: 200px;
+  display: inline;
+
 }
 
 .containerForm h1 {
-  font-size: 1.9em;
+  font-size: 2.0em;
   margin-bottom: 1.0em;
-  align-items: center;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
