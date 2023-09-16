@@ -1,25 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Menu.module.css';
-import logo from '../../img/logo.png'
+import logo from '../../img/logo.png';
 
-function Menu({userId}) {
-    console.log("userId passado para perfil", userId);
-    return (
-        <nav className={styles.menu}>
-            <dev className={styles.logo}>
-                <img src={logo} alt='' style={{ width: "8em" }}></img>
-            </dev>
-            <ul className={styles.list}>
-
-                <li className={styles.item}>
-                <Link to={`/perfil/${userId}`}>PERFIL</Link>
-                </li>
-                <li className={styles.item}>
-                    <Link to="/">SAIR</Link>
-                </li>
-            </ul>
-        </nav>
-    )
+function Menu({ userId }) {
+  return (
+    <nav className={styles.menu}>
+      <div className={styles.logo}>
+        <img src={logo} alt='' style={{ width: '8em' }} />
+      </div>
+      <ul className={styles.list}>
+        <li className={styles.item}>
+          <Link to={`/perfil/${userId}`} className={styles.link}>
+            PERFIL
+          </Link>
+        </li>
+        <li className={styles.item}>
+          <Link to="/" className={styles.link}>
+            SAIR
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  );
 }
+
 export default Menu;
