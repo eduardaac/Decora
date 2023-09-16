@@ -35,7 +35,7 @@ module.exports = {
             const token = jwt.sign({ userId: existingUser._id }, secretKey, { expiresIn: '1h' });
 
             return response.json({ token, typeUser: existingUser.typeUser, codigoTurma: existingUser.codigoTurma, userId: existingUser._id });
-            
+
         } catch (error) {
             console.log(error);
             return response.status(500).json({ error: 'Erro ao fazer login.' });
@@ -55,7 +55,6 @@ module.exports = {
         try {
             const { nome, email, dataNascimento, senha, atuacao, escolaridade, typeUser, codigoTurma } = request.body;
 
-            // Verificar se o typeUser é "professor" e gerar um código de turma aleatório e distinto
             let generatedCodigoTurma;
             if (typeUser === "professor") {
                 generatedCodigoTurma = generateUniqueCodigoTurma();
@@ -67,6 +66,13 @@ module.exports = {
                 }
                 generatedCodigoTurma = codigoTurma; // Salvar o código de turma fornecido pelo aluno
             }
+
+            const existingUser = await user.findOne({ email });
+
+            if (existingUser) {
+                return response.status(400).json({ error: 'Este email já está em uso.' });
+            }
+
             const userCreated = await user.create({
                 nome,
                 email,
@@ -190,23 +196,44 @@ module.exports = {
     async getUserById(request, response) {
         try {
             const { id } = request.params;
-            const existingUser = await user.findById(id); // Certifique-se de usar o modelo correto
-
+            const existingUser = await user.findById(id);
+    
             if (!existingUser) {
                 return response.status(404).json({ error: 'Usuário não encontrado.' });
             }
-            return response.json(existingUser);
+    
+            const alunos = await user.find({ typeUser: 'aluno', codigoTurma: existingUser.codigoTurma });
+            const totalAlunos = alunos.length;
+            const nomesAlunos = alunos.map((aluno) => aluno.nome);
+    
+            // Crie um novo objeto com todas as informações necessárias
+            const responseData = {
+                _id: existingUser._id,
+                nome: existingUser.nome,
+                email: existingUser.email,
+                dataNascimento: existingUser.dataNascimento,
+                senha: existingUser.senha,
+                atuacao: existingUser.atuacao,
+                codigoTurma: existingUser.codigoTurma,
+                escolaridade: existingUser.escolaridade,
+                typeUser: existingUser.typeUser,
+                totalAlunos: totalAlunos,
+                nomesAlunos: nomesAlunos,
+            };
+    
+            return response.json(responseData);
         } catch (error) {
             console.log(error);
             return response.status(500).json({ error: 'Erro ao obter informações do usuário.' });
         }
     },
     
+
     async deleteAllUsers(request, response) {
         try {
             // Delete todos os usuários
             await user.deleteMany({}); // Isso vai deletar todos os documentos na coleção 'users'
-            
+
             // Opcional: Também pode deletar outras informações relacionadas (por exemplo, perguntas associadas aos professores)
             await question.deleteMany({}); // Isso vai deletar todas as perguntas
 
