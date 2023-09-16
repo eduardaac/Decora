@@ -20,6 +20,11 @@ const Perfil = () => {
     }
   }, [userId]);
 
+  const formatDateOfBirth = (dateOfBirth) => {
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    return new Date(dateOfBirth).toLocaleDateString(undefined, options);
+  };
+
   return (
     <div className='form'>
       <div className='formE'>
@@ -32,8 +37,9 @@ const Perfil = () => {
         <input type='email' id='email' value={userData.email} readOnly />
 
 
+
         <label htmlFor='dataNascimento'>Data de Nascimento:</label>
-        <input type='text' id='dataNascimento' value={userData.dataNascimento} readOnly />
+        <input type='text' id='dataNascimento' value={formatDateOfBirth(userData.dataNascimento)} readOnly />
 
 
         <label htmlFor='atuacao'>Atuação:</label>
@@ -45,14 +51,13 @@ const Perfil = () => {
 
 
         <label htmlFor='typeUser'>Tipo de Usuário:</label>
-        <input type='text' id='typeUser' value={userData.typeUser} readOnly />
+        <input type='text' id='typeUser' value={userData.typeUser.charAt(0).toUpperCase() + userData.typeUser.slice(1)} readOnly />
 
 
         <label htmlFor='codigoTurma'>Código de Turma:</label>
         <input type='text' id='codigoTurma' value={userData.codigoTurma} readOnly />
       </div>
     </div>
-
   );
 };
 

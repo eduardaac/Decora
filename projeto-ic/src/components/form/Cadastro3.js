@@ -49,8 +49,8 @@ const Cadastro3 = () => {
                     {...register("atuacao", { validate: (value) => value !== "0" })}
                 >
                     <option value="0">Selecione sua área de atuação...</option>
-                    <option value="mercadoTrabalho">Mercado de trabalho</option>
-                    <option value="academica">Acadêmica</option>
+                    <option value="Mercado de trabalho">Mercado de trabalho</option>
+                    <option value="Acadêmica">Acadêmica</option>
                 </select>
 
                 {errors?.atuacao?.type === "validate" && (
@@ -66,8 +66,8 @@ const Cadastro3 = () => {
                     {...register("escolaridade", { validate: (value) => value !== "0" })}
                 >
                     <option value="0">Selecione o seu nível de escolaridade...</option>
-                    <option value="superiorIncompleto">Ensino superior incompleto</option>
-                    <option value="superiorCompleto">Ensino superior completo</option>
+                    <option value="Ensino superior incompleto">Ensino superior incompleto</option>
+                    <option value="Ensino superior completo">Ensino superior completo</option>
                     <option value="Mestrado">Mestrado</option>
                     <option value="Doutorado">Doutorado</option>
                 </select>
