@@ -2,7 +2,8 @@
     margin-top: 1.0em;
     border-color: #474242;
 }
-.formE label{
+
+.formE label {
     display: block;
     font-size: 0.9em;
     font-weight: bold;
@@ -11,7 +12,8 @@
     width: 100%;
     margin-top: 1em;
 }
-.formE input{
+
+.formE input {
     width: 700px;
     background-color: transparent;
     border: none;
@@ -21,9 +23,10 @@
     border-radius: 5px;
     font-size: 0.9em;
     font-weight: 300;
- 
+
     height: 2.3em;
 }
+
 .formGroup label {
     display: block;
     text-transform: lowercase;
@@ -119,7 +122,7 @@
     align-items: center;
     justify-content: center;
     margin-right: 1em;
-    margin-top: 43px;
+    margin-top: 20px;
     margin-left: 6px;
 }
 
