@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css';
 import { useForm } from 'react-hook-form';
 import { isEmail } from 'validator';
@@ -16,6 +16,12 @@ const LoginP = () => {
     formState: { errors },
   } = useForm();
 
+  const [loginError, setLoginError] = useState('');
+
+  const clearLoginError = () => {
+    setLoginError('');
+  };
+
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(`${API_BASE_URL}/login`, data);
@@ -32,7 +38,11 @@ const LoginP = () => {
         }
       }
     } catch (error) {
-      console.error('Erro ao fazer login:', error);
+      if (error.response && error.response.status === 401) {
+        setLoginError('Credenciais inválidas.');
+      } else {
+        console.error('Erro ao fazer login:', error);
+      }
     }
   };
 
@@ -48,6 +58,7 @@ const LoginP = () => {
             required: true,
             validate: (value) => isEmail(value),
           })}
+          onFocus={clearLoginError} // Limpar a mensagem de erro ao focar no campo de email
         />
         {errors?.email?.type === 'required' && (
           <p className="error-message">O e-mail é necessário.</p>
@@ -65,6 +76,7 @@ const LoginP = () => {
           type="password"
           placeholder="Insira sua senha"
           {...register('senha', { required: true, minLength: 7 })}
+          onFocus={clearLoginError} // Limpar a mensagem de erro ao focar no campo de senha
         />
 
         {errors?.senha?.type === 'required' && (
@@ -75,8 +87,12 @@ const LoginP = () => {
           <p className="error-message">
             A senha precisa ter pelo menos 7 caracteres.
           </p>
+
+
         )}
+        {loginError && <p className="error-message">{loginError}</p>}
       </div>
+
 
       <div className="formField">
         <input type="checkbox" name="checkbox" id="checkbox" />
