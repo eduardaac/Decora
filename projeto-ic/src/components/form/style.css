@@ -2,7 +2,28 @@
     margin-top: 2.0em;
     border-color: #474242;
 }
-
+.formE label{
+    display: block;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 2px;
+    width: 100%;
+    margin-top: 1em;
+}
+.formE input{
+    width: 700px;
+    background-color: transparent;
+    border: none;
+    color: #676464;
+    outline: none;
+    border: 1px solid #676464;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: 300;
+ 
+    height: 2.3em;
+}
 .formGroup label {
     display: block;
     text-transform: lowercase;
@@ -10,6 +31,7 @@
     font-weight: bold;
     color: black;
     margin-bottom: 2px;
+    width: 100%;
 }
 
 .formGroup label::first-letter {
@@ -25,7 +47,7 @@
     border-radius: 5px;
     font-size: 0.9em;
     font-weight: 300;
-    width: 99%;
+    width: 100%;
     height: 2.3em;
 }
 

@@ -4,7 +4,7 @@ import Menu from '../../layout/cabecalho/Menu';
 import Sistema from '../../form/Sistema';
 import { FaEdit } from "react-icons/fa";
 import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom'; 
+import { useLocation } from 'react-router-dom';
 
 function SistRecProfessor() {
     console.log("SistRecProfessor renderizado");
