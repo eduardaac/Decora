@@ -2,8 +2,7 @@
     margin-top: 1.0em;
     border-color: #474242;
 }
-
-.formE label {
+.formE label{
     display: block;
     font-size: 0.9em;
     font-weight: bold;
@@ -12,8 +11,7 @@
     width: 100%;
     margin-top: 1em;
 }
-
-.formE input {
+.formE input{
     width: 700px;
     background-color: transparent;
     border: none;
@@ -23,10 +21,9 @@
     border-radius: 5px;
     font-size: 0.9em;
     font-weight: 300;
-
+ 
     height: 2.3em;
 }
-
 .formGroup label {
     display: block;
     text-transform: lowercase;
@@ -84,6 +81,7 @@
     font-weight: bold;
     width: 100%;
     height: 40px;
+    margin-top: 1.0em;
 }
 
 .formGroup button:hover {
@@ -132,7 +130,7 @@
 
 
 .formField {
-    margin-top: 1.0em;
+    margin-top: 1.5em;
 }
 
 .formField label {
