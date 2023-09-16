@@ -17,6 +17,14 @@ function SistemaEdition() {
     category: 'styles',
   });
 
+  const [newOption, setNewOption] = useState({
+    text: '',
+    answers: [],
+  });
+
+  const [addingQuestion, setAddingQuestion] = useState(false);
+  const [addingOption, setAddingOption] = useState(false);
+
   useEffect(() => {
     if (codigoTurma) {
       axios.get(`${API_BASE_URL}/questions/byclass/${codigoTurma}`)
@@ -42,6 +50,49 @@ function SistemaEdition() {
       });
   };
 
+  const handleAddQuestion = () => {
+    setAddingQuestion(true);
+  };
+
+  const handleCancelAddQuestion = () => {
+    setAddingQuestion(false);
+    setNewQuestion({
+      label: '',
+      options: [],
+      priority: 1,
+      category: 'styles',
+    });
+  };
+
+  const handleAddOption = () => {
+    setAddingOption(true);
+  };
+
+  const handleCancelAddOption = () => {
+    setAddingOption(false);
+    setNewOption({
+      text: '',
+      answers: [],
+    });
+  };
+
+  const handleFinishAddOption = () => {
+    // Adicione a nova opção à pergunta
+    setNewQuestion(prevQuestion => ({
+      ...prevQuestion,
+      options: [...prevQuestion.options, newOption],
+    }));
+
+    // Limpe o formulário de nova opção
+    setNewOption({
+      text: '',
+      answers: [],
+    });
+
+    // Termine a adição de opção
+    setAddingOption(false);
+  };
+
   return (
     <div>
       {questions.map((question, index) => (
@@ -64,6 +115,54 @@ function SistemaEdition() {
           </div>
         </div>
       ))}
+
+      {addingQuestion ? (
+        <div className="formGroup">
+          <label htmlFor="label">Label:</label>
+          <input
+            type="text"
+            id="label"
+            value={newQuestion.label}
+            onChange={(e) => setNewQuestion({ ...newQuestion, label: e.target.value })}
+          />
+          <label htmlFor="priority">Priority:</label>
+          <input
+            type="number"
+            id="priority"
+            value={newQuestion.priority}
+            onChange={(e) => setNewQuestion({ ...newQuestion, priority: e.target.value })}
+          />
+          <label htmlFor="category">Category:</label>
+          <input
+            type="text"
+            id="category"
+            value={newQuestion.category}
+            onChange={(e) => setNewQuestion({ ...newQuestion, category: e.target.value })}
+          />
+          {addingOption ? (
+            <div className="addOptionForm">
+              <label htmlFor="optionText">Option Text:</label>
+              <input
+                type="text"
+                id="optionText"
+                value={newOption.text}
+                onChange={(e) => setNewOption({ ...newOption, text: e.target.value })}
+              />
+              <button onClick={handleFinishAddOption}>Finalizar Resposta</button>
+              <button onClick={handleCancelAddOption}>Cancelar Resposta</button>
+            </div>
+          ) : (
+            <button onClick={handleAddOption}>Adicionar Resposta</button>
+          )}
+          <button onClick={handleCancelAddQuestion}>Cancelar Pergunta</button>
+        </div>
+      ) : (
+        <div className='formGroup'>
+          <button onClick={handleAddQuestion}>
+            Adicionar Pergunta
+          </button>
+        </div>
+      )}
     </div>
   );
 }
