@@ -176,11 +176,13 @@ function SistemaEdition() {
                 value={newAnswer}
                 onChange={(e) => setNewAnswer(e.target.value)}
               />
-              <button onClick={handleFinishAddOption}>Finalizar Opção</button>
-              <button onClick={handleCancelAddOption}>Cancelar Resposta</button>
+              <button onClick={handleFinishAddOption}>Finalizar Resposta</button>
             </div>
+          ) : null}
+          {addingOption ? (
+            <button onClick={handleCancelAddOption}>Cancelar Resposta</button>
           ) : (
-            <button onClick={handleAddOption}>Adicionar Opção</button>
+            <button onClick={handleAddOption}>Adicionar Resposta</button>
           )}
           <button onClick={handleSaveQuestion}>Salvar Pergunta</button>
           <button onClick={handleCancelAddQuestion}>Cancelar Pergunta</button>
