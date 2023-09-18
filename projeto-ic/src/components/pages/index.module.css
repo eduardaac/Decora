@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-  margin-top: 8.5%;
+  margin-top: 6%;
   width: 100%;
   max-width: 800px;
   background-color: white;
@@ -30,7 +30,7 @@ body {
   width: 100%;
   max-width: 800px;
   min-height: 200px;
-  margin-top: 35px;
+  padding: 16px;
 }
 
 .loginAside {

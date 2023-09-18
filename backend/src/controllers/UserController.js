@@ -205,6 +205,7 @@ module.exports = {
             const alunos = await user.find({ typeUser: 'aluno', codigoTurma: existingUser.codigoTurma });
             const totalAlunos = alunos.length;
             const nomesAlunos = alunos.map((aluno) => aluno.nome);
+            const emailAlunos = alunos.map((aluno) => aluno.email);
     
             // Crie um novo objeto com todas as informações necessárias
             const responseData = {
@@ -219,6 +220,7 @@ module.exports = {
                 typeUser: existingUser.typeUser,
                 totalAlunos: totalAlunos,
                 nomesAlunos: nomesAlunos,
+                emailAlunos: emailAlunos,
             };
     
             return response.json(responseData);
@@ -228,7 +230,6 @@ module.exports = {
         }
     },
     
-
     async deleteAllUsers(request, response) {
         try {
             // Delete todos os usuários

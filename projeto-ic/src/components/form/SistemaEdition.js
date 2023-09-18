@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { FaTrash } from 'react-icons/fa';
+import { FaTrash, FaPlus } from 'react-icons/fa';
 
 const API_BASE_URL = "http://localhost:3333";
 
@@ -17,11 +17,8 @@ function SistemaEdition() {
     category: 'styles',
   });
 
-  const [newOption, setNewOption] = useState({
-    text: '',
-    answers: [],
-  });
-
+  const [newOption, setNewOption] = useState('');
+  const [newAnswer, setNewAnswer] = useState('');
   const [addingQuestion, setAddingQuestion] = useState(false);
   const [addingOption, setAddingOption] = useState(false);
 
@@ -40,7 +37,6 @@ function SistemaEdition() {
   const handleDeleteQuestion = (questionId, indexToDelete) => {
     axios.delete(`${API_BASE_URL}/users/${professorId}/questions/${questionId}`)
       .then(response => {
-        // Remova a questão da lista após a exclusão bem-sucedida
         setQuestions(prevQuestions =>
           prevQuestions.filter((_, index) => index !== indexToDelete)
         );
@@ -70,27 +66,52 @@ function SistemaEdition() {
 
   const handleCancelAddOption = () => {
     setAddingOption(false);
-    setNewOption({
-      text: '',
-      answers: [],
-    });
+    setNewOption('');
+    setNewAnswer('');
   };
 
   const handleFinishAddOption = () => {
-    // Adicione a nova opção à pergunta
-    setNewQuestion(prevQuestion => ({
-      ...prevQuestion,
-      options: [...prevQuestion.options, newOption],
-    }));
+    if (newOption.trim() !== '') {
+      const newOptionObject = {
+        text: newOption,
+        answers: newAnswer ? [newAnswer] : [], // Inclua a resposta se houver uma
+      };
 
-    // Limpe o formulário de nova opção
-    setNewOption({
-      text: '',
-      answers: [],
+      setNewQuestion(prevQuestion => ({
+        ...prevQuestion,
+        options: [...prevQuestion.options, newOptionObject],
+      }));
+
+      setNewOption('');
+      setNewAnswer('');
+    }
+  };
+
+  const handleSaveQuestion = () => {
+    if (newQuestion.label.trim() === '') {
+      alert('Por favor, preencha o campo de label da pergunta.');
+      return;
+    }
+
+    if (newQuestion.options.length === 0) {
+      alert('Por favor, adicione pelo menos uma opção à pergunta.');
+      return;
+    }
+
+    // Envie a nova pergunta para o servidor aqui
+    // Certifique-se de ajustar a lógica de envio de acordo com a estrutura esperada pelo servidor
+    console.log("Nova pergunta a ser enviada:", newQuestion);
+
+    // Limpe o estado para preparar uma nova pergunta
+    setNewQuestion({
+      label: '',
+      options: [],
+      priority: 1,
+      category: 'styles',
     });
-
-    // Termine a adição de opção
     setAddingOption(false);
+    setNewOption('');
+    setNewAnswer('');
   };
 
   return (
@@ -145,15 +166,23 @@ function SistemaEdition() {
               <input
                 type="text"
                 id="optionText"
-                value={newOption.text}
-                onChange={(e) => setNewOption({ ...newOption, text: e.target.value })}
+                value={newOption}
+                onChange={(e) => setNewOption(e.target.value)}
               />
-              <button onClick={handleFinishAddOption}>Finalizar Resposta</button>
+              <label htmlFor="answerText">Answer Text:</label>
+              <input
+                type="text"
+                id="answerText"
+                value={newAnswer}
+                onChange={(e) => setNewAnswer(e.target.value)}
+              />
+              <button onClick={handleFinishAddOption}>Finalizar Opção</button>
               <button onClick={handleCancelAddOption}>Cancelar Resposta</button>
             </div>
           ) : (
-            <button onClick={handleAddOption}>Adicionar Resposta</button>
+            <button onClick={handleAddOption}>Adicionar Opção</button>
           )}
+          <button onClick={handleSaveQuestion}>Salvar Pergunta</button>
           <button onClick={handleCancelAddQuestion}>Cancelar Pergunta</button>
         </div>
       ) : (
