@@ -97,22 +97,32 @@ function SistemaEdition() {
       alert('Por favor, adicione pelo menos uma opção à pergunta.');
       return;
     }
+    // Verifique se os dados da nova pergunta estão corretos antes de fazer a solicitação POST
+    console.log('Nova pergunta a ser enviada:', newQuestion);
+    console.log('ProfessorId', professorId);
 
-    // Envie a nova pergunta para o servidor aqui
-    // Certifique-se de ajustar a lógica de envio de acordo com a estrutura esperada pelo servidor
-    console.log("Nova pergunta a ser enviada:", newQuestion);
-
-    // Limpe o estado para preparar uma nova pergunta
-    setNewQuestion({
-      label: '',
-      options: [],
-      priority: 1,
-      category: 'styles',
-    });
-    setAddingOption(false);
-    setNewOption('');
-    setNewAnswer('');
+    axios.post(`${API_BASE_URL}/questions`, newQuestion)
+      .then(response => {
+        // A resposta do servidor deve conter a nova pergunta criada
+        const newQuestionFromServer = response.data;
+        console.log('Resposta do servidor:', newQuestionFromServer); // Adicione este log para verificar a resposta do servidor
+        // Atualizar o estado com a nova pergunta
+        setQuestions(prevQuestions => [...prevQuestions, newQuestionFromServer]);
+        setNewQuestion({
+          label: '',
+          options: [],
+          priority: 1,
+          category: 'styles',
+        });
+        setAddingOption(false);
+        setNewOption('');
+        setNewAnswer('');
+      })
+      .catch(error => {
+        console.error('Erro ao criar a pergunta:', error);
+      });
   };
+
 
   return (
     <div>

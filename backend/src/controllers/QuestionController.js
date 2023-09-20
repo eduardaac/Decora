@@ -6,7 +6,7 @@ module.exports = {
     // Cria uma nova pergunta
     async create(request, response) {
         try {
-            const { professorId, label, options, answers, priority } = request.body;
+            const { professorId, label, options, answers, priority, category } = request.body;
 
             const professor = await user.findById(professorId);
             if (!professor || professor.typeUser !== 'professor') {
