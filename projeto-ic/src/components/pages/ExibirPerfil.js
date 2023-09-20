@@ -14,9 +14,9 @@ function ExibirPerfil() {
                 <div className={styles.formE}>
                     <button onClick={handleGoBack} className={styles.icons}><BsArrowLeftSquareFill /></button>
                     <h1>PERFIL</h1>
-                    
+
                     <Perfil />
-                
+
                 </div>
             </div>
         </div>

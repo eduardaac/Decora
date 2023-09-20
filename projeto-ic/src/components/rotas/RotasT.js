@@ -8,6 +8,7 @@ import SistRecAluno from '../pages/formulario/SistRecAluno';
 import SistRecProfessor from '../pages/formulario/SistRecProfessor';
 import ExibirPerfil from '../pages/ExibirPerfil';
 import SistEdit from '../pages/formulario/SistEdit';
+import Sugestoes from '../form/Sugestoes';
 
 function RoutasT() {
   return (
@@ -23,6 +24,8 @@ function RoutasT() {
         <Route exact path='/sistema-recomendacoes-p' element={<SistRecProfessor />} />
         <Route path="/perfil/:userId" element={<ExibirPerfil />} />
         <Route path="/edition/:userId/:codigoTurma" element={<SistEdit />} />
+        <Route path="/sugestoes" element={<Sugestoes />} />
+      
       </Routes>
     </Router>
   )

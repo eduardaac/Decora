@@ -4,14 +4,14 @@ import Menu from '../../layout/cabecalho/Menu';
 import SistemaEdition from '../../form/SistemaEdition';
 import { BsArrowLeftSquareFill } from "react-icons/bs";
 import { Link, useNavigate } from 'react-router-dom'; // Importe useNavigate em vez de useHistory
-import { useLocation } from 'react-router-dom'; 
+import { useLocation } from 'react-router-dom';
 
 function SistEdit() {
     const location = useLocation();
     const userId = location.state ? location.state.userId : null;
     const codigoTurma = location.state ? location.state.novoCodigoTurma : null;
 
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const handleGoBack = () => {
         navigate(-1);
@@ -24,6 +24,7 @@ function SistEdit() {
             <div className={styles.containerSist}>
                 <div className={styles.formSist}>
                     <button onClick={handleGoBack} className={styles.icons}><BsArrowLeftSquareFill /></button>
+
                     <h1>SISTEMA DE RECOMENDAÇÃO</h1>
                     <SistemaEdition />
                 </div>

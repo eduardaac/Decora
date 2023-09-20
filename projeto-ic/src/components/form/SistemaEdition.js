@@ -6,8 +6,9 @@ import { FaTrash, FaPlus } from 'react-icons/fa';
 const API_BASE_URL = "http://localhost:3333";
 
 function SistemaEdition() {
-  let { userId, codigoTurma } = useParams();
+  const { userId, codigoTurma } = useParams();
   const professorId = userId;
+  console.log("ID DO PROFESSOR: ", professorId);
 
   const [questions, setQuestions] = useState([]);
   const [newQuestion, setNewQuestion] = useState({
@@ -15,12 +16,14 @@ function SistemaEdition() {
     options: [],
     priority: 1,
     category: 'styles',
+    professorId,
   });
 
   const [newOption, setNewOption] = useState('');
   const [newAnswer, setNewAnswer] = useState('');
   const [addingQuestion, setAddingQuestion] = useState(false);
-  const [addingOption, setAddingOption] = useState(false);
+
+  const allowedCategories = ["styles", "technologies", "decisions"]; // Categorias permitidas
 
   useEffect(() => {
     if (codigoTurma) {
@@ -57,24 +60,15 @@ function SistemaEdition() {
       options: [],
       priority: 1,
       category: 'styles',
+      professorId,
     });
-  };
-
-  const handleAddOption = () => {
-    setAddingOption(true);
-  };
-
-  const handleCancelAddOption = () => {
-    setAddingOption(false);
-    setNewOption('');
-    setNewAnswer('');
   };
 
   const handleFinishAddOption = () => {
     if (newOption.trim() !== '') {
       const newOptionObject = {
         text: newOption,
-        answers: newAnswer ? [newAnswer] : [], // Inclua a resposta se houver uma
+        answers: newAnswer ? [newAnswer] : [],
       };
 
       setNewQuestion(prevQuestion => ({
@@ -97,24 +91,24 @@ function SistemaEdition() {
       alert('Por favor, adicione pelo menos uma opção à pergunta.');
       return;
     }
-    // Verifique se os dados da nova pergunta estão corretos antes de fazer a solicitação POST
-    console.log('Nova pergunta a ser enviada:', newQuestion);
-    console.log('ProfessorId', professorId);
+
+    if (!allowedCategories.includes(newQuestion.category)) {
+      alert('Categoria inválida. Use "styles," "technologies" ou "decisions".');
+      return;
+    }
 
     axios.post(`${API_BASE_URL}/questions`, newQuestion)
       .then(response => {
-        // A resposta do servidor deve conter a nova pergunta criada
         const newQuestionFromServer = response.data;
-        console.log('Resposta do servidor:', newQuestionFromServer); // Adicione este log para verificar a resposta do servidor
-        // Atualizar o estado com a nova pergunta
         setQuestions(prevQuestions => [...prevQuestions, newQuestionFromServer]);
         setNewQuestion({
           label: '',
           options: [],
           priority: 1,
           category: 'styles',
+          professorId,
         });
-        setAddingOption(false);
+        setAddingQuestion(false);
         setNewOption('');
         setNewAnswer('');
       })
@@ -122,7 +116,6 @@ function SistemaEdition() {
         console.error('Erro ao criar a pergunta:', error);
       });
   };
-
 
   return (
     <div>
@@ -148,59 +141,57 @@ function SistemaEdition() {
       ))}
 
       {addingQuestion ? (
-        <div className="formGroup">
-          <label htmlFor="label">Label:</label>
+        <div className="formBorder">
+
+          <p>ADICIONAR PERGUNTA</p>
+
+          <label htmlFor="label">Título</label>
           <input
             type="text"
             id="label"
             value={newQuestion.label}
             onChange={(e) => setNewQuestion({ ...newQuestion, label: e.target.value })}
           />
-          <label htmlFor="priority">Priority:</label>
+          <label htmlFor="priority">Prioridade</label>
           <input
             type="number"
             id="priority"
             value={newQuestion.priority}
             onChange={(e) => setNewQuestion({ ...newQuestion, priority: e.target.value })}
           />
-          <label htmlFor="category">Category:</label>
+          <label htmlFor="category">Categoria</label>
           <input
             type="text"
             id="category"
             value={newQuestion.category}
             onChange={(e) => setNewQuestion({ ...newQuestion, category: e.target.value })}
           />
-          {addingOption ? (
-            <div className="addOptionForm">
-              <label htmlFor="optionText">Option Text:</label>
-              <input
-                type="text"
-                id="optionText"
-                value={newOption}
-                onChange={(e) => setNewOption(e.target.value)}
-              />
-              <label htmlFor="answerText">Answer Text:</label>
-              <input
-                type="text"
-                id="answerText"
-                value={newAnswer}
-                onChange={(e) => setNewAnswer(e.target.value)}
-              />
-              <button onClick={handleFinishAddOption}>Finalizar Resposta</button>
-            </div>
-          ) : null}
-          {addingOption ? (
-            <button onClick={handleCancelAddOption}>Cancelar Resposta</button>
-          ) : (
-            <button onClick={handleAddOption}>Adicionar Resposta</button>
-          )}
-          <button onClick={handleSaveQuestion}>Salvar Pergunta</button>
-          <button onClick={handleCancelAddQuestion}>Cancelar Pergunta</button>
+
+          <label htmlFor="optionText">Opção</label>
+          <input
+            type="text"
+            id="optionText"
+            value={newOption}
+            onChange={(e) => setNewOption(e.target.value)}
+          />
+          <label htmlFor="answerText">Resposta</label>
+          <input
+            type="text"
+            id="answerText"
+            value={newAnswer}
+            onChange={(e) => setNewAnswer(e.target.value)}
+          />
+          <button onClick={handleFinishAddOption}>ADICIONAR OPÇÃO</button>
+
+          <div className="horizontalAlign">
+            <button onClick={handleSaveQuestion} className="saveButton">SALVAR</button>
+            <button onClick={handleCancelAddQuestion} className="cancelButton">CANCELAR</button>
+          </div>
         </div>
       ) : (
         <div className='formGroup'>
           <button onClick={handleAddQuestion}>
-            Adicionar Pergunta
+            ADICIONAR PERGUNTA
           </button>
         </div>
       )}

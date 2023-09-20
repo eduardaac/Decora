@@ -49,7 +49,7 @@ const defaultQuestions = [
       { text: 'React Native', answers: [{ answer: ['React-Native'] }] },
       { text: 'Nenhuma das opções' },
     ],
-    priority: 1,
+    priority: 2,
     category: 'technologies',
   },
 

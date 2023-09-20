@@ -2,7 +2,15 @@
     margin-top: 1.0em;
     border-color: #474242;
 }
-.formE label{
+
+.formBorder {
+    border: 1px solid #474242;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.formBorder label {
     display: block;
     font-size: 0.9em;
     font-weight: bold;
@@ -11,7 +19,61 @@
     width: 100%;
     margin-top: 1em;
 }
-.formE input{
+
+.formBorder input {
+    width: 700px;
+    background-color: transparent;
+    border: none;
+    color: #676464;
+    outline: none;
+    border: 1px solid #676464;
+    border-radius: 5px;
+    font-size: 0.9em;
+    height: 32px;
+}
+
+.formBorder button {
+    background-color: #090539;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    width: 100%;
+    height: 40px;
+    margin-top: 1.0em;
+}
+
+.horizontalAlign {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.formBorder p{
+    font-size: 1.5em;
+   font-weight: bold;
+   margin-left: 30%;
+}
+
+.cancelButton {
+    width: 48%;
+    margin-left: 10px;
+}
+
+.formE label {
+    display: block;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 2px;
+    width: 100%;
+    margin-top: 1em;
+}
+
+.formE input {
     width: 700px;
     background-color: transparent;
     border: none;
@@ -21,9 +83,9 @@
     border-radius: 5px;
     font-size: 0.9em;
     font-weight: 300;
- 
     height: 2.3em;
 }
+
 .formGroup label {
     display: block;
     text-transform: lowercase;
@@ -177,15 +239,28 @@
 }
 
 @media (max-width: 768px) {
-    .formField {
-        text-align: center;
+    .formBorder {
+      padding: 10px; /* Reduza o preenchimento */
     }
-
-    .formField input[type="checkbox"],
-    .formField label,
-    .formField a {
-        display: inline-block;
-        margin-right: 5px;
-        font-size: 0.8em;
+  
+    .addQuestionTitle {
+      font-size: 1.5em; /* Aumente o tamanho da fonte do título */
     }
-}
+  
+    .formBorder label,
+    .formBorder input,
+    .formBorder select {
+      width: 100%; /* Faça os elementos ocuparem toda a largura disponível */
+    }
+    
+    .horizontalAlign {
+      flex-direction: column; /* Empilhe os botões verticalmente */
+      align-items: center; /* Centralize os botões horizontalmente */
+    }
+  
+    .formBorder button {
+      width: 100%; /* Faça os botões ocuparem toda a largura */
+      margin-top: 1em; /* Adicione um espaço superior */
+    }
+  }
+  
