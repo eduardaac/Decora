@@ -32,9 +32,9 @@ const LoginP = () => {
         const userId = response.data.userId;
 
         if (typeUser === 'aluno') {
-          navigate(`/sistema-recomendacoes-a`, { state: { novoCodigoTurma, userId } });
+          navigate(`/sistema-recomendacoes-a`, { state: { novoCodigoTurma, userId, typeUser } });
         } else if (typeUser === 'professor') {
-          navigate(`/sistema-recomendacoes-p`, { state: { novoCodigoTurma, userId } });
+          navigate(`/sistema-recomendacoes-p`, { state: { novoCodigoTurma, userId, typeUser } });
         }
       }
     } catch (error) {

@@ -11,10 +11,11 @@ function SistRecProfessor() {
     const location = useLocation();
     const userId = location.state ? location.state.userId : null;
     const codigoTurma = location.state ? location.state.novoCodigoTurma : null;
+    const typeUser = location.state ? location.state.typeUser : null;
     console.log("Codigo de turma na pagina renderizada: ", codigoTurma);
     return (
         <div className={styles.page}>
-            <Menu userId={userId} />
+            <Menu userId={userId} typeUser={typeUser} />
             <div className={styles.containerSist}>
                 <div className={styles.formSist}>
                     <Link to={`/edition/${userId}/${codigoTurma}`} className={styles.icons}><FaEdit /></Link>

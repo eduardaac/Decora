@@ -49,22 +49,6 @@ const Perfil = () => {
 
         <label htmlFor='codigoTurma'>Código de Turma:</label>
         <input type='text' id='codigoTurma' value={userData.codigoTurma} readOnly />
-
-        {userData.typeUser === 'professor' && (
-          <div>
-            <label htmlFor='totalAlunos'>Total de Alunos:</label>
-            <input type='text' id='totalAlunos' value={userData.totalAlunos || 0} readOnly />
-
-            <label htmlFor='nomesAlunos'>Turma:</label>
-            {userData.emailAlunos && (
-              <div>
-                {userData.emailAlunos.map((nome, index) => (
-                  <input type='text' id={`aluno-${index}`} value={nome} readOnly key={index} />
-                ))}
-              </div>
-            )}
-          </div>
-        )}
       </div>
     </div>
   );

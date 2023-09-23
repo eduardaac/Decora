@@ -34,7 +34,12 @@ module.exports = {
 
             const token = jwt.sign({ userId: existingUser._id }, secretKey, { expiresIn: '1h' });
 
-            return response.json({ token, typeUser: existingUser.typeUser, codigoTurma: existingUser.codigoTurma, userId: existingUser._id });
+            return response.json({
+                token,
+                userId: existingUser._id,
+                typeUser: existingUser.typeUser, // Adicione o typeUser ao JSON de resposta
+                codigoTurma: existingUser.codigoTurma,
+            });
 
         } catch (error) {
             console.log(error);
@@ -197,16 +202,16 @@ module.exports = {
         try {
             const { id } = request.params;
             const existingUser = await user.findById(id);
-    
+
             if (!existingUser) {
                 return response.status(404).json({ error: 'Usuário não encontrado.' });
             }
-    
+
             const alunos = await user.find({ typeUser: 'aluno', codigoTurma: existingUser.codigoTurma });
             const totalAlunos = alunos.length;
             const nomesAlunos = alunos.map((aluno) => aluno.nome);
             const emailAlunos = alunos.map((aluno) => aluno.email);
-    
+
             // Crie um novo objeto com todas as informações necessárias
             const responseData = {
                 _id: existingUser._id,
@@ -222,14 +227,14 @@ module.exports = {
                 nomesAlunos: nomesAlunos,
                 emailAlunos: emailAlunos,
             };
-    
+
             return response.json(responseData);
         } catch (error) {
             console.log(error);
             return response.status(500).json({ error: 'Erro ao obter informações do usuário.' });
         }
     },
-    
+
     async deleteAllUsers(request, response) {
         try {
             // Delete todos os usuários

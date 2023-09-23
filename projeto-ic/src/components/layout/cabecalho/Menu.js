@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './Menu.module.css';
 import logo from '../../img/logo.png';
 
-function Menu({ userId }) {
+function Menu({ userId, typeUser }) {
   return (
     <nav className={styles.menu}>
       <div className={styles.logo}>
@@ -15,6 +15,13 @@ function Menu({ userId }) {
             PERFIL
           </Link>
         </li>
+        {typeUser === 'professor' && (
+          <li className={styles.item}>
+            <Link to={`/exibir-relatorio/${userId}`} className={styles.link}>
+              RELATÓRIO
+            </Link>
+          </li>
+        )}
         <li className={styles.item}>
           <Link to="/" className={styles.link}>
             SAIR
