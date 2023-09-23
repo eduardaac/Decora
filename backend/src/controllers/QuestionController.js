@@ -24,6 +24,7 @@ module.exports = {
 
             return response.status(201).json(questionCreated);
         } catch (error) {
+            console.log("ERRO", error);
             return response.status(500).json({ error: 'Erro ao adicionar pergunta.' });
         }
     },

@@ -1,8 +1,8 @@
 import RoutasT from "./components/rotas/RotasT";
 
 function App() {
-  return(
-        <RoutasT/>
+  return (
+    <RoutasT />
   )
 }
 

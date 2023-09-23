@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { FaTrash, FaPlus } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 
 const API_BASE_URL = "http://localhost:3333";
 
@@ -68,7 +68,7 @@ function SistemaEdition() {
     if (newOption.trim() !== '') {
       const newOptionObject = {
         text: newOption,
-        answers: newAnswer ? [newAnswer] : [],
+        answers: newAnswer ? [{ answer: newAnswer }] : [], // Estrutura correta para respostas
       };
 
       setNewQuestion(prevQuestion => ({
@@ -97,7 +97,9 @@ function SistemaEdition() {
       return;
     }
 
-    axios.post(`${API_BASE_URL}/questions`, newQuestion)
+    console.log("Questão a ser enviada para o banco", newQuestion)
+    axios
+      .post(`${API_BASE_URL}/questions`, newQuestion) // Verifique a estrutura de newQuestion
       .then(response => {
         const newQuestionFromServer = response.data;
         setQuestions(prevQuestions => [...prevQuestions, newQuestionFromServer]);
@@ -117,12 +119,13 @@ function SistemaEdition() {
       });
   };
 
+
   return (
     <div>
       {questions.map((question, index) => (
-        <div key={question.label} className="questionContainer">
+        <div key={question._id} className="questionContainer"> {/* Modified key */}
           <div className='deleteButtonContainer'>
-            <button className='deleteButton' onClick={() => handleDeleteQuestion(question._id, index)}>
+            <button className='deleteButton' onClick={() => handleDeleteQuestion(question._id, index)}> {/* Modified onClick */}
               <FaTrash />
             </button>
           </div>
