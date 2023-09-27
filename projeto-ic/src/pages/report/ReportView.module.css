@@ -1,0 +1,12 @@
+.containerE {
+    width: 100%;
+    max-width: 800px;
+    min-height: 200px;
+    padding: 16px;
+}
+
+.formE {
+    background-color: white;
+    padding: 20px;
+    min-height: 200px;
+}

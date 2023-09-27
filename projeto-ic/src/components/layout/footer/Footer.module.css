@@ -2,38 +2,36 @@
 .formField {
     margin-top: 15px;
     text-align: center;
-  }
-  
-  .horizontalLine {
+}
+
+.horizontalLine {
     width: 43%;
     height: 1px;
     background-color: #676464;
     display: inline-block;
     vertical-align: middle;
-  }
-  
-  .text {
+}
+
+.text {
     color: #676464;
     font-size: 16px;
     font-style: italic;
     display: inline-block;
     margin: 0 10px;
     vertical-align: middle;
-  }
-  
-  .link {
+}
+
+.link {
     color: #090539;
     font-size: 15px;
-  }
-  
-  /* Estilos responsivos */
-  @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
     .horizontalLine {
-      width: 42%; /* Reduz a largura da linha em telas menores */
+        width: 42%;
     }
-  
+
     .text {
-      font-size: 14px; /* Reduz o tamanho do texto em telas menores */
+        font-size: 14px;
     }
-  }
-  
+}
