@@ -1,6 +1,5 @@
 .container {
     margin: 0;
-    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,29 +14,26 @@
     align-items: center;
     justify-content: center;
     width: 350px;
-    height: 80%;
+    height: 75%;
 }
 
 .form {
     width: 400px;
-    height: 80%;
+    height: 75%;
+    background-color: white;
+    padding: 30px;
 }
 
 .loginAside {
     background: linear-gradient(to bottom, #ffffff, #090539);
     text-align: center;
-    padding: 10px;
+    padding: 30px;
 }
 
 .loginAside h1 {
     font-size: 1.5em;
     color: white;
     text-transform: uppercase;
-}
-
-.form {
-    background-color: white;
-    padding: 10px;
 }
 
 .form h1 {

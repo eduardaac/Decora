@@ -1,7 +1,7 @@
 import React from 'react';
 import Menu from '../../components/layout/header/Menu';
 import FormSystem from '../../components/form/suggest/FormSystem';
-import { useLocation } from 'react-router-dom'; 
+import { useLocation } from 'react-router-dom';
 
 import styles from './Suggest.module.css';
 
@@ -16,7 +16,9 @@ function StudentRecommendationSystem() {
             <Menu userId={userId} />
             <div className={styles.container}>
                 <div className={styles.form}>
-                    <h1>SISTEMA DE RECOMENDAÇÃO</h1>
+                    <center>
+                        <h1>SISTEMA DE RECOMENDAÇÃO</h1>
+                    </center>
                     <FormSystem codigoTurma={codigoTurma} />
                 </div>
             </div>
