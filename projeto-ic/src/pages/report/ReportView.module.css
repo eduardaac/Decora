@@ -13,6 +13,8 @@
     width: 50%;
     background-color: white;
     padding: 4%;
+    border-radius: 10px;
+    height: 70%;
 }
 
 .form h1 {

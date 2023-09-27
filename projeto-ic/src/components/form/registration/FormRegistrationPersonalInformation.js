@@ -28,7 +28,7 @@ const FormRegistrationPersonalInformation = () => {
             const response = await axios.post(`${API_BASE_URL}/users`, data);
             const userId = response.data._id;
 
-            navigate('/Cadastro2', { state: { userId } });
+            navigate('/registration-access-information', { state: { userId } });
         } catch (error) {
             console.log(error);
             if (error.response && error.response.status === 400) {

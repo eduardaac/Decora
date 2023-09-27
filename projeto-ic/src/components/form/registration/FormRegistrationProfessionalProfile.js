@@ -28,9 +28,9 @@ const FormRegistrationProfessionalProfile = () => {
                 console.log("Código da Turma:", novoCodigoTurma);
 
                 if (typeUser === "aluno") {
-                    navigate(`/sistema-recomendacoes-a`, { state: { novoCodigoTurma, userId, typeUser } });
+                    navigate(`/student-recommendation`, { state: { novoCodigoTurma, userId, typeUser } });
                 } else if (typeUser === "professor") {
-                    navigate(`/sistema-recomendacoes-p`, { state: { novoCodigoTurma, userId, typeUser } });
+                    navigate(`/teacher-recommendation`, { state: { novoCodigoTurma, userId, typeUser } });
                 }
             }
         } catch (error) {

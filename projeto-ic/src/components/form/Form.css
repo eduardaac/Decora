@@ -93,13 +93,6 @@
     margin-top: 20px;
 }
 
-.formBorder input {
-    display: block;
-    font-size: 0.9em;
-    font-weight: bold;
-    margin-bottom: 2px;
-    margin-top: 1em;
-}
 
 .formBorder label {
     display: block;
@@ -107,7 +100,6 @@
     font-weight: bold;
     color: black;
     margin-bottom: 2px;
-    width: 100%;
     margin-top: 1em;
 }
 
@@ -121,6 +113,7 @@
     border-radius: 5px;
     font-size: 0.9em;
     height: 32px;
+    width: 100%;
 }
 
 .formBorder button {
