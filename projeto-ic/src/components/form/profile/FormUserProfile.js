@@ -24,7 +24,7 @@ const FormUserProfile = () => {
 
   return (
     <div className='form'>
-      <div className='formE'>
+      <div className='formGroup'>
         <label htmlFor='nome'>Nome:</label>
         <input type='text' id='nome' value={userData.nome} readOnly />
 

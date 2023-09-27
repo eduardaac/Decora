@@ -42,6 +42,10 @@
     align-items: baseline;
 }
 
+.topo h2 {
+    font-size: 1.5em;
+}
+
 .icons {
     font-size: 1.6em;
     cursor: pointer;
@@ -51,8 +55,4 @@
 
 .icons:hover {
     color: #9897E7;
-}
-
-.topo h2 {
-    font-size: 1.5em;
 }

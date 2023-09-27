@@ -24,7 +24,7 @@ const FormReportView = () => {
 
     return (
         <div className='form'>
-            <div className='formE'>
+            <div className='formGroup'>
 
                 <label htmlFor='typeUser'>Tipo de Usuário:</label>
                 <input

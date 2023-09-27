@@ -154,32 +154,6 @@
     margin-left: 10px;
 }
 
-.formE label {
-    display: block;
-    font-size: 0.9em;
-    font-weight: bold;
-    color: black;
-    margin-bottom: 2px;
-    width: 100%;
-    margin-top: 1em;
-}
-
-.formE input {
-    width: 700px;
-    background-color: transparent;
-    border: none;
-    color: #676464;
-    outline: none;
-    border: 1px solid #676464;
-    border-radius: 5px;
-    font-size: 0.9em;
-    font-weight: 300;
-    height: 2.3em;
-}
-
-
-
-
 .questionContainer {
     display: flex;
     align-items: center;

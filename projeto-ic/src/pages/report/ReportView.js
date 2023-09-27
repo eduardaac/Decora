@@ -11,13 +11,13 @@ function ReportView() {
         navigate(-1);
     };
     return (
-        <div className={styles.page}>
-            <div className={styles.containerE}>
-                <div className={styles.formE}>
-                    <button onClick={handleGoBack} className={styles.icons}><BsArrowLeftSquareFill /></button>
-                    <h1>RELATÓRIO</h1>
-                    <FormReportView />
-                </div>
+
+        <div className={styles.container}>
+            <div className={styles.form}>
+                <button onClick={handleGoBack} className={styles.icons}><BsArrowLeftSquareFill /></button>
+                <h1>RELATÓRIO</h1>
+                <FormReportView />
+
             </div>
         </div>
     )

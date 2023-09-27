@@ -11,13 +11,11 @@ function UserProfile() {
         navigate(-1);
     };
     return (
-        <div className={styles.page}>
-            <div className={styles.containerE}>
-                <div className={styles.formE}>
-                    <button onClick={handleGoBack} className={styles.icons}><BsArrowLeftSquareFill /></button>
-                    <h1>PERFIL</h1>
-                    <FormUserProfile />
-                </div>
+        <div className={styles.container}>
+            <div className={styles.form}>
+                <button onClick={handleGoBack} className={styles.icons}><BsArrowLeftSquareFill /></button>
+                <h1>PERFIL</h1>
+                <FormUserProfile />
             </div>
         </div>
     )

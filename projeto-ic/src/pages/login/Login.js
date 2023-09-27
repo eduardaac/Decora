@@ -1,5 +1,5 @@
 import React from 'react';
-import FormLogin from  '../../components/form/login/FormLogin';
+import FormLogin from '../../components/form/login/FormLogin';
 import Footer from '../../components/layout/footer/Footer';
 import logo from '../../components/img/logo.png';
 
