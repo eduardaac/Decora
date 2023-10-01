@@ -22,7 +22,7 @@
     display: inline;
     font-size: 2.0em;
     align-items: center;
-    margin-left: 130px;
+    margin-left: 15%;
 }
 
 .icons {
@@ -36,4 +36,19 @@
 
 .icons:hover {
     color: #9897E7;
+}
+
+@media (max-width: 768px) {
+    .form {
+        padding: 2%;
+    }
+
+    .form h1 {
+        font-size: 1.5em;
+        margin-left: 0;
+    }
+
+    .icons {
+        font-size: 1.5em;
+    }
 }

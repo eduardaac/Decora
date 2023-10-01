@@ -10,38 +10,42 @@
 }
 
 .form {
-    width: 90%;
-    max-width: 500px;
+    width: 50%;
     background-color: white;
     padding: 4%;
     border-radius: 10px;
-    height: auto;
-
+    height: 70%;
 }
 
 .form h1 {
     text-align: center;
     display: inline;
     font-size: 2.0em;
-    margin-left: 30%;
+    align-items: center;
+    margin-left: 20%;
 }
 
 .icons {
     font-size: 2em;
     cursor: pointer;
     color: #090539;
-    margin-right: 10px;
+    margin-right: 90px;
     background-color: white;
     border: none;
 }
 
+.icons:hover {
+    color: #9897E7;
+}
+
 @media (max-width: 768px) {
     .form {
-        padding: 3%;
+        padding: 2%;
     }
 
     .form h1 {
-        font-size: 1.8em;
+        font-size: 1.5em;
+        margin-left: 0;
     }
 
     .icons {

@@ -10,7 +10,6 @@ import styles from './Suggest.module.css';
 function EditingSystem() {
     const location = useLocation();
     const userId = location.state ? location.state.userId : null;
-    const codigoTurma = location.state ? location.state.novoCodigoTurma : null;
     const navigate = useNavigate();
 
     const handleGoBack = () => {

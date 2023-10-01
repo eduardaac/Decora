@@ -16,9 +16,7 @@ function StudentRecommendationSystem() {
             <Menu userId={userId} />
             <div className={styles.container}>
                 <div className={styles.form}>
-                    <center>
-                        <h1>SISTEMA DE RECOMENDAÇÃO</h1>
-                    </center>
+                    <h1>SISTEMA DE RECOMENDAÇÃO</h1>
                     <FormSystem codigoTurma={codigoTurma} />
                 </div>
             </div>
