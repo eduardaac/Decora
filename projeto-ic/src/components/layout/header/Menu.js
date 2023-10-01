@@ -24,7 +24,7 @@ function Menu({ userId, typeUser }) {
           </li>
         )}
         <li className={styles.item}>
-          <Link to="/login" className={styles.link}>
+          <Link to="/" className={styles.link}>
             SAIR
           </Link>
         </li>

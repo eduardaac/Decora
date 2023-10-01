@@ -18,7 +18,7 @@ function RegistrationPersonalInformation() {
         <FormRegistrationPersonalInformation />
         <Footer
           frase="Já possui cadastro? Entre"
-          rota="/login"
+          rota="/"
         />
       </div>
     </div>

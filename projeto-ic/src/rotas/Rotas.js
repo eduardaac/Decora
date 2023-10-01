@@ -14,7 +14,7 @@ function Routas() {
   return (
     <Router>
       <Routes>
-        <Route exact path='/login' element={<Login />} />
+        <Route exact path='/' element={<Login />} />
 
         <Route exact path='/registration-personal-information' element={<RegistrationPersonalInformation/>} />
         <Route exact path='/registration-access-information' element={<RegistrationAccessInformation />} />
