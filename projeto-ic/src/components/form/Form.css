@@ -150,11 +150,8 @@
 .questionContainer {
     display: flex;
     align-items: center;
-    /* Centralizar verticalmente os elementos */
     justify-content: space-between;
-    /* Colocar espaço entre os elementos */
     margin-bottom: 10px;
-    /* Adicionar um espaço entre as perguntas */
 }
 
 .formGroup {
@@ -222,27 +219,21 @@
 
     .addQuestionTitle {
         font-size: 1.5em;
-        /* Aumente o tamanho da fonte do título */
     }
 
     .formBorder label,
     .formBorder input,
     .formBorder select {
         width: 100%;
-        /* Faça os elementos ocuparem toda a largura disponível */
     }
 
     .horizontalAlign {
         flex-direction: column;
-        /* Empilhe os botões verticalmente */
         align-items: center;
-        /* Centralize os botões horizontalmente */
     }
 
     .formBorder button {
         width: 100%;
-        /* Faça os botões ocuparem toda a largura */
         margin-top: 1em;
-        /* Adicione um espaço superior */
     }
 }

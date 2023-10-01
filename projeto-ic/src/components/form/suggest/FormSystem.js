@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import FormRecommendations from './FormRecommendations';
+import { useNavigate } from 'react-router-dom'; // Alteração aqui
 
-import '../Form.css'
+import '../Form.css';
 
 const API_BASE_URL = "http://localhost:3333";
 
-const FormSystem = ({ codigoTurma }) => { // Receba codigoTurma como uma propriedade
+const FormSystem = ({ codigoTurma }) => {
   const [questions, setQuestions] = useState([]);
-  const [showRecommendations, setShowRecommendations] = useState(false);
-  const [recommendations, setRecommendations] = useState({});
+  const navigate = useNavigate(); // Alteração aqui
   const {
     register,
     handleSubmit,
@@ -18,7 +18,7 @@ const FormSystem = ({ codigoTurma }) => { // Receba codigoTurma como uma proprie
   } = useForm();
 
   useEffect(() => {
-    if (codigoTurma) { // Verifique se o codigoTurma está disponível
+    if (codigoTurma) {
       console.log("Codigo de turma do sistema: ", codigoTurma);
       axios.get(`${API_BASE_URL}/questions/byclass/${codigoTurma}`)
         .then(response => {
@@ -50,8 +50,9 @@ const FormSystem = ({ codigoTurma }) => { // Receba codigoTurma como uma proprie
 
       if (response.data.recommendations) {
         console.log("Recomendações:", response.data.recommendations);
-        setRecommendations(response.data.recommendations); // Atualize as recomendações no estado
-        setShowRecommendations(true); // Mostra as sugestões após a submissão
+        navigate('/recommendation', {
+          state: { recommendations: response.data.recommendations },
+        });
       }
     } catch (error) {
       console.error('Erro ao salvar a resposta:', error);
@@ -92,9 +93,6 @@ const FormSystem = ({ codigoTurma }) => { // Receba codigoTurma como uma proprie
           </div>
         </form>
       </div>
-
-      {/* Renderize o componente de Sugestoes após a submissão */}
-      {showRecommendations && <FormRecommendations recommendations={recommendations} />}
     </>
   );
 };

@@ -1,11 +1,17 @@
+// Em FormRecommendations.js
 import React from 'react';
 
-import '../Form.css'
+import '../Form.css';
 
 const FormRecommendations = ({ recommendations }) => {
+  console.log("FormRecommendations - Recomendações:", recommendations);
+
+  if (!recommendations) {
+    return null;
+  }
+
   return (
     <div>
-      <h2>SUGESTÕES</h2>
       <ul>
         {recommendations.styles.map((style, index) => (
           <li key={index}>{style}</li>
@@ -16,13 +22,11 @@ const FormRecommendations = ({ recommendations }) => {
           <li key={index}>{decision}</li>
         ))}
       </ul>
-
       <ul>
         {recommendations.technologies.map((technology, index) => (
           <li key={index}>{technology}</li>
         ))}
       </ul>
-
     </div>
   );
 };
