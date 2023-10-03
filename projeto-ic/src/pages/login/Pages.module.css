@@ -49,9 +49,11 @@
     .container {
         width: 100%;
         height: 100vh;
-        padding: 2%;
+        
     }
-
+    .form{
+        padding: 30px;
+    }
     .loginAside {
         display: none;
     }
