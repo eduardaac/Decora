@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const dbConfig = "mongodb+srv://bancoteste:decora123@cluster0.jmp65vb.mongodb.net/mydatabase?retryWrites=true&w=majority";
+const dbConfig = "mongodb+srv://decoraBD:decora123@cluster0.jmp65vb.mongodb.net/mydatabase?retryWrites=true&w=majority";
 
 const options = {
   useNewUrlParser: true,
