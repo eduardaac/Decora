@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Alteração aqui
+import { useNavigate } from 'react-router-dom'; 
 
 import '../Form.css';
 
@@ -9,7 +9,7 @@ const API_BASE_URL = "http://localhost:3333";
 
 const FormSystem = ({ codigoTurma }) => {
   const [questions, setQuestions] = useState([]);
-  const navigate = useNavigate(); // Alteração aqui
+  const navigate = useNavigate(); 
   const {
     register,
     handleSubmit,

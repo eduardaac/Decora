@@ -1,6 +1,4 @@
-// Em FormRecommendations.js
 import React from 'react';
-
 import '../Form.css';
 
 const FormRecommendations = ({ recommendations }) => {
@@ -12,21 +10,18 @@ const FormRecommendations = ({ recommendations }) => {
 
   return (
     <div>
-      <ul>
-        {recommendations.styles.map((style, index) => (
-          <li key={index}>{style}</li>
-        ))}
-      </ul>
-      <ul>
-        {recommendations.decisions.map((decision, index) => (
-          <li key={index}>{decision}</li>
-        ))}
-      </ul>
-      <ul>
-        {recommendations.technologies.map((technology, index) => (
-          <li key={index}>{technology}</li>
-        ))}
-      </ul>
+      {Object.keys(recommendations).map((category, index) => (
+        <div key={index}>
+          <h2>{category}</h2>
+          <ul>
+            {recommendations[category].map((recommendation, index) => (
+              <li key={index} title={`Pergunta: ${recommendation.question}`}>
+                {recommendation.answer}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   );
 };

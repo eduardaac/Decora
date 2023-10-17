@@ -19,13 +19,20 @@ async function generateRecommendations(userResponses) {
             technologies: {},
         };
 
+        // Crie um objeto para rastrear a pergunta correspondente a cada resposta
+        const questionsForAnswers = {};
+
+        // ... (código anterior)
+
         // Itere pelas respostas do usuário
         for (const questionId of Object.keys(userResponses)) {
             const questionData = await question.findById(questionId);
+            console.log('questionData:', questionData); // Adicione este log para depuração
             if (questionData) {
                 const selectedOption = questionData.options[userResponses[questionId]];
                 if (selectedOption && selectedOption.answers) {
                     selectedOption.answers.forEach((answerObj) => {
+                        console.log('answerObj:', answerObj); // Adicione este log para depuração
                         answerObj.answer.forEach((answer) => {
                             // Rastreie a prioridade da resposta por categoria
                             const category = questionData.category;
@@ -34,11 +41,17 @@ async function generateRecommendations(userResponses) {
                             } else {
                                 answerPrioritiesByCategory[category][answer] += questionData.priority;
                             }
+
+                            // Rastreie a pergunta correspondente a cada resposta
+                            questionsForAnswers[answer] = questionData.label; // Altere para questionData.label
                         });
                     });
                 }
             }
         }
+
+        // ... (código posterior)
+
 
         // Construa as recomendações com base nas prioridades máximas por categoria
         for (const category of Object.keys(answerPrioritiesByCategory)) {
@@ -57,8 +70,11 @@ async function generateRecommendations(userResponses) {
                 }
             }
 
-            // Adicione as respostas com prioridade máxima à categoria
-            recommendations[category] = maxPriorityAnswers;
+            // Adicione as respostas com prioridade máxima e suas perguntas correspondentes à categoria
+            recommendations[category] = maxPriorityAnswers.map((answer) => ({
+                answer,
+                question: questionsForAnswers[answer],
+            }));
         }
 
         return recommendations;
@@ -67,6 +83,7 @@ async function generateRecommendations(userResponses) {
         throw new Error('Erro ao gerar recomendações.');
     }
 }
+
 
 module.exports = {
     async saveResponse(request, response) {
