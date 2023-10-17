@@ -12,7 +12,6 @@ const FormRecommendations = ({ recommendations }) => {
     <div>
       {Object.keys(recommendations).map((category, index) => (
         <div key={index}>
-          <h2>{category}</h2>
           <ul>
             {recommendations[category].map((recommendation, index) => (
               <li key={index} title={`Pergunta: ${recommendation.question}`}>

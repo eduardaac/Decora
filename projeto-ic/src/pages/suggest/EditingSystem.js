@@ -23,7 +23,7 @@ function EditingSystem() {
             <div className={styles.container}>
                 <div className={styles.form}>
                     <button onClick={handleGoBack} className={styles.icons}><BsArrowLeftSquareFill /></button>
-                    <h1>SISTEMA DE RECOMENDAÇÃO</h1>
+                    <h1>SISTEMA DE SUGESTÕES</h1>
                     <FormEditingSystem />
                 </div>
             </div>
