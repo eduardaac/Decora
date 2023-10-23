@@ -16,19 +16,19 @@ function Routas() {
       <Routes>
         <Route exact path='/' element={<Login />} />
 
-        <Route exact path='/registration-personal-information' element={<RegistrationPersonalInformation/>} />
+        <Route exact path='/registration-personal-information' element={<RegistrationPersonalInformation />} />
         <Route exact path='/registration-access-information' element={<RegistrationAccessInformation />} />
         <Route exact path='/registration-professional-profile' element={<RegistrationProfessionalProfile />} />
-        
+
         <Route path="/editing-system/:userId/:codigoTurma" element={<EditingSystem />} />
         <Route exact path='/student-recommendation' element={<StudentRecommendationSystem />} />
         <Route exact path='/teacher-recommendation' element={<TeacherRecommendationSystem />} />
-        
+
         <Route path="/user-profile/:userId" element={<UserProfile />} />
-       
+
         <Route path="/report-view/:userId" element={<ReportView />} />
         <Route path="/recommendation" element={<Recommendation />} />
-  
+
       </Routes>
     </Router>
   )
