@@ -1,9 +1,8 @@
 const user = require('../models/userData');
 const question = require('../models/questionData');
-const defaultQuestions = require('./defaultQuestions'); // Importe as perguntas padrão de onde estão definidas
+const defaultQuestions = require('./defaultQuestions'); 
 
 module.exports = {
-    // Cria uma nova pergunta
     async create(request, response) {
         try {
             const { professorId, label, options, answers, priority, category } = request.body;
@@ -29,7 +28,6 @@ module.exports = {
         }
     },
 
-    // Obtém todas as perguntas de um professor específico
     async getQuestionsByProfessor(request, response) {
         try {
             const professorId = request.params.professorId;
@@ -46,7 +44,6 @@ module.exports = {
         }
     },
 
-    // Obtém todas as perguntas de um professor específico vinculado por código de turma
     async getQuestionsByClassCode(request, response) {
         try {
             const { codigoTurma } = request.params;
@@ -69,24 +66,20 @@ module.exports = {
             const professorId = request.params.professorId;
             const questionId = request.params.questionId;
 
-            // Verificar se o professor existe e é um professor
             const professor = await user.findById(professorId);
             if (!professor || professor.typeUser !== 'professor') {
                 return response.status(401).json({ error: 'Apenas professores podem deletar perguntas.' });
             }
 
-            // Encontrar a pergunta a ser deletada
             const questionToDelete = await question.findById(questionId);
             if (!questionToDelete) {
                 return response.status(404).json({ error: 'Pergunta não encontrada.' });
             }
 
-            // Verificar se a pergunta pertence ao professor atual
             if (questionToDelete.professorId.toString() !== professorId) {
                 return response.status(403).json({ error: 'Você não tem permissão para deletar esta pergunta.' });
             }
 
-            // Deletar a pergunta usando o método deleteOne()
             await question.deleteOne({ _id: questionId });
             return response.status(200).json({ message: 'Pergunta deletada com sucesso.' });
         } catch (error) {
@@ -101,13 +94,11 @@ module.exports = {
                 return { error: 'Somente professores podem ser registrados com perguntas padrão.' };
             }
 
-            // Verifica se o professor já possui perguntas, se sim, não adiciona as padrões novamente
             const existingQuestions = await question.find({ professorId });
             if (existingQuestions.length > 0) {
                 return { message: 'Professor já possui perguntas cadastradas.' };
             }
 
-            // Adicionar perguntas padrão ao banco de dados
             const defaultQuestionsToCreate = defaultQuestions.map((defaultQuestion) => ({
                 ...defaultQuestion,
                 professorId,

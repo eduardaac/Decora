@@ -4,6 +4,7 @@ const router = express.Router();
 const userController = require('./controllers/UserController');
 const questionController = require('./controllers/QuestionController');
 const responseController = require('./controllers/ResponseController');
+const motivationController = require('./controllers/MotivationController');
 
 // Rotas para o usuário
 router.get('/users', userController.read);
@@ -22,5 +23,8 @@ router.get('/questions/byclass/:codigoTurma', questionController.getQuestionsByC
 
 // Rotas para responder as perguntas 
 router.post('/responses', responseController.saveResponse);
+
+// Rotas para buscar a Motivação da Recomendação
+router.get('/motivations/getMotivationsByAnswer/:answer', motivationController.getMotivationsByAnswer);
 
 module.exports = router;

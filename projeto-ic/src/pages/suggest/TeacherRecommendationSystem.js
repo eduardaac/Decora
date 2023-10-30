@@ -20,7 +20,7 @@ function TeacherRecommendationSystem() {
             <div className={styles.container}>
                 <div className={styles.form}>
                     <Link to={`/editing-system/${userId}/${codigoTurma}`} className={styles.icons}><FaEdit /></Link>
-                    <h1>SISTEMA DE SUGESTÕES</h1>
+                    <h1>SISTEMA DE RECOMENDAÇÕES</h1>
                     <FormSystem codigoTurma={codigoTurma} />
                 </div>
             </div>

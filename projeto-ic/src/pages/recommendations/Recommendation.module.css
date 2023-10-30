@@ -1,20 +1,19 @@
 .container {
-    margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #EEF1FD;
     width: 100%;
-    height: 100vh;
 }
 
 .form {
     width: 50%;
     background-color: white;
     padding: 4%;
-    border-radius: 10px;
     height: 70%;
+    margin: 4%;
+    border-radius: 10px;
 }
 
 .form h1 {
@@ -22,14 +21,13 @@
     display: inline;
     font-size: 2.0em;
     align-items: center;
-    margin-left: 10%;
+    margin-left: 20%;
 }
 
 .icons {
     font-size: 2em;
     cursor: pointer;
     color: #090539;
-    margin-right: 90px;
     background-color: white;
     border: none;
 }
@@ -45,7 +43,6 @@
 
     .form h1 {
         font-size: 1.5em;
-        margin-left: 0;
     }
 
     .icons {

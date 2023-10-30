@@ -3,7 +3,7 @@ import Login from '../pages/login/Login';
 import RegistrationPersonalInformation from '../pages/registration/RegistrationPersonalInformation';
 import RegistrationAccessInformation from '../pages/registration/RegistrationAccessInformation';
 import RegistrationProfessionalProfile from '../pages/registration/RegistrationProfessionalProfile';
-import EditingSystem from '../pages/suggest/EditingSystem';
+import EditingSystem from '../pages/editing/EditingSystem';
 import StudentRecommendationSystem from '../pages/suggest/StudentRecommendationSystem';
 import TeacherRecommendationSystem from '../pages/suggest/TeacherRecommendationSystem';
 import UserProfile from '../pages/profile/UserProfile';
@@ -15,7 +15,6 @@ function Routas() {
     <Router>
       <Routes>
         <Route exact path='/' element={<Login />} />
-
         <Route exact path='/registration-personal-information' element={<RegistrationPersonalInformation />} />
         <Route exact path='/registration-access-information' element={<RegistrationAccessInformation />} />
         <Route exact path='/registration-professional-profile' element={<RegistrationProfessionalProfile />} />
