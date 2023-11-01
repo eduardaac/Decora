@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import '../Form.css'
 
-const API_BASE_URL = "http://localhost:3333"; // Atualize para a URL correta
+const API_BASE_URL = "https://decora-back.vercel.app"; // Atualize para a URL correta
 
 const FormRegistrationAccessInformation = () => {
   const {

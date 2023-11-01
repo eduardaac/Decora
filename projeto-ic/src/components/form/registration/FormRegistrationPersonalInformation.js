@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import '../Form.css'
 
-const API_BASE_URL = 'http://localhost:3333';
+const API_BASE_URL = 'https://decora-back.vercel.app';
 
 const FormRegistrationPersonalInformation = () => {
     const navigate = useNavigate();

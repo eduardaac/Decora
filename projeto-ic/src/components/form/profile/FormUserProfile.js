@@ -11,7 +11,7 @@ const FormUserProfile = () => {
 
   useEffect(() => {
     if (userId) {
-      axios.get(`http://localhost:3333/users/${userId}`)
+      axios.get(`https://decora-back.vercel.app/users/${userId}`)
         .then(response => {
           setUserData(response.data);
           console.log(response.data);
