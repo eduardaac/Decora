@@ -5,7 +5,7 @@ const routes = require('./routes');
 require('./config/dbConfig');
 
 app.use(cors({
-    origin: 'https://decora-back.vercel.app',
+    origin: 'https://decora-front.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
