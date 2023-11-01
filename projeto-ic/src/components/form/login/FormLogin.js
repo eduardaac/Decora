@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import '../Form.css'
 
-const API_BASE_URL = 'http://localhost:3333';
+const API_BASE_URL = 'https://teste-chi-tawny.vercel.app';
 
 const FormLogin = () => {
   const navigate = useNavigate();
