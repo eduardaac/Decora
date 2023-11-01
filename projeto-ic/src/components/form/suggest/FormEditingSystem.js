@@ -5,7 +5,7 @@ import { FaTrash } from 'react-icons/fa';
 
 import '../Form.css'
 
-const API_BASE_URL = "https://decora-front.vercel.app";
+const API_BASE_URL = "https://decora-back.vercel.app";
 
 function FormEditingSystem() {
   const { userId, codigoTurma } = useParams();

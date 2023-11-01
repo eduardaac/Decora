@@ -9,7 +9,7 @@ function Recommendation() {
     const { recommendations } = location.state || {};
     const [recommendationsWithMotivations, setRecommendationsWithMotivations] = useState([]);
 
-    const API_BASE_URL = "https://decora-front.vercel.app";
+    const API_BASE_URL = "https://decora-back.vercel.app";
 
     const handleGoBack = () => {
         navigate(-1);
