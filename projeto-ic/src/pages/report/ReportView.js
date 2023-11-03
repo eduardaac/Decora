@@ -15,7 +15,7 @@ function ReportView() {
         <div className={styles.container}>
             <div className={styles.form}>
                 <button onClick={handleGoBack} className={styles.icons}><BsArrowLeftSquareFill /></button>
-                <h1>RELATÓRIO</h1>
+                <h1>DADOS DA TURMA</h1>
                 <FormReportView />
 
             </div>

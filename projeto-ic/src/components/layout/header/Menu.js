@@ -19,7 +19,7 @@ function Menu({ userId, typeUser }) {
         {typeUser === 'professor' && (
           <li className={styles.item}>
             <Link to={`/report-view/${userId}`} className={styles.link}>
-              RELATÓRIO
+              DADOS DA TURMA
             </Link>
           </li>
         )}
