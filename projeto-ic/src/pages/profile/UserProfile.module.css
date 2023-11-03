@@ -6,7 +6,7 @@
     align-items: center;
     background-color: #EEF1FD;
     width: 100%;
-    height: 100%;
+    height: 100vh;
 }
 
 .form {
@@ -23,7 +23,6 @@
     font-size: 2.0em;
     align-items: center;
     margin-left: 20%;
-    margin-bottom: 24px;
 }
 
 .icons {
