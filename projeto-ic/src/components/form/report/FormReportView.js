@@ -26,23 +26,15 @@ const FormReportView = () => {
         <div className='form'>
             <div className='formGroup'>
 
-                <label htmlFor='typeUser'>Tipo de Usuário:</label>
-                <input
-                    type='text'
-                    id='typeUser'
-                    value={userData.typeUser ? userData.typeUser.charAt(0).toUpperCase() + userData.typeUser.slice(1) : ''}
-                    readOnly
-                />
-
-                <label htmlFor='codigoTurma'>Código de Turma:</label>
+                <label>Código de Turma:</label>
                 <input type='text' id='codigoTurma' value={userData.codigoTurma} readOnly />
 
                 {userData.typeUser === 'professor' && (
                     <div>
-                        <label htmlFor='totalAlunos'>Total de Alunos:</label>
+                        <label>Total de Alunos:</label>
                         <input type='text' id='totalAlunos' value={userData.totalAlunos || 0} readOnly />
 
-                        <label htmlFor='nomesAlunos'>Turma:</label>
+                        <label>Turma:</label>
                         {userData.emailAlunos && (
                             <div>
                                 {userData.emailAlunos.map((nome, index) => (

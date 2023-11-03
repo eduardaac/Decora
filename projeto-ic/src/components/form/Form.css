@@ -1,5 +1,4 @@
 .formGroup {
-    margin-top: 24px;
     border-color: #474242;
 }
 
@@ -28,6 +27,7 @@
     font-weight: 300;
     width: 100%;
     height: 2.3em;
+    margin-top: 24px;
 }
 
 .formGroup input:focus {
@@ -50,6 +50,7 @@
     font-weight: 300;
     width: 100%;
     height: 2.5em;
+    margin-top: 24px;
 }
 
 .formGroup select:focus {

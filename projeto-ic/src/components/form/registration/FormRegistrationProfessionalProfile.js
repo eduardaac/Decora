@@ -16,7 +16,7 @@ const FormRegistrationProfessionalProfile = () => {
     } = useForm();
     const location = useLocation();
     const navigate = useNavigate();
-    const userId = location.state.userId; // Recebendo o userId do estado
+    const userId = location.state.userId; 
     const typeUser = watch("typeUser");
 
     const onSubmit = async (data) => {
