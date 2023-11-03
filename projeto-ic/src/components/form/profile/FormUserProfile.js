@@ -37,13 +37,13 @@ const FormUserProfile = () => {
   return (
     <div className='form'>
       <div className='formGroup'>
-        <label htmlFor='nome'>Nome:</label>
+        <label>Nome:</label>
         <input type='text' id='nome' value={userData.nome} readOnly />
 
-        <label htmlFor='email'>Email:</label>
+        <label>Email:</label>
         <input type='email' id='email' value={userData.email} readOnly />
 
-        <label htmlFor='dataNascimento'>Data de Nascimento:</label>
+        <label>Data de Nascimento:</label>
         <input
           type='text'
           id='dataNascimento'
@@ -51,13 +51,13 @@ const FormUserProfile = () => {
           readOnly
         />
 
-        <label htmlFor='atuacao'>Atuação:</label>
+        <label>Atuação:</label>
         <input type='text' id='atuacao' value={userData.atuacao} readOnly />
 
-        <label htmlFor='escolaridade'>Escolaridade:</label>
+        <label>Escolaridade:</label>
         <input type='text' id='escolaridade' value={userData.escolaridade} readOnly />
 
-        <label htmlFor='typeUser'>Tipo de Usuário:</label>
+        <label>Tipo de Usuário:</label>
         <input
           type='text'
           id='typeUser'
@@ -65,7 +65,7 @@ const FormUserProfile = () => {
           readOnly
         />
 
-        <label htmlFor='codigoTurma'>Código de Turma:</label>
+        <label>Código de Turma:</label>
         <input type='text' id='codigoTurma' value={userData.codigoTurma} readOnly />
       </div>
     </div>
